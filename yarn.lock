@@ -24,7 +24,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.26.3.tgz#99488264a56b2aded63983abd6a417f03b92ed02"
   integrity sha512-nHIxvKPniQXpmQLb0vhY3VaFb3S0YrTAwpOWJZh1wn3oJPjJk9Asva204PsBdmAE8vpzfHudT8DB0scYvy9q0g==
 
-"@babel/core@^7.0.0", "@babel/core@^7.1.6", "@babel/core@^7.12.0", "@babel/core@^7.3.4", "@babel/core@^7.7.2":
+"@babel/core@^7.0.0", "@babel/core@^7.1.6", "@babel/core@^7.12.0", "@babel/core@^7.23.2", "@babel/core@^7.3.4", "@babel/core@^7.7.2":
   version "7.26.0"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.26.0.tgz#d78b6023cc8f3114ccf049eb219613f74a747b40"
   integrity sha512-i1SLeK+DzNnQ3LL/CswPCa/E5u4lh1k6IAEphON8F+cXt0t9euTshDru0q7/IqMa1PMPz5RnHuHscF8/ZJsStg==
@@ -4924,7 +4924,7 @@ ember-cli-babel-plugin-helpers@^1.0.0, ember-cli-babel-plugin-helpers@^1.1.1:
   resolved "https://registry.yarnpkg.com/ember-cli-babel-plugin-helpers/-/ember-cli-babel-plugin-helpers-1.1.1.tgz#5016b80cdef37036c4282eef2d863e1d73576879"
   integrity sha512-sKvOiPNHr5F/60NLd7SFzMpYPte/nnGkq/tMIfXejfKHIhaiIkYFqX8Z9UFTKWLLn+V7NOaby6niNPZUdvKCRw==
 
-"ember-cli-babel@>= 6.17.2":
+"ember-cli-babel@>= 6.17.2", ember-cli-babel@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-8.2.0.tgz#91e14c22ac22956177002385947724174553d41c"
   integrity sha512-8H4+jQElCDo6tA7CamksE66NqBXWs7VNpS3a738L9pZCjg2kXIX4zoyHzkORUqCtr0Au7YsCnrlAMi1v2ALo7A==
@@ -5083,6 +5083,14 @@ ember-cli-deploy@^1.0.2:
     lodash "^4.0.0"
     rsvp "^3.3.3"
     silent-error "^1.0.0"
+
+ember-cli-deprecation-workflow@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/ember-cli-deprecation-workflow/-/ember-cli-deprecation-workflow-3.0.2.tgz#3b9f08e0917c69e11bd317410b70e02be556898f"
+  integrity sha512-Wjw4nNn1GMKLjKo/CrdFNaYSEW3qOuJYnBh7l8uO84EyWOYYvOLp9Ef4kGwaeehRgK8qDNcdzTFdPO6TD/aFIg==
+  dependencies:
+    "@babel/core" "^7.23.2"
+    ember-cli-babel "^8.2.0"
 
 ember-cli-eslint@^5.1.0:
   version "5.1.0"

@@ -26,9 +26,9 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     await render(hbs`
       {{#drag-sort-list
-        additionalArgs = additionalArgs
-        items          = items
-        dragEndAction  = (action dragEndCallback)
+        additionalArgs = this.additionalArgs
+        items          = this.items
+        dragEndAction  = (action this.dragEndCallback)
         as |item|
       }}
         <div>
@@ -75,8 +75,8 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     await render(hbs`
       {{#drag-sort-list
-        items         = items
-        dragEndAction = (action dragEndCallback)
+        items         = this.items
+        dragEndAction = (action this.dragEndCallback)
         as |item|
       }}
         <div>
@@ -110,8 +110,8 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     await render(hbs`
       {{#drag-sort-list
-        items         = items
-        dragEndAction = (action dragEndCallback)
+        items         = this.items
+        dragEndAction = (action this.dragEndCallback)
         handle        = ".handle"
         as |item|
       }}
@@ -168,8 +168,8 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     await render(hbs`
       {{#drag-sort-list
-        items         = items
-        dragEndAction = (action dragEndCallback)
+        items         = this.items
+        dragEndAction = (action this.dragEndCallback)
         handle        = ".handle"
         as |item|
       }}
@@ -230,8 +230,8 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     await render(hbs`
       {{#drag-sort-list
-        items           = items
-        dragStartAction = (action dragStartCallback)
+        items           = this.items
+        dragStartAction = (action this.dragStartCallback)
         as |item|
       }}
         <div class="item-wrapper">

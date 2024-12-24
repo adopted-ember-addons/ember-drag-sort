@@ -9,6 +9,5 @@ setupDeprecationWorkflow({
     },
     { handler : 'silence', matchId : 'ember-cli-page-object.old-collection-api' },
     { handler : 'silence', matchId : 'ember-global' },
-    { handler : 'silence', matchId : 'this-property-fallback' },
   ],
 })

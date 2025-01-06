@@ -11,9 +11,8 @@ import {
 
 export function dragSortList (content = {}, handleSelector) {
   return component({
-    items : collection({
-      itemScope : '> .dragSortItem',
-      item      : {
+    items : collection('> .dragSortItem', {
+      item : {
         ...dragSortItem,
         content,
       },

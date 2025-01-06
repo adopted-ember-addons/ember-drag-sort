@@ -8,6 +8,5 @@ setupDeprecationWorkflow({
       matchId : 'deprecated-run-loop-and-computed-dot-access',
     },
     { handler : 'silence', matchId : 'ember-cli-page-object.old-collection-api' },
-    { handler : 'silence', matchId : 'ember-global' },
   ],
 })

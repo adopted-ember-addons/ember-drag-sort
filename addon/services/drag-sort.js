@@ -1,3 +1,4 @@
+import classic from 'ember-classic-decorator';
 // ----- Ember modules -----
 import Service from '@ember/service'
 import EventedMixin from '@ember/object/evented'
@@ -5,26 +6,23 @@ import {next} from '@ember/runloop'
 
 
 
-export default Service.extend(EventedMixin, {
-
+@classic
+export default class DragSortService extends Service.extend(EventedMixin) {
   // ----- Static properties -----
-  isDragging   : false,
-  isDraggingUp : null,
+  isDragging = false;
 
-  draggedItem : null,
-  group       : null,
-
-  sourceList  : null,
-  targetList  : null,
-  sourceIndex : null,
-  targetIndex : null,
-
-  lastDragEnteredList : null,
-  isHorizontal        : false,
-
+  isDraggingUp = null;
+  draggedItem = null;
+  group = null;
+  sourceList = null;
+  targetList = null;
+  sourceIndex = null;
+  targetIndex = null;
+  lastDragEnteredList = null;
+  isHorizontal = false;
 
   // ----- Custom methods -----
-  startDragging ({additionalArgs, item, index, items, group, isHorizontal}) {
+  startDragging({additionalArgs, item, index, items, group, isHorizontal}) {
     this.setProperties({
       isDragging   : true,
       isDraggingUp : false,
@@ -59,11 +57,9 @@ export default Service.extend(EventedMixin, {
         sourceIndex : index,
       })
     })
-  },
+  }
 
-
-
-  draggingOver ({group, index, items, isDraggingUp}) {
+  draggingOver({group, index, items, isDraggingUp}) {
     // Ignore hovers over irrelevant groups
     if (group !== this.get('group')) return
 
@@ -91,11 +87,9 @@ export default Service.extend(EventedMixin, {
       targetIndex : index,
       isDraggingUp,
     })
-  },
+  }
 
-
-
-  dragEntering ({group, items, isHorizontal, targetArgs, targetIndex = 0}) {
+  dragEntering({group, items, isHorizontal, targetArgs, targetIndex = 0}) {
     // Ignore entering irrelevant groups
     if (group !== this.get('group')) return
 
@@ -126,11 +120,9 @@ export default Service.extend(EventedMixin, {
       lastDragEnteredList : items,
       isHorizontal        : isHorizontal,
     })
-  },
+  }
 
-
-
-  endDragging ({action}) {
+  endDragging({action}) {
     const sourceArgs   = this.get('sourceArgs')
     const sourceList   = this.get('sourceList')
     const sourceIndex  = this.get('sourceIndex')
@@ -199,11 +191,9 @@ export default Service.extend(EventedMixin, {
         targetIndex,
       })
     })
-  },
+  }
 
-
-
-  _reset () {
+  _reset() {
     this.setProperties({
       isDragging   : false,
       isDraggingUp : null,
@@ -220,5 +210,5 @@ export default Service.extend(EventedMixin, {
 
       lastDragEnteredList : null,
     })
-  },
-})
+  }
+}

@@ -1,9 +1,12 @@
+import classic from 'ember-classic-decorator';
+import { attributeBindings, classNameBindings, layout as templateLayout } from '@ember-decorators/component';
+import { observes } from '@ember-decorators/object';
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { reads, not } from '@ember/object/computed';
 // ----- Ember modules -----
 import Component from '@ember/component'
 import { assert }  from '@ember/debug'
-import {inject as service} from '@ember/service'
-import {not, reads} from '@ember/object/computed'
-import {computed, observer} from '@ember/object'
 import {next} from '@ember/runloop'
 
 // ----- Own modules -----
@@ -20,77 +23,77 @@ function getComputedStyleInt (element, cssProp) {
 
 
 
-export default Component.extend({
-
+@classic
+@templateLayout(layout)
+@classNameBindings(
+  ':dragSortItem',
+  'isDragged2:-isDragged',
+  'isDraggingOver:-isDraggingOver',
+  'shouldShowPlaceholderBefore2:-placeholderBefore',
+  'shouldShowPlaceholderAfter2:-placeholderAfter',
+  'isTarget:-isTarget:-isTargetNOT',
+  'index',
+  'targetIndex'
+)
+@attributeBindings('draggable')
+export default class DragSortItem extends Component {
   // ----- Arguments -----
-  item            : undefined,
-  index           : undefined,
-  items           : undefined,
-  group           : undefined,
-  childTagName    : 'div',
-  draggingEnabled : undefined,
-  handle          : null,
-  isHorizontal    : false,
-  isRtl           : false,
-  sourceOnly      : false,
+  item;
 
-  dragEndAction                  : undefined,
-  dragStartAction                : undefined,
-  determineForeignPositionAction : undefined,
-
-
+  index;
+  items;
+  group;
+  childTagName = 'div';
+  draggingEnabled;
+  handle = null;
+  isHorizontal = false;
+  isRtl = false;
+  sourceOnly = false;
+  dragEndAction;
+  dragStartAction;
+  determineForeignPositionAction;
 
   // ----- Services -----
-  dragSort : service(),
-
-
-
-  // ----- Overridden properties -----
-  layout,
-  classNameBindings : [
-    ':dragSortItem',
-    'isDragged2:-isDragged',
-    'isDraggingOver:-isDraggingOver',
-    'shouldShowPlaceholderBefore2:-placeholderBefore',
-    'shouldShowPlaceholderAfter2:-placeholderAfter',
-    'isTarget:-isTarget:-isTargetNOT',
-    'index',
-    'targetIndex',
-  ],
-
-  attributeBindings : [
-    'draggable',
-  ],
-
-
-
+  @service
+  dragSort;
 
   // ----- Static properties -----
-  isDragged2     : false,
-  originalHeight : null,
+  isDragged2 = false;
 
-  shouldShowPlaceholderBefore2 : undefined,
-  shouldShowPlaceholderAfter2  : undefined,
-  isVertical                   : not('dragSort.isHorizontal'),
+  originalHeight = null;
+  shouldShowPlaceholderBefore2;
+  shouldShowPlaceholderAfter2;
+
+  @not('dragSort.isHorizontal')
+  isVertical;
 
   // ----- Aliases -----
-  isDraggingUp : reads('dragSort.isDraggingUp'),
-  sourceList   : reads('dragSort.sourceList'),
-  sourceIndex  : reads('dragSort.sourceIndex'),
-  targetIndex  : reads('dragSort.targetIndex'),
-  targetList   : reads('dragSort.targetList'),
+  @reads('dragSort.isDraggingUp')
+  isDraggingUp;
 
+  @reads('dragSort.sourceList')
+  sourceList;
 
+  @reads('dragSort.sourceIndex')
+  sourceIndex;
+
+  @reads('dragSort.targetIndex')
+  targetIndex;
+
+  @reads('dragSort.targetList')
+  targetList;
 
   // ----- Computed properties -----
-  draggable : computed('draggingEnabled', 'handle', function () {
+  @computed('draggingEnabled', 'handle')
+  get draggable() {
     const handle          = this.get('handle')
     const draggingEnabled = this.get('draggingEnabled')
 
     return !handle && draggingEnabled ? true : null
-  }),
+  }
 
-  isDragged : computed('dragSort.isDragging', 'items', 'sourceList', 'index', 'sourceIndex', function () {
+  @computed('dragSort.isDragging', 'items', 'sourceList', 'index', 'sourceIndex')
+  get isDragged() {
     const isDragging  = this.get('dragSort.isDragging')
     const items       = this.get('items')
     const sourceList  = this.get('sourceList')
@@ -98,9 +101,18 @@ export default Component.extend({
     const sourceIndex = this.get('sourceIndex')
 
     return isDragging && items === sourceList && index === sourceIndex
-  }),
+  }
 
-  isDraggingOver : computed('dragSort.isDragging', 'items', 'targetList', 'index', 'targetIndex', 'isDragged', 'sourceOnly', function () {
+  @computed(
+    'dragSort.isDragging',
+    'items',
+    'targetList',
+    'index',
+    'targetIndex',
+    'isDragged',
+    'sourceOnly'
+  )
+  get isDraggingOver() {
     const isDragging  = this.get('dragSort.isDragging')
     const items       = this.get('items')
     const targetList  = this.get('targetList')
@@ -110,43 +122,44 @@ export default Component.extend({
     const sourceOnly  = this.get('sourceOnly')
 
     return !sourceOnly && isDragging && items === targetList && index === targetIndex && !isDragged
-  }),
+  }
 
-  isLast : computed('index', 'items.[]', function () {
+  @computed('index', 'items.[]')
+  get isLast() {
     const index = this.get('index')
     const count = this.get('items.length')
 
     return index === count - 1
-  }),
+  }
 
-  shouldShowPlaceholderBefore : computed('isDraggingOver', 'isDraggingUp', 'sourceOnly', function () {
+  @computed('isDraggingOver', 'isDraggingUp', 'sourceOnly')
+  get shouldShowPlaceholderBefore() {
     const isDraggingOver = this.get('isDraggingOver')
     const isDraggingUp   = this.get('isDraggingUp')
     const sourceOnly     = this.get('sourceOnly')
 
     return !sourceOnly && isDraggingOver && isDraggingUp
-  }),
+  }
 
-  shouldShowPlaceholderAfter : computed('isDraggingOver', 'isDraggingUp', 'sourceOnly', function () {
+  @computed('isDraggingOver', 'isDraggingUp', 'sourceOnly')
+  get shouldShowPlaceholderAfter() {
     const isDraggingOver = this.get('isDraggingOver')
     const isDraggingUp   = this.get('isDraggingUp')
     const sourceOnly     = this.get('sourceOnly')
 
     return !sourceOnly && isDraggingOver && !isDraggingUp
-  }),
-
-
+  }
 
   // ----- Overridden methods -----
-  didInsertElement () {
+  didInsertElement() {
     // Consume properties for observers to act
     this.getProperties(
       'shouldShowPlaceholderBefore',
       'shouldShowPlaceholderAfter'
     )
-  },
+  }
 
-  dragStart (event) {
+  dragStart(event) {
     // Ignore irrelevant drags
     if (!this.get('draggingEnabled')) return
 
@@ -177,9 +190,9 @@ export default Component.extend({
     }
 
     this.startDragging(event)
-  },
+  }
 
-  dragEnd (event) {
+  dragEnd(event) {
     // Ignore irrelevant drags
     if (!this.get('dragSort.isDragging')) return
 
@@ -187,14 +200,14 @@ export default Component.extend({
     event.preventDefault()
 
     this.endDragging(event)
-  },
+  }
 
   // Required for Firefox. http://stackoverflow.com/a/32592759/901944
-  drop (event) {
+  drop(event) {
     event.preventDefault()
-  },
+  }
 
-  dragOver (event) {
+  dragOver(event) {
     // Ignore irrelevant drags
     if (
       !this.get('dragSort.isDragging')
@@ -211,20 +224,16 @@ export default Component.extend({
     event.preventDefault()
 
     this.draggingOver(event)
-  },
+  }
 
-  dragEnter (event) {
+  dragEnter(event) {
     if (!this.get('dragSort.isDragging')) return
     // Without this, dragOver would not fire in IE11. http://mereskin.github.io/dnd/
     event.preventDefault()
-  },
-
-
-
-
+  }
 
   // ----- Custom methods -----
-  startDragging () {
+  startDragging() {
     this.collapse()
 
     const additionalArgs = this.get('additionalArgs')
@@ -236,18 +245,18 @@ export default Component.extend({
     const isHorizontal   = this.get('isHorizontal')
 
     dragSort.startDragging({additionalArgs, item, index, items, group, isHorizontal})
-  },
+  }
 
-  endDragging () {
+  endDragging() {
     this.restore()
 
     const action   = this.get('dragEndAction')
     const dragSort = this.get('dragSort')
 
     dragSort.endDragging({action})
-  },
+  }
 
-  draggingOver (event) {
+  draggingOver(event) {
     const sourceOnly = this.get('sourceOnly')
 
     if (sourceOnly) {
@@ -299,27 +308,27 @@ export default Component.extend({
         : (mousePosition - offset) < (itemSize + placeholderCorrection) / 2
 
     dragSort.draggingOver({group, index, items, isDraggingUp})
-  },
+  }
 
-  collapse () {
+  collapse() {
     // The delay is necessary for HTML classes to update with a delay.
     // Otherwise, dragging is finished immediately.
     next(() => {
       if (this.get('isDestroying') || this.get('isDestroyed')) return
       this.set('isDragged2', true)
     })
-  },
+  }
 
-  restore () {
+  restore() {
     // The delay is necessary for HTML class to update with a delay.
     // Otherwise, dragging is finished immediately.
     next(() => {
       if (this.get('isDestroying') || this.get('isDestroyed')) return
       this.set('isDragged2', false)
     })
-  },
+  }
 
-  isHandleUsed (target) {
+  isHandleUsed(target) {
     const handle  = this.get('handle')
     const element = this.get('element')
 
@@ -330,12 +339,11 @@ export default Component.extend({
     assert('Handle not found', !!handleElement)
 
     return handleElement === target || handleElement.contains(target)
-  },
-
-
+  }
 
   // ----- Observers -----
-  setPlaceholderBefore : observer('shouldShowPlaceholderBefore', function () {
+  @observes('shouldShowPlaceholderBefore')
+  setPlaceholderBefore() {
     // The delay is necessary for HTML class to update with a delay.
     // Otherwise, dragging is finished immediately.
     next(() => {
@@ -345,9 +353,10 @@ export default Component.extend({
         this.get('shouldShowPlaceholderBefore')
       )
     })
-  }),
+  }
 
-  setPlaceholderAfter : observer('shouldShowPlaceholderAfter', function () {
+  @observes('shouldShowPlaceholderAfter')
+  setPlaceholderAfter() {
     // The delay is necessary for HTML class to update with a delay.
     // Otherwise, dragging is finished immediately.
     next(() => {
@@ -357,5 +366,5 @@ export default Component.extend({
         this.get('shouldShowPlaceholderAfter')
       )
     })
-  }),
-})
+  }
+}

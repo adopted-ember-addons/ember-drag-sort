@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { attributeBindings, classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { computed } from '@ember/object';
@@ -23,7 +22,6 @@ function getComputedStyleInt (element, cssProp) {
 
 
 
-@classic
 @templateLayout(layout)
 @classNameBindings(
   ':dragSortItem',

@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { classNameBindings, layout as templateLayout } from '@ember-decorators/component';
 import { observes } from '@ember-decorators/object';
 import { inject as service } from '@ember/service';
@@ -16,7 +15,6 @@ import layout from '../templates/components/drag-sort-list'
 
 
 
-@classic
 @templateLayout(layout)
 @classNameBindings(
   ':dragSortList',

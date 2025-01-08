@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 // ----- Ember modules -----
 import Service from '@ember/service'
 import EventedMixin from '@ember/object/evented'
@@ -6,7 +5,6 @@ import {next} from '@ember/runloop'
 
 
 
-@classic
 export default class DragSortService extends Service.extend(EventedMixin) {
   // ----- Static properties -----
   isDragging = false;
@@ -61,22 +59,22 @@ export default class DragSortService extends Service.extend(EventedMixin) {
 
   draggingOver({group, index, items, isDraggingUp}) {
     // Ignore hovers over irrelevant groups
-    if (group !== this.get('group')) return
+    if (group !== this.group) return
 
     // Ignore hovers over irrelevant lists
-    if (items !== this.get('targetList')) return
+    if (items !== this.targetList) return
 
-    if (index !== this.get('targetIndex')) {
+    if (index !== this.targetIndex) {
       next(() => {
         this.trigger('sort', {
           group,
-          sourceArgs     : this.get('sourceArgs'),
-          sourceList     : this.get('sourceList'),
-          sourceIndex    : this.get('sourceIndex'),
-          draggedItem    : this.get('draggedItem'),
-          targetArgs     : this.get('targetArgs'),
-          targetList     : this.get('targetList'),
-          oldTargetIndex : this.get('targetIndex'),
+          sourceArgs     : this.sourceArgs,
+          sourceList     : this.sourceList,
+          sourceIndex    : this.sourceIndex,
+          draggedItem    : this.draggedItem,
+          targetArgs     : this.targetArgs,
+          targetList     : this.targetList,
+          oldTargetIndex : this.targetIndex,
           newTargetIndex : index,
         })
       })
@@ -91,19 +89,19 @@ export default class DragSortService extends Service.extend(EventedMixin) {
 
   dragEntering({group, items, isHorizontal, targetArgs, targetIndex = 0}) {
     // Ignore entering irrelevant groups
-    if (group !== this.get('group')) return
+    if (group !== this.group) return
 
     // Reset index when entering a new list
-    if (items !== this.get('targetList')) {
+    if (items !== this.targetList) {
 
       next(() => {
         this.trigger('move', {
           group,
-          sourceArgs    : this.get('sourceArgs'),
-          sourceList    : this.get('sourceList'),
-          sourceIndex   : this.get('sourceIndex'),
-          draggedItem   : this.get('draggedItem'),
-          oldTargetList : this.get('targetList'),
+          sourceArgs    : this.sourceArgs,
+          sourceList    : this.sourceList,
+          sourceIndex   : this.sourceIndex,
+          draggedItem   : this.draggedItem,
+          oldTargetList : this.targetList,
           newTargetList : items,
           targetArgs,
           targetIndex   : targetIndex,
@@ -123,15 +121,15 @@ export default class DragSortService extends Service.extend(EventedMixin) {
   }
 
   endDragging({action}) {
-    const sourceArgs   = this.get('sourceArgs')
-    const sourceList   = this.get('sourceList')
-    const sourceIndex  = this.get('sourceIndex')
-    const targetArgs   = this.get('targetArgs')
-    const targetList   = this.get('targetList')
-    let   targetIndex  = this.get('targetIndex')
-    const isDraggingUp = this.get('isDraggingUp')
-    const group        = this.get('group')
-    const draggedItem  = this.get('draggedItem')
+    const sourceArgs   = this.sourceArgs
+    const sourceList   = this.sourceList
+    const sourceIndex  = this.sourceIndex
+    const targetArgs   = this.targetArgs
+    const targetList   = this.targetList
+    let   targetIndex  = this.targetIndex
+    const isDraggingUp = this.isDraggingUp
+    const group        = this.group
+    const draggedItem  = this.draggedItem
 
     if (sourceList !== targetList || sourceIndex !== targetIndex) {
       // Account for dragged item shifting indexes by one
@@ -146,12 +144,12 @@ export default class DragSortService extends Service.extend(EventedMixin) {
         !isDraggingUp
 
         // Target index is not after the last item
-        && targetIndex < targetList.get('length')
+        && targetIndex < targetList.length
 
         // The only element in target list is not the one dragged
         && !(
-          targetList.get('length') === 1
-          && targetList.get('firstObject') === draggedItem
+          targetList.length === 1
+          && targetList[0] === draggedItem
         )
       ) targetIndex++
 

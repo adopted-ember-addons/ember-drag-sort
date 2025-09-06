@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-jquery */
 import component from './_component';
 import dragSortItem from './drag-sort-item';
 import trigger, { sort, move } from 'ember-drag-sort/utils/trigger';

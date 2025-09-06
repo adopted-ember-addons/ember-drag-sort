@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-jquery */
 import { attribute, hasClass } from 'ember-cli-page-object';
 
 import component from './_component';

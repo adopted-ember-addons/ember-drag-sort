@@ -10,7 +10,11 @@ function assertListItems(list, expectedTitles, assert, message) {
   // List with disabled sorting
   expectedTitles.forEach((expectedTitle, i) => {
     const m = `${message}: List #0 item #${i} content title`;
-    assert.strictEqual(list.items.objectAt(i).item.content.title, expectedTitle, m);
+    assert.strictEqual(
+      list.items.objectAt(i).item.content.title,
+      expectedTitle,
+      m,
+    );
   });
 }
 

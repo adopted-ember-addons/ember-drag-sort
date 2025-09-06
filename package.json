@@ -111,13 +111,5 @@
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "https://kaliber5.github.io/ember-drag-sort/"
-  },
-  "resolutions": {
-    "gift": "^0.10.2",
-    "**/nise": "1.5.2"
-  },
-  "volta": {
-    "node": "12.22.12",
-    "yarn": "1.22.19"
   }
 }

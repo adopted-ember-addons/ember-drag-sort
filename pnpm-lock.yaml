@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@babel/core':
-        specifier: ^7.25.2
+        specifier: ^7.28.4
         version: 7.28.4
       ember-cli-babel:
         specifier: ^8.2.0
@@ -22,10 +22,10 @@ importers:
         specifier: ^7.28.4
         version: 7.28.4(@babel/core@7.28.4)(eslint@8.57.1)
       '@babel/plugin-proposal-decorators':
-        specifier: ^7.24.7
+        specifier: ^7.28.0
         version: 7.28.0(@babel/core@7.28.4)
       '@ember/optional-features':
-        specifier: ^2.1.0
+        specifier: ^2.2.0
         version: 2.2.0
       '@ember/test-helpers':
         specifier: ^3.3.1
@@ -55,7 +55,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       ember-cli-dependency-checker:
-        specifier: ^3.3.2
+        specifier: ^3.3.3
         version: 3.3.3(ember-cli@5.12.0(handlebars@4.7.8)(underscore@1.13.7))
       ember-cli-deploy:
         specifier: ^2.0.0
@@ -85,10 +85,10 @@ importers:
         specifier: ^2.1.2
         version: 2.1.2(@babel/core@7.28.4)
       ember-page-title:
-        specifier: ^8.2.3
+        specifier: ^8.2.4
         version: 8.2.4(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.28.4))(rsvp@4.8.5)(webpack@5.101.3))
       ember-qunit:
-        specifier: ^8.1.0
+        specifier: ^8.1.1
         version: 8.1.1(@ember/test-helpers@3.3.1(@babel/core@7.28.4)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.28.4))(rsvp@4.8.5)(webpack@5.101.3))(webpack@5.101.3))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.28.4))(rsvp@4.8.5)(webpack@5.101.3))(qunit@2.24.1)
       ember-resolver:
         specifier: ^12.0.1
@@ -100,7 +100,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       ember-template-lint:
-        specifier: ^6.0.0
+        specifier: ^6.1.0
         version: 6.1.0
       ember-truth-helpers:
         specifier: ^4.0.3
@@ -112,37 +112,37 @@ importers:
         specifier: ^8.57.1
         version: 8.57.1
       eslint-config-prettier:
-        specifier: ^9.1.0
+        specifier: ^9.1.2
         version: 9.1.2(eslint@8.57.1)
       eslint-plugin-ember:
-        specifier: ^12.2.1
+        specifier: ^12.7.3
         version: 12.7.3(@babel/core@7.28.4)(eslint@8.57.1)(typescript@5.9.2)
       eslint-plugin-n:
         specifier: ^16.6.2
         version: 16.6.2(eslint@8.57.1)
       eslint-plugin-prettier:
-        specifier: ^5.2.1
+        specifier: ^5.5.4
         version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.6.2)
       eslint-plugin-qunit:
-        specifier: ^8.1.2
+        specifier: ^8.2.5
         version: 8.2.5(eslint@8.57.1)
       loader.js:
         specifier: ^4.7.0
         version: 4.7.0
       prettier:
-        specifier: ^3.3.3
+        specifier: ^3.6.2
         version: 3.6.2
       qunit:
-        specifier: ^2.22.0
+        specifier: ^2.24.1
         version: 2.24.1
       qunit-dom:
-        specifier: ^3.2.1
+        specifier: ^3.5.0
         version: 3.5.0
       sinon:
-        specifier: ^8.0.2
+        specifier: ^8.1.1
         version: 8.1.1
       sinon-chai:
-        specifier: ^3.3.0
+        specifier: ^3.7.0
         version: 3.7.0(chai@4.5.0)(sinon@8.1.1)
       stylelint:
         specifier: ^15.11.0
@@ -7347,7 +7347,7 @@ snapshots:
 
   '@types/glob@9.0.0':
     dependencies:
-      glob: 10.4.5
+      glob: 8.1.0
 
   '@types/http-errors@2.0.5': {}
 
@@ -7367,7 +7367,7 @@ snapshots:
 
   '@types/minimatch@6.0.0':
     dependencies:
-      minimatch: 9.0.5
+      minimatch: 7.4.6
 
   '@types/minimist@1.2.5': {}
 

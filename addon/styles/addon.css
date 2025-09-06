@@ -38,12 +38,12 @@
 }
 
 .dragSortItem.-placeholderBefore {
-  /*margin-top: 25px;*/
+  /* margin-top: 25px; */
   padding-top: 25px;
 }
 
 .dragSortItem.-placeholderAfter {
-  /*margin-bottom: 25px;*/
+  /* margin-bottom: 25px; */
   padding-bottom: 25px;
 }
 
@@ -66,12 +66,12 @@
 }
 
 .dragSortItem.-placeholderBefore:before {
-  /*bottom: 100%;*/
+  /* bottom: 100%; */
   top: 0;
 }
 
 .dragSortItem.-placeholderAfter:before {
-  /*top: 100%;*/
+  /* top: 100%; */
   bottom: 0;
 }
 

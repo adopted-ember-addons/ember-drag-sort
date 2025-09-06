@@ -1,97 +1,53 @@
+'use strict';
+
 module.exports = {
-  root          : true,
-  parser        : 'babel-eslint',
-  parserOptions : {
-    ecmaVersion  : 2018,
-    sourceType   : 'module',
-    ecmaFeatures : {
-      legacyDecorators : true,
+  root: true,
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      legacyDecorators: true,
     },
   },
-  plugins : [
-    'align-assignments',
-    'ember',
-    'varspacing',
-  ],
-  extends : [
+  plugins: ['ember'],
+  extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
-    'standard',
-    'plugin:varspacing/recommended',
+    'plugin:prettier/recommended',
   ],
-  env : {
-    browser : true,
+  env: {
+    browser: true,
   },
-  rules : {
-    'align-assignments/align-assignments' : 'error',
-    'arrow-parens'                        : 'off',
-    'camelcase'                           : 'off',
-    'comma-dangle'                        : ['error', 'always-multiline'],
-    'ember/no-jquery'                     : 'error',
-    'ember/no-observers'                  : 'off',
-    'func-call-spacing'                   : 'off',
-    'generator-star-spacing'              : 'off',
-    'indent'                              : ['error', 2, {flatTernaryExpressions : true}],
-    'key-spacing'                         : ['error', { beforeColon : true, afterColon : true, align : 'colon' }],
-    'new-cap'                             : 'off',
-    'no-console'                          : 'off',
-    'no-mixed-operators'                  : 'off',
-    'no-multi-spaces'                     : 'off',
-    'no-multiple-empty-lines'             : 'off',
-    'no-return-assign'                    : 'off',
-    'no-sequences'                        : 'off',
-    'no-template-curly-in-string'         : 'off',
-    'no-whitespace-before-property'       : 'off',
-    'object-curly-spacing'                : 'off',
-    'operator-linebreak'                  : 'off',
-    'padded-blocks'                       : 'off',
-    'quote-props'                         : ['error', 'consistent-as-needed'],
-    'quotes'                              : ['error', 'single'],
-    'spaced-comment'                      : 'off',
-    'standard/object-curly-even-spacing'  : 'off',
-  },
-  overrides : [
+  rules: {},
+  overrides: [
     // node files
     {
-      files : [
-        '.eslintrc.js',
-        '.template-lintrc.js',
-        'ember-cli-build.js',
-        'index.js',
-        'testem.js',
-        'blueprints/*/index.js',
-        'config/**/*.js',
-        'tests/dummy/config/**/*.js',
+      files: [
+        './.eslintrc.js',
+        './.prettierrc.js',
+        './.template-lintrc.js',
+        './ember-cli-build.js',
+        './index.js',
+        './testem.js',
+        './blueprints/*/index.js',
+        './config/**/*.js',
+        './tests/dummy/config/**/*.js',
       ],
-      excludedFiles : [
-        'addon/**',
-        'addon-test-support/**',
-        'app/**',
-        'tests/dummy/app/**',
-        'tests/pages/**',
-      ],
-      parserOptions : {
-        sourceType  : 'script',
-        ecmaVersion : 2015,
+      parserOptions: {
+        sourceType: 'script',
       },
-      env : {
-        browser : false,
-        node    : true,
+      env: {
+        browser: false,
+        node: true,
       },
-      plugins : ['node'],
-      rules   : Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
-      }),
+      plugins: ['node'],
+      extends: ['plugin:node/recommended'],
     },
-
-    // tests
     {
-      files : [
-        'tests/**/*.js',
-      ],
-      rules : {
-        'no-unused-expressions' : 'off',
-      },
+      // Test files:
+      files: ['tests/**/*-test.{js,ts}'],
+      extends: ['plugin:qunit/recommended'],
     },
   ],
-}
+};

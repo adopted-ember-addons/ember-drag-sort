@@ -51,11 +51,11 @@
 
 
 
-## Support
-
-Bug reports and feature requests are very welcome. In case you have something to suggest or report, please file an issue to the [issue queue](https://github.com/kaliber5/ember-drag-sort/issues). But first make sure there's no similar issue. ;)
-
-If you're having trouble using this addon in your project, **please file a properly structured question at [StackOverflow](http://stackoverflow.com/questions/ask?tags=ember.js,ember-drag-sort)**. It is important that you use `ember.js` and `ember-drag-sort` tags for your question to be seen.
+## Compatibility
+ 
+* Ember.js v3.24 or above
+* Ember CLI v3.24 or above
+* Node.js v12 or above
 
 
 
@@ -842,4 +842,4 @@ Currently developed and maintained by [kaliber5](https://kaliber5.de).
 
 ## License
 
-[MIT](https://github.com/kaliber5/ember-drag-sort/blob/gen-1/LICENSE.md).
+This project is licensed under the [MIT License](LICENSE.md).

@@ -1,7 +1,5 @@
-import {assert} from '@ember/debug'
-import { triggerEvent, settled } from '@ember/test-helpers'
-
-
+import { assert } from '@ember/debug';
+import { triggerEvent, settled } from '@ember/test-helpers';
 
 // // https://github.com/jgwhite/ember-sortable/blob/21d2c513f96796f9b1a56983d34cf501a1f169c2/tests/integration/components/sortable-group-test.js#L35-L40
 // export function triggerEvent (elementOrSelector, eventName, params) {
@@ -19,87 +17,92 @@ import { triggerEvent, settled } from '@ember/test-helpers'
 //   })
 // }
 
-
-
-export default function trigger (elementOrSelector, eventName, isDraggingUp) {
+export default function trigger(elementOrSelector, eventName, isDraggingUp) {
   const element =
-    (elementOrSelector instanceof Element)
+    elementOrSelector instanceof Element
       ? elementOrSelector
-      : find(elementOrSelector)
+      : find(elementOrSelector);
 
-  const params = {}
+  const params = {};
 
   if (isDraggingUp != null) {
-    const modifier = isDraggingUp ? 0.25 : 0.75
-    const inner    = element.offsetHeight * modifier
-    const outer    = element.getBoundingClientRect().top
-    params.clientY = inner + outer
+    const modifier = isDraggingUp ? 0.25 : 0.75;
+    const inner = element.offsetHeight * modifier;
+    const outer = element.getBoundingClientRect().top;
+    params.clientY = inner + outer;
   }
 
-  return triggerEvent(elementOrSelector, eventName, params)
+  return triggerEvent(elementOrSelector, eventName, params);
 }
 
+export async function sort(
+  sourceList,
+  sourceIndex,
+  targetIndex,
+  above,
+  handleSelector
+) {
+  let sourceItem = sourceList.children[sourceIndex];
 
+  assert(`source item not exist at index ${sourceIndex}`, sourceItem);
 
+  if (handleSelector) sourceItem = sourceItem.querySelector(handleSelector);
 
-export async function sort (sourceList, sourceIndex, targetIndex, above, handleSelector) {
-  let sourceItem = sourceList.children[sourceIndex]
+  assert('handle does not exist', !handleSelector || sourceItem);
 
-  assert(`source item not exist at index ${sourceIndex}`, sourceItem)
+  const targetItem = sourceList.children[targetIndex];
 
-  if (handleSelector) sourceItem = sourceItem.querySelector(handleSelector)
+  assert(`target item not exist at index ${targetIndex}`, targetItem);
 
-  assert('handle does not exist', !handleSelector || sourceItem)
+  await trigger(sourceItem, 'dragstart');
+  await trigger(targetItem, 'dragover', above);
+  await trigger(sourceItem, 'dragend');
 
-  const targetItem = sourceList.children[targetIndex]
-
-  assert(`target item not exist at index ${targetIndex}`, targetItem)
-
-  await trigger(sourceItem, 'dragstart')
-  await trigger(targetItem, 'dragover', above)
-  await trigger(sourceItem, 'dragend')
-
-  return settled()
+  return settled();
 }
 
+export async function move(
+  sourceList,
+  sourceIndex,
+  targetList,
+  targetIndex,
+  above,
+  handleSelector
+) {
+  let sourceItem = sourceList.children[sourceIndex];
 
+  assert(`source item not exist at index ${sourceIndex}`, sourceItem);
 
+  if (handleSelector) sourceItem = sourceItem.querySelector(handleSelector);
 
-export async function move (sourceList, sourceIndex, targetList, targetIndex, above, handleSelector) {
-  let sourceItem = sourceList.children[sourceIndex]
+  assert('handle does not exist', !handleSelector || sourceItem);
 
-  assert(`source item not exist at index ${sourceIndex}`, sourceItem)
-
-  if (handleSelector) sourceItem = sourceItem.querySelector(handleSelector)
-
-  assert('handle does not exist', !handleSelector || sourceItem)
-
-  const targetListLength = targetList.childElementCount
+  const targetListLength = targetList.childElementCount;
 
   if (targetListLength) {
     if (targetIndex == null) {
-      targetIndex = targetListLength - 1
-      above       = false
+      targetIndex = targetListLength - 1;
+      above = false;
     }
 
-    const targetItem = targetList.children[targetIndex]
+    const targetItem = targetList.children[targetIndex];
 
-    assert(`target item not exist at index ${targetIndex}`, targetItem)
+    assert(`target item not exist at index ${targetIndex}`, targetItem);
 
-    await trigger(sourceItem, 'dragstart')
-    await trigger(targetList, 'dragenter')
-    await trigger(targetItem, 'dragover', above)
-    await trigger(sourceItem, 'dragend')
+    await trigger(sourceItem, 'dragstart');
+    await trigger(targetList, 'dragenter');
+    await trigger(targetItem, 'dragover', above);
+    await trigger(sourceItem, 'dragend');
   } else {
     assert(
       `target list is empty, the only available target index is 0, but target index ${targetIndex} was provided`,
       !targetIndex
-    )
+    );
 
-    await trigger(sourceItem, 'dragstart')
-    await trigger(targetList, 'dragenter')
-    await trigger(sourceItem, 'dragend')
+    await trigger(sourceItem, 'dragstart');
+    await trigger(targetList, 'dragenter');
+    await trigger(sourceItem, 'dragend');
   }
 
-  return settled()
+  return settled();
 }

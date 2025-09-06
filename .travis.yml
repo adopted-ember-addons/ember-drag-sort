@@ -3,10 +3,9 @@ language: node_js
 node_js:
   # we recommend testing addons with the same minimum supported node version as Ember CLI
   # so that your addon works for all apps
-  - "8"
+  - "12"
 
-sudo: false
-dist: trusty
+dist: xenial
 
 addons:
   chrome: stable
@@ -21,10 +20,12 @@ env:
 
 branches:
   only:
-    - /.*/
+    - master
+    # npm version tags
+    - /^v\d+\.\d+\.\d+/
 
 jobs:
-  fail_fast: true
+  fast_finish: true
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
@@ -32,30 +33,28 @@ jobs:
     # runs linting and tests with current locked deps
     - stage: "Tests"
       name: "Tests"
-      install:
-        - yarn install --non-interactive
       script:
-        - yarn lint:hbs
-        - yarn lint:js
-        - yarn test
+        - yarn lint
+        - yarn test:ember
 
     - stage: "Additional Tests"
       name: "Floating Dependencies"
       install:
-        - yarn install --no-lockfile  --non-interactive
-
+        - yarn install --no-lockfile --non-interactive
       script:
-        - yarn test
+        - yarn test:ember
 
     # we recommend new addons test the current and previous LTS
     # as well as latest stable release (bonus points to beta/canary)
-      # - env: EMBER_TRY_SCENARIO=ember-lts-3.8
-    - env: EMBER_TRY_SCENARIO=ember-lts-3.12
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.24
+    - env: EMBER_TRY_SCENARIO=ember-lts-3.28
     - env: EMBER_TRY_SCENARIO=ember-release
     - env: EMBER_TRY_SCENARIO=ember-beta
     - env: EMBER_TRY_SCENARIO=ember-canary
     - env: EMBER_TRY_SCENARIO=ember-default-with-jquery
     - env: EMBER_TRY_SCENARIO=ember-classic
+    - env: EMBER_TRY_SCENARIO=embroider-safe
+    - env: EMBER_TRY_SCENARIO=embroider-optimized
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash

@@ -1,9 +1,5 @@
-'use strict'
+'use strict';
 
 module.exports = {
-  extends : 'octane',
-
-  rules : {
-    quotes : false,
-  },
-}
+  extends: 'recommended',
+};

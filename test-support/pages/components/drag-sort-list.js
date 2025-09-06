@@ -30,7 +30,7 @@ export function dragSortList(content = {}, handleSelector) {
         sourceIndex,
         targetIndex,
         above,
-        handleSelector
+        handleSelector,
       );
     },
 
@@ -41,7 +41,7 @@ export function dragSortList(content = {}, handleSelector) {
         targetList.$.get(0),
         targetIndex,
         above,
-        handleSelector
+        handleSelector,
       );
     },
   });

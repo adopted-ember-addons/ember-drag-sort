@@ -84,7 +84,7 @@ export default Component.extend({
       const isOnlyElementDragged = this.isOnlyElementDragged;
 
       return isDragging && (isEmpty || isOnlyElementDragged);
-    }
+    },
   ),
 
   isExpanded2: reads('isExpanded'),
@@ -107,7 +107,7 @@ export default Component.extend({
       const sourceIndex = this.sourceIndex;
 
       return count === 1 && items === sourceList && !sourceIndex;
-    }
+    },
   ),
 
   // ----- Overridden methods -----
@@ -183,8 +183,8 @@ export default Component.extend({
     const draggableItems = A(Array.prototype.slice.call(itemsNodeList));
     const positions = A(
       draggableItems.map((draggableItem) =>
-        draggableItem.getBoundingClientRect()
-      )
+        draggableItem.getBoundingClientRect(),
+      ),
     );
     const rows = positions.uniqBy('top').mapBy('top').sort();
     const currentRowPosition = rows.filter((row) => row < event.clientY).pop();

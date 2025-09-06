@@ -32,12 +32,12 @@ export default function component(scope = '', descriptor = {}) {
     click: clickable(),
     contains: jquery(
       ($el) => (selector) => $el.find(selector).length > 0,
-      false
+      false,
     ),
     empty: jquery(
       ($el) =>
         $el.is(':empty') ||
-        (!$el.children().length && !$el.text().trim().length)
+        (!$el.children().length && !$el.text().trim().length),
     ),
     exists: jquery(($el) => $el.length > 0, false), // false: don't spit an error if element isn't found
     index: jquery(($el) => $el.index()),

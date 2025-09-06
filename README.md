@@ -489,7 +489,7 @@ test('sorting a list', async function (assert) {
 
   const expectedTitles = ['Bar', 'Foo', 'Baz', 'Quux']
 
-  assert.equal(list.childElementCount, 4)
+  assert.strictEqual(list.childElementCount, 4)
 
   expectedTitles.forEach((expectedTitle, k) => {
     m = `List #0 item #${k} content title`
@@ -672,7 +672,7 @@ In a test, list items are available as `sortableList.items()`. Item content is a
 For example, to assert the title of the first item in a list, using the page object from the last example, you can do this:
 
 ```js
-assert.equal(sortableList.items(0).content.title, "Foo")
+assert.strictEqual(sortableList.items(0).content.title, "Foo")
 ```
 
 
@@ -727,7 +727,7 @@ test('sorting a list', async function (assert) {
 
   const expectedTitles = ['Bar', 'Foo', 'Baz', 'Quux']
 
-  assert.equal(list.items().count, 4)
+  assert.strictEqual(list.items().count, 4)
 
   expectedTitles.forEach((expectedTitle, k) => {
     m = `List #0 item #${k} content title`

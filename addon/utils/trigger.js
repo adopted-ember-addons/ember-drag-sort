@@ -40,7 +40,7 @@ export async function sort(
   sourceIndex,
   targetIndex,
   above,
-  handleSelector
+  handleSelector,
 ) {
   let sourceItem = sourceList.children[sourceIndex];
 
@@ -67,7 +67,7 @@ export async function move(
   targetList,
   targetIndex,
   above,
-  handleSelector
+  handleSelector,
 ) {
   let sourceItem = sourceList.children[sourceIndex];
 
@@ -96,7 +96,7 @@ export async function move(
   } else {
     assert(
       `target list is empty, the only available target index is 0, but target index ${targetIndex} was provided`,
-      !targetIndex
+      !targetIndex,
     );
 
     await trigger(sourceItem, 'dragstart');

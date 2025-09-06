@@ -5,12 +5,12 @@ import page from 'dummy/tests/pages/index';
 
 function assertListItems(list, expectedTitles, assert, message) {
   const m = `${message}: items count`;
-  assert.equal(list.items().count, expectedTitles.length, m);
+  assert.strictEqual(list.items().count, expectedTitles.length, m);
 
   // List with disabled sorting
   expectedTitles.forEach((expectedTitle, i) => {
     const m = `${message}: List #0 item #${i} content title`;
-    assert.equal(list.items(i).content.title, expectedTitle, m);
+    assert.strictEqual(list.items(i).content.title, expectedTitle, m);
   });
 }
 
@@ -20,12 +20,12 @@ module('Acceptance | index', function (hooks) {
   test('visiting /index', async function (assert) {
     await page.visit();
 
-    assert.equal(currentURL(), '/', 'Current URL');
+    assert.strictEqual(currentURL(), '/', 'Current URL');
     assertListItems(
       page.simple1,
       ['Foo', 'Bar', 'Baz', 'Quux'],
       assert,
-      'Simple 1'
+      'Simple 1',
     );
     assertListItems(page.simple2, ['☰ Zomg', '☰ Lol'], assert, 'Simple 2');
   });
@@ -38,7 +38,7 @@ module('Acceptance | index', function (hooks) {
       page.simple1,
       ['Bar', 'Foo', 'Baz', 'Quux'],
       assert,
-      'Simple 1'
+      'Simple 1',
     );
   });
 
@@ -51,7 +51,7 @@ module('Acceptance | index', function (hooks) {
       page.simple2,
       ['☰ Zomg', '☰ Lol', '☰ Foo'],
       assert,
-      'Simple 2'
+      'Simple 2',
     );
   });
 
@@ -63,7 +63,7 @@ module('Acceptance | index', function (hooks) {
       page.foreign1,
       ['Bar', 'Baz', 'Foo', 'Quux'],
       assert,
-      'Foreign 1'
+      'Foreign 1',
     );
   });
 
@@ -83,7 +83,7 @@ module('Acceptance | index', function (hooks) {
       page.foreign1,
       ['Bar', 'Baz', 'Foo', 'Quux', 'Zomg'],
       assert,
-      'Foreign 1'
+      'Foreign 1',
     );
     assertListItems(page.foreign2, ['Lol'], assert, 'Foreign 2');
   });
@@ -108,7 +108,7 @@ module('Acceptance | index', function (hooks) {
       page.foreign1,
       ['Bar', 'Baz', 'Foo', 'Quux'],
       assert,
-      'Foreign 1'
+      'Foreign 1',
     );
     assertListItems(page.foreign2, ['Zomg', 'Lol'], assert, 'Foreign 2');
   });
@@ -130,7 +130,7 @@ module('Acceptance | index', function (hooks) {
       page.foreign1,
       ['Bar', 'Baz', 'Foo', 'Quux', 'Zomg'],
       assert,
-      'Foreign 1'
+      'Foreign 1',
     );
     assertListItems(page.foreign2, ['Lol'], assert, 'Foreign 2');
 
@@ -147,7 +147,7 @@ module('Acceptance | index', function (hooks) {
       page.foreign1,
       ['Bar', 'Baz', 'Foo', 'Lol', 'Quux', 'Zomg'],
       assert,
-      'Foreign 1'
+      'Foreign 1',
     );
     assertListItems(page.foreign2, [], assert, 'Foreign 2');
   });
@@ -176,7 +176,7 @@ module('Acceptance | index', function (hooks) {
       page.sourceOnly1,
       ['Foo', 'Bar', 'Baz'],
       assert,
-      'Source only 1'
+      'Source only 1',
     );
     assertListItems(page.sourceOnly2, ['Quux', 'Foo'], assert, 'Source only 2');
   });
@@ -189,7 +189,7 @@ module('Acceptance | index', function (hooks) {
       page.sourceOnly1,
       ['Foo', 'Bar', 'Baz'],
       assert,
-      'Source only 1'
+      'Source only 1',
     );
     assertListItems(page.sourceOnly2, ['Quux'], assert, 'Source only 2');
   });

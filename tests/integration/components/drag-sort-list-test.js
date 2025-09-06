@@ -25,16 +25,11 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     this.setProperties({ additionalArgs, items, dragEndCallback });
 
     await render(hbs`
-      {{#drag-sort-list
-        additionalArgs = additionalArgs
-        items          = items
-        dragEndAction  = (action dragEndCallback)
-        as |item|
-      }}
+      <DragSortList @additionalArgs={{this.additionalArgs}} @items={{this.items}} @dragEndAction={{this.dragEndCallback}} as |item|>
         <div>
           {{item.name}}
         </div>
-      {{/drag-sort-list}}
+      </DragSortList>
     `);
 
     const itemElements = findAll('.dragSortItem');
@@ -58,7 +53,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
         targetList: items,
         sourceIndex: 0,
         targetIndex: 1,
-      })
+      }),
     );
   });
 
@@ -70,15 +65,11 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     this.setProperties({ items, dragEndCallback });
 
     await render(hbs`
-      {{#drag-sort-list
-        items         = items
-        dragEndAction = (action dragEndCallback)
-        as |item|
-      }}
+      <DragSortList @items={{this.items}} @dragEndAction={{this.dragEndCallback}} as |item|>
         <div>
           {{item.name}}
         </div>
-      {{/drag-sort-list}}
+      </DragSortList>
     `);
 
     const item0 = find('.dragSortItem');
@@ -99,17 +90,12 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     this.setProperties({ items, dragEndCallback });
 
     await render(hbs`
-      {{#drag-sort-list
-        items         = items
-        dragEndAction = (action dragEndCallback)
-        handle        = ".handle"
-        as |item|
-      }}
+      <DragSortList @items={{this.items}} @dragEndAction={{this.dragEndCallback}} @handle=".handle" as |item|>
         <div class="handle">handle</div>
         <div>
           {{item.name}}
         </div>
-      {{/drag-sort-list}}
+      </DragSortList>
     `);
 
     const itemElements = findAll('.dragSortItem');
@@ -141,7 +127,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
         targetList: items,
         sourceIndex: 0,
         targetIndex: 1,
-      })
+      }),
     );
   });
 
@@ -153,19 +139,14 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     this.setProperties({ items, dragEndCallback });
 
     await render(hbs`
-      {{#drag-sort-list
-        items         = items
-        dragEndAction = (action dragEndCallback)
-        handle        = ".handle"
-        as |item|
-      }}
+      <DragSortList @items={{this.items}} @dragEndAction={{this.dragEndCallback}} @handle=".handle" as |item|>
         <div class="handle">
           <div class="handle2">handle</div>
         </div>
         <div>
           {{item.name}}
         </div>
-      {{/drag-sort-list}}
+      </DragSortList>
     `);
 
     const itemElements = findAll('.dragSortItem');
@@ -197,7 +178,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
         targetList: items,
         sourceIndex: 0,
         targetIndex: 1,
-      })
+      }),
     );
   });
 
@@ -210,22 +191,18 @@ module('Integration | Component | drag-sort-list', function (hooks) {
       event.dataTransfer.setDragImage(
         element.querySelector('.item-wrapper'),
         20,
-        30
+        30,
       );
     });
 
     this.setProperties({ items, dragStartCallback });
 
     await render(hbs`
-      {{#drag-sort-list
-        items           = items
-        dragStartAction = (action dragStartCallback)
-        as |item|
-      }}
+      <DragSortList @items={{this.items}} @dragStartAction={{this.dragStartCallback}} as |item|>
         <div class="item-wrapper">
           {{item.name}}
         </div>
-      {{/drag-sort-list}}
+      </DragSortList>
     `);
 
     const itemElements = findAll('.dragSortItem');
@@ -242,15 +219,15 @@ module('Integration | Component | drag-sort-list', function (hooks) {
       dragStartCallback.calledWithMatch({
         draggedItem: items.objectAt(0),
         element: item0,
-      })
+      }),
     );
     assert.ok(dataTransfer.setDragImage.called);
     assert.ok(
       dataTransfer.setDragImage.lastCall.calledWithExactly(
         item0.querySelector('.item-wrapper'),
         20,
-        30
-      )
+        30,
+      ),
     );
   });
 });

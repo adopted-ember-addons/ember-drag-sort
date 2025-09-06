@@ -9,25 +9,25 @@ import { computed } from '@ember/object';
 
 export default Controller.extend({
   simple1: computed(() =>
-    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }])
+    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }]),
   ),
 
   simple2: computed(() => A([{ name: 'Zomg' }, { name: 'Lol' }])),
 
   async1: computed(() =>
-    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }])
+    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }]),
   ),
 
   async2: computed(() => A([{ name: 'Zomg' }, { name: 'Lol' }])),
 
   foreign1: computed(() =>
-    A([{ name: 'Bar' }, { name: 'Baz' }, { name: 'Foo' }, { name: 'Quux' }])
+    A([{ name: 'Bar' }, { name: 'Baz' }, { name: 'Foo' }, { name: 'Quux' }]),
   ),
 
   foreign2: computed(() => A([{ name: 'Zomg' }, { name: 'Lol' }])),
 
   copies1: computed(() =>
-    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }])
+    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }]),
   ),
 
   copies2: computed(() => A([{ name: 'Quux' }])),
@@ -35,7 +35,7 @@ export default Controller.extend({
   copies3: computed(() => A()),
 
   table1: computed(() =>
-    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }])
+    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }]),
   ),
 
   table2: computed(() => A([{ name: 'Zomg' }, { name: 'Lol' }])),
@@ -51,11 +51,11 @@ export default Controller.extend({
       { name: 'Quuz' },
       { name: 'Hello' },
       { name: 'World' },
-    ])
+    ]),
   ),
 
   horizontal2: computed(() =>
-    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }])
+    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }]),
   ),
 
   rtl: computed(() =>
@@ -64,11 +64,11 @@ export default Controller.extend({
       { name: 'حلقة واحدة للعثور عليهم' },
       { name: 'حلقة واحدة لجلب لهم' },
       { name: 'وفي الظلام لربطهم' },
-    ])
+    ]),
   ),
 
   dragImage: computed(() =>
-    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }])
+    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }, { name: 'Quux' }]),
   ),
 
   nestedItem: computed(() => ({
@@ -126,7 +126,7 @@ export default Controller.extend({
   })),
 
   sourceOnly1: computed(() =>
-    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }])
+    A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }]),
   ),
 
   sourceOnly2: computed(() => A([{ name: 'Quux' }])),
@@ -157,7 +157,8 @@ export default Controller.extend({
 
       let item = sourceList.objectAt(sourceIndex);
 
-      if (sourceList === unsortableList) item = { ...item }; // shallow clone
+      if (sourceList === unsortableList)
+        item = { ...item }; // shallow clone
       else sourceList.removeAt(sourceIndex);
 
       if (targetList !== unsortableList) targetList.insertAt(targetIndex, item);
@@ -187,7 +188,7 @@ export default Controller.extend({
       event.dataTransfer.setDragImage(
         target,
         event.clientX - x,
-        event.clientY - y
+        event.clientY - y,
       );
     },
   },

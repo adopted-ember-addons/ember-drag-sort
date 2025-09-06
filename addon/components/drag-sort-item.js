@@ -88,7 +88,7 @@ export default Component.extend({
       const sourceIndex = this.sourceIndex;
 
       return isDragging && items === sourceList && index === sourceIndex;
-    }
+    },
   ),
 
   isDraggingOver: computed(
@@ -115,7 +115,7 @@ export default Component.extend({
         index === targetIndex &&
         !isDragged
       );
-    }
+    },
   ),
 
   isLast: computed('index', 'items.[]', function () {
@@ -135,7 +135,7 @@ export default Component.extend({
       const sourceOnly = this.sourceOnly;
 
       return !sourceOnly && isDraggingOver && isDraggingUp;
-    }
+    },
   ),
 
   shouldShowPlaceholderAfter: computed(
@@ -148,17 +148,19 @@ export default Component.extend({
       const sourceOnly = this.sourceOnly;
 
       return !sourceOnly && isDraggingOver && !isDraggingUp;
-    }
+    },
   ),
 
   // ----- Overridden methods -----
   didInsertElement() {
     this._super(...arguments);
     // Consume properties for observers to act
+    /* eslint-disable */
     this.getProperties(
       'shouldShowPlaceholderBefore',
-      'shouldShowPlaceholderAfter'
+      'shouldShowPlaceholderAfter',
     );
+    /* eslint-enable */
   },
 
   dragStart(event) {
@@ -296,8 +298,8 @@ export default Component.extend({
     const placeholderCorrection = isPlaceholderBefore
       ? getComputedStyleInt(element, beforeAttribute) * placeholderModifier
       : isPlaceholderAfter
-      ? -getComputedStyleInt(element, afterAttribute) * placeholderModifier
-      : 0; // eslint-disable-line indent
+        ? -getComputedStyleInt(element, afterAttribute) * placeholderModifier
+        : 0; // eslint-disable-line indent
 
     const offset = isHorizontal
       ? element.getBoundingClientRect().left
@@ -353,7 +355,7 @@ export default Component.extend({
       if (this.isDestroying || this.isDestroyed) return;
       this.set(
         'shouldShowPlaceholderBefore2',
-        this.shouldShowPlaceholderBefore
+        this.shouldShowPlaceholderBefore,
       );
     });
   }),

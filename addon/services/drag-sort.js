@@ -1,4 +1,4 @@
-// ----- Ember modules -----
+/* eslint-disable ember/no-runloop */
 import Service from '@ember/service';
 import EventedMixin from '@ember/object/evented';
 import { next } from '@ember/runloop';

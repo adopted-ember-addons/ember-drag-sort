@@ -6,8 +6,7 @@ import { collection, hasClass } from 'ember-cli-page-object';
 
 export function dragSortList(content = {}, handleSelector) {
   return component({
-    items: collection({
-      itemScope: '> .dragSortItem',
+    items: collection('> .dragSortItem', {
       item: {
         ...dragSortItem,
         content,

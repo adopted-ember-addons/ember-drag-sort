@@ -1,15 +1,10 @@
-// ----- Ember modules -----
+/* eslint-disable ember/no-runloop */
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { not, reads } from '@ember/object/computed';
-import { computed, get, observer } from '@ember/object';
+import { computed, observer } from '@ember/object';
 import { next } from '@ember/runloop';
 import { A } from '@ember/array';
-
-// ----- Ember addons -----
-
-// ----- Own modules -----
-import layout from '../templates/components/drag-sort-list';
 
 export default Component.extend({
   // ----- Arguments -----
@@ -33,7 +28,6 @@ export default Component.extend({
   dragSort: service(),
 
   // ----- Overridden properties -----
-  layout,
   classNameBindings: [
     ':dragSortList',
     'draggingEnabled:-draggingEnabled',
@@ -46,8 +40,6 @@ export default Component.extend({
     'isEmpty:-isEmpty',
     'sourceOnly:-sourceOnlyList',
   ],
-
-  // ----- Static properties -----
 
   // ----- Aliases -----
   sourceList: reads('dragSort.sourceList'),

@@ -25,8 +25,6 @@ export default function component(scope = '', descriptor = {}) {
   }
 
   return {
-    ...(scope ? { scope, itemScope: scope } : {}), // inject the scope only if it was provided
-
     $: jquery(($el) => $el),
     attr: jquery(($el) => (attrName) => $el.attr(attrName)),
     click: clickable(),

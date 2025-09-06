@@ -49,55 +49,41 @@
   - [Credits](#credits)
   - [License](#license)
 
-
-
 ## Compatibility
- 
-* Ember.js v3.24 or above
-* Ember CLI v3.24 or above
-* Node.js v12 or above
 
-
+- Ember.js v3.24 or above
+- Ember CLI v3.24 or above
+- Node.js v12 or above
 
 ## About
 
 A drag'n'drop sortable list addon.
 
-
-
 ### Features
 
-* Dragging between lists.
-* Drag handle.
-* Nested lists (tree-like structures).
-* Strict DDAU: does not mutate the lists while dragging. On drag end, calls an action for you to handle list mutation.
-* Disable sorting within a list while still allowing dragging in and out of the list (sort order is determined by host app instead of the user).
-
-
+- Dragging between lists.
+- Drag handle.
+- Nested lists (tree-like structures).
+- Strict DDAU: does not mutate the lists while dragging. On drag end, calls an action for you to handle list mutation.
+- Disable sorting within a list while still allowing dragging in and out of the list (sort order is determined by host app instead of the user).
 
 ### Demo
 
 https://kaliber5.github.io/ember-drag-sort/
 
-
-
 ## Versions, branches and jQuery
 
-* Version 1.x, `gen-0` branch is based on jQuery. Supports Ember CLI 1.13+.
-* Version 2.x, `gen-1` branch (current development head) has got rid of jQuery. Except for page objects which [still import](https://github.com/san650/ember-cli-page-object/blob/v1.15.2/index.js#L23-L28) jQuery in test env. Supports Ember CLI 3.8+.
-* Version 3.x, `gen-2` branch supports Ember CLI 3.12+.
-
-
+- Version 1.x, `gen-0` branch is based on jQuery. Supports Ember CLI 1.13+.
+- Version 2.x, `gen-1` branch (current development head) has got rid of jQuery. Except for page objects which [still import](https://github.com/san650/ember-cli-page-object/blob/v1.15.2/index.js#L23-L28) jQuery in test env. Supports Ember CLI 3.8+.
+- Version 3.x, `gen-2` branch supports Ember CLI 3.12+.
 
 ## Known issues
 
-* :warning: Nested lists do not work correctly in Ember <= v3.10.0-beta.1 without jQuery. This is an issue with Ember itself, see https://github.com/emberjs/ember.js/issues/17840 .
+- :warning: Nested lists do not work correctly in Ember <= v3.10.0-beta.1 without jQuery. This is an issue with Ember itself, see https://github.com/emberjs/ember.js/issues/17840 .
 
-    If your app has jQuery removed, make sure you're using Ember newer than v3.10.0-beta.1, non-inclusive.
+  If your app has jQuery removed, make sure you're using Ember newer than v3.10.0-beta.1, non-inclusive.
 
-    The [demo app](https://kaliber5.github.io/ember-drag-sort/) is using Ember Canary.
-
-
+  The [demo app](https://kaliber5.github.io/ember-drag-sort/) is using Ember Canary.
 
 ### Browser support
 
@@ -105,20 +91,18 @@ Tested manually.
 
 Works in desktop browsers:
 
-* IE 10
-* IE 11
-* Edge
-* Chrome
-* Firefox
-* Safari
+- IE 10
+- IE 11
+- Edge
+- Chrome
+- Firefox
+- Safari
 
 Does not work on mobile browsers:
 
-* Safari/iOS: does not support drag'n'drop.
-* Firefox/Android: does not support drag'n'drop.
-* Chrome/Android: for some reason, does not fire the `dragend` event. Currently, the addon behaves incorrectly on Chrome/Android. If your webapp offers mobile experience, you must manually detect Chrome/Android and disable dragging.
-
-
+- Safari/iOS: does not support drag'n'drop.
+- Firefox/Android: does not support drag'n'drop.
+- Chrome/Android: for some reason, does not fire the `dragend` event. Currently, the addon behaves incorrectly on Chrome/Android. If your webapp offers mobile experience, you must manually detect Chrome/Android and disable dragging.
 
 ## Installation
 
@@ -132,17 +116,13 @@ Install the addon:
 
 The `drag-sort-list` component accepts two mandatory arguments:
 
-* `items` -- the array of items to sort. *Must* be an Ember array (normally, all arrays in an Ember app are Ember arrays).
-* `dragEndAction` -- a closure action that should update elements when sort is complete.
+- `items` -- the array of items to sort. _Must_ be an Ember array (normally, all arrays in an Ember app are Ember arrays).
+- `dragEndAction` -- a closure action that should update elements when sort is complete.
 
 The component accepts a block representing an individual item (the block is rendered multiple times, one per list item). It yields `item` and `index`.
 
 ```handlebars
-<DragSortList
-  @items         = {{this.items1}}
-  @dragEndAction = {{this.dragEnd}}
-  as |item|
->
+<DragSortList @items={{this.items1}} @dragEndAction={{this.dragEnd}} as |item|>
   {{item.name}}
 </DragSortList>
 ```
@@ -152,7 +132,7 @@ The component accepts a block representing an individual item (the block is rend
 It is called on the source list component when the drag'n'drop operation is complete. It's called with a single argument -- an object with the following properties:
 
 | Property      | Type   | Description                                                            |
-|:--------------|:-------|:-----------------------------------------------------------------------|
+| :------------ | :----- | :--------------------------------------------------------------------- |
 | `group`       | String | Group provided to the `drag-sort-list` component.                      |
 | `draggedItem` | <any>  | The list item being dragged.                                           |
 | `sourceList`  | Array  | The list where the sorting was initiated.                              |
@@ -182,17 +162,15 @@ Here's the reference implementation of the `dragEndAction` action:
   }
 ```
 
-
-
 ### The drag start action
 
 This action is called when a drag is beginning, and can be used to customize the drag image, or otherwise modify the data transfer. It's called with a single argument -- an object with the following properties:
 
-| Property       | Type         | Description                                       |
-|:---------------|:-------------|:--------------------------------------------------|
-| `event`        | Event        | The `dragstart` event.                            |
-| `element`      | DOMElement   | The DOM element being dragged.                    |
-| `draggedItem`  | <any>        | The list item being dragged.                      |
+| Property      | Type       | Description                    |
+| :------------ | :--------- | :----------------------------- |
+| `event`       | Event      | The `dragstart` event.         |
+| `element`     | DOMElement | The DOM element being dragged. |
+| `draggedItem` | <any>      | The list item being dragged.   |
 
 This can be used to put margins around the list items without those margins being included in the drag image:
 
@@ -204,9 +182,9 @@ This can be used to put margins around the list items without those margins bein
 
 ```handlebars
 <DragSortList
-  items           = {{this.items1}}
-  dragStartAction = {{action "dragStart"}}
-  dragEndAction   = {{action "dragEnd"}}
+  items={{this.items1}}
+  dragStartAction={{action "dragStart"}}
+  dragEndAction={{action "dragEnd"}}
   as |item|
 >
   <div class="the-item">
@@ -226,8 +204,6 @@ actions: {
 }
 ```
 
-
-
 ### The determine foreign position action
 
 You may want to let the user drag items in and out of a list, without letting him rearrange items within a list. In that case the order of items is determined by the app.
@@ -243,7 +219,7 @@ The action is only called for foreign items. When the user drags an item out of 
 The `determineForeignPositionAction` is called with with a single argument -- an object with the following properties:
 
 | Property      | Type  | Description                                   |
-|:--------------|:------|:----------------------------------------------|
+| :------------ | :---- | :-------------------------------------------- |
 | `draggedItem` |       | The item being dragged.                       |
 | `items`       | Array | The list where the item should be positioned. |
 
@@ -258,7 +234,7 @@ determineForeignPosition ({/* draggedItem,  */items}) {
 }
 ```
 
-To sort items alphabetically, you  can use lodash:
+To sort items alphabetically, you can use lodash:
 
 ```js
 @action
@@ -281,8 +257,6 @@ determineForeignPosition ({draggedItem, items}) {
 
 **`determineForeignPositionAction` must not actually sort the list**. It's only purpose is to suggest desired item position, which is necessary to display the placeholder.
 
-
-
 ### Marking a list as a source only bucket
 
 Sometimes you may have a need to define a bucket of items that is "source only". This means
@@ -293,9 +267,9 @@ This list would be marked as source only:
 
 ```hbs
 <DragSortList
-  @items         = {{this.items1}}
-  @dragEndAction = {{this.dragEnd}}
-  @sourceOnly    = {{true}}
+  @items={{this.items1}}
+  @dragEndAction={{this.dragEnd}}
+  @sourceOnly={{true}}
   as |item|
 >
   {{item.name}}
@@ -303,8 +277,6 @@ This list would be marked as source only:
 ```
 
 You could then have one or more other lists which you could drag the items from the source list into.
-
-
 
 ### Passing additional arguments
 
@@ -347,34 +319,29 @@ dragEndAction({ sourceList, sourceIndex, sourceArgs, targetList, targetIndex, ta
 }
 ```
 
-
-
-
 ### drag-sort-list arguments reference
 
 | Argument                         | Type                                         | Default value | Description                                                                                                                                                                                     |
-|:---------------------------------|:---------------------------------------------|:--------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :------------------------------- | :------------------------------------------- | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `items`                          | Ember Array                                  | <required>    | An array of items to display and offer sorting.                                                                                                                                                 |
 | `dragEndAction`                  | Closure action                               | <required>    | This callback will be called on source list when sorting is complete. See above for details.                                                                                                    |
-| `dragStartAction`                | Closure action                               | <required>    | This callback will be called on source list when dragging is starting. See above for details.                                                                                                    |
+| `dragStartAction`                | Closure action                               | <required>    | This callback will be called on source list when dragging is starting. See above for details.                                                                                                   |
 | `determineForeignPositionAction` | Closure action or `undefined`                | `undefined`   | When provided, used to determine the position of the placeholder when dragging a foreign item into the list. When not provided, the user is able to determine the order. See above for details. |
 | `group`                          | <any>                                        | `undefined`   | Used to restrict dragging between multiple lists to only some of those lists. Typically a string.                                                                                               |
 | `draggingEnabled`                | Boolean                                      | `true`        | Disables sorting. Useful when `dragEndAction` is an async operation.                                                                                                                            |
 | `childClass`                     | String                                       | `""`          | HTML class applied to list item components.                                                                                                                                                     |
 | `childTagName`                   | String                                       | `"div"`       | `tagName` applied to list item components.                                                                                                                                                      |
-| `handle`                         | String, typically `"[draggable]"`, or `null` | `null`        | Selector of the drag handle element. When provided, items can only be dragged by handle. :warning: The handle element *must* have `draggable="true"` attribute.                                 |
+| `handle`                         | String, typically `"[draggable]"`, or `null` | `null`        | Selector of the drag handle element. When provided, items can only be dragged by handle. :warning: The handle element _must_ have `draggable="true"` attribute.                                 |
 | `isHorizontal`                   | Boolean                                      | `false`       | Displays the list horizontally. :warning: Horizontal lists don't work well when nested.                                                                                                         |
 | `isRtl`                          | Boolean                                      | `false`       | RTL - Right to left. Might be useful for certain languages. :warning: Has no effect on vertical lists.                                                                                          |
 | `additionalArgs`                 | <any>                                        | `undefined`   | A catch-all for additional arguments you may want to access in the `dragEndAction`. Can be used for things like passing the parent of the list in for saving `hasMany` relationships.           |
-
-
 
 ### HTML classes
 
 `drag-sort-list` component has HTML class `dragSortList`. It also assumes the following classes dynamically:
 
 | HTML class         | Applied when...                                                                                                                                                                   |
-|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-isEmpty`         | The given list is empty.                                                                                                                                                          |
 | `-draggingEnabled` | Dragging is enabled via the `draggingEnabled` attribute.                                                                                                                          |
 | `-isDragging`      | Dragging is in progress and the given list is either a source list or belongs to the same group as the source list.                                                               |
@@ -383,15 +350,12 @@ dragEndAction({ sourceList, sourceIndex, sourceArgs, targetList, targetIndex, ta
 
 The individual item component has HTML class `dragSortItem`. It also assumes the following classes dynamically:
 
-
-| HTML class          | Applied when...                                                               |
-|:--------------------|:------------------------------------------------------------------------------|
-| `-isDragged`        | The given item is the one being dragged. Used to hide the item from the list. |
-| `-isDraggingOver`   | Dragged item is positioned either above/before or below/after the given item.              |
-| `-placeholderBefore` | Dragged item is positioned above/before the given item.                              |
-| `-placeholderAfter` | Dragged item is positioned below/after the given item.                              |
-
-
+| HTML class           | Applied when...                                                               |
+| :------------------- | :---------------------------------------------------------------------------- |
+| `-isDragged`         | The given item is the one being dragged. Used to hide the item from the list. |
+| `-isDraggingOver`    | Dragged item is positioned either above/before or below/after the given item. |
+| `-placeholderBefore` | Dragged item is positioned above/before the given item.                       |
+| `-placeholderAfter`  | Dragged item is positioned below/after the given item.                        |
 
 ### CSS concerns
 
@@ -405,8 +369,6 @@ You must not apply any padding or margin to list item elements either. If you ne
 
 Avoid collapsing margins between list items and between list item and list. Collapsing margins may cause a [jumping glitch](https://github.com/kaliber5/ember-drag-sort/issues/7).
 
-
-
 ### Events
 
 There's an Ember service called `dragSort`. You can listen to the following events on it, using the [Evented API](https://www.emberjs.com/api/classes/Ember.Evented.html).
@@ -414,13 +376,11 @@ There's an Ember service called `dragSort`. You can listen to the following even
 Each event is called with as single argument, which is an object with properties. For the description of properties, see `dragEndAction` documentation above.
 
 | Event name | Description                                                                        | Argument properties                                                                                   |
-|:-----------|:-----------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------|
+| :--------- | :--------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
 | `start`    | Sorting has started.                                                               | `group`, `draggedItem`, `sourceList`, `sourceIndex`                                                   |
 | `sort`     | Dragged item has been moved within a list. The list is referenced as `targetList`. | `group`, `draggedItem`, `sourceList`, `sourceIndex`, `targetList`, `oldTargetIndex`, `newTargetIndex` |
 | `move`     | Item has been dragged into a different list.                                       | `group`, `draggedItem`, `sourceList`, `sourceIndex`, `oldTargetList`, `newTargetList`, `targetIndex`  |
-| `end`      | Sorting has ended.                                                                 | `group`, `draggedItem`, `sourceList`, `sourceIndex`, `targetList`, `targetIndex`  |
-
-
+| `end`      | Sorting has ended.                                                                 | `group`, `draggedItem`, `sourceList`, `sourceIndex`, `targetList`, `targetIndex`                      |
 
 ## Test helpers
 
@@ -429,13 +389,13 @@ Each event is called with as single argument, which is an object with properties
 `trigger` is a low-level test helper that can be imported like this:
 
 ```js
-import trigger from 'ember-drag-sort/utils/trigger'
+import trigger from "ember-drag-sort/utils/trigger";
 ```
 
 It accepts three arguments:
 
 | Argument    | Type                                     | Description                                                                                    |
-|:------------|:-----------------------------------------|:-----------------------------------------------------------------------------------------------|
+| :---------- | :--------------------------------------- | :--------------------------------------------------------------------------------------------- |
 | `element`   | String, DOM element or jQuery collection | Selector or element to trigger an operation on.                                                |
 | `eventName` | String                                   | For list: `dragenter`; for list item: `dragstart`, `dragover` or `dragend`.                    |
 | `above`     | Boolean                                  | Only for `dragover`. Whether to put placeholder above (`true`) or below (`false`) target item. |
@@ -451,8 +411,6 @@ After performing the operations, you must [wait for async behavior](https://guid
 
 See this addon's integration test for example.
 
-
-
 ### sort
 
 `sort` is a high-level test helper that **moves an item to a new position within the same list**.
@@ -460,13 +418,13 @@ See this addon's integration test for example.
 It can be imported like this:
 
 ```js
-import {sort} from 'ember-drag-sort/utils/trigger'
+import { sort } from "ember-drag-sort/utils/trigger";
 ```
 
 It accepts the following arguments:
 
 | Argument         | Type                                     | Required? | Description                                                                                                                     |
-|:-----------------|:-----------------------------------------|:----------|:--------------------------------------------------------------------------------------------------------------------------------|
+| :--------------- | :--------------------------------------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | `sourceList`     | String, DOM element or jQuery collection | yes       | Selector or element of the `drag-sort-list` component.                                                                          |
 | `sourceIndex`    | Integer                                  | yes       | Zero-based index of the item to pick up.                                                                                        |
 | `targetIndex`    | Integer                                  | yes       | Zero-based index of the item to drop picked item on top of, calculated while the picked item is still on its original position. |
@@ -498,7 +456,6 @@ test('sorting a list', async function (assert) {
 }))
 ```
 
-
 ### move
 
 `move` is a high-level test helper that **moves an item from one list into another**.
@@ -506,13 +463,13 @@ test('sorting a list', async function (assert) {
 It can be imported like this:
 
 ```js
-import {sort} from 'ember-drag-sort/utils/trigger'
+import { sort } from "ember-drag-sort/utils/trigger";
 ```
 
 It accepts the following arguments:
 
 | Argument         | Type                                     | Required?                       | Description                                                                                                                                                                                                                                |
-|:-----------------|:-----------------------------------------|:--------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :--------------- | :--------------------------------------- | :------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sourceList`     | String, DOM element or jQuery collection | yes                             | Selector or element of the source `drag-sort-list` component.                                                                                                                                                                              |
 | `sourceIndex`    | Integer                                  | yes                             | Zero-based index of the item to pick up.                                                                                                                                                                                                   |
 | `targetList`     | String, DOM element or jQuery collection | yes                             | Selector or element of the target `drag-sort-list` component.                                                                                                                                                                              |
@@ -525,22 +482,18 @@ After executing `sort`, perform a wait using `wait`, `andThen` or `await`.
 Example:
 
 ```js
-  const [list0, list1] = document.querySelectorAll('.dragSortList')
+const [list0, list1] = document.querySelectorAll(".dragSortList");
 
-  await move(list0, 0, list1, 1, false)
+await move(list0, 0, list1, 1, false);
 ```
 
 This will pick the first item from `list0` and drop it below the second item of `list1`.
 
 See this addon's acceptance test for example.
 
-
-
 ### Page object components
 
 This addon provides [page object](http://ember-cli-page-object.js.org) components.
-
-
 
 #### Importing page object components
 
@@ -556,7 +509,7 @@ Normally, you only need to import `dragSortList`. `dragSortItem` is available as
 When used in a test, **the `dragSortList` page object component offers the following properties and methods**:
 
 | Property          | Type                                                                                     | Description                                                       |
-|:------------------|:-----------------------------------------------------------------------------------------|:------------------------------------------------------------------|
+| :---------------- | :--------------------------------------------------------------------------------------- | :---------------------------------------------------------------- |
 | `items`           | [Page Object Collection](http://ember-cli-page-object.js.org/docs/v1.8.x/api/collection) | Each item is a `dragSortItem` page object component.              |
 | `draggingEnabled` | Boolean                                                                                  | Checks for `-draggingEnabled` class on the component (see above). |
 | `isDragging`      | Boolean                                                                                  | Checks for `-isDragging` class on the component (see above).      |
@@ -567,16 +520,15 @@ When used in a test, **the `dragSortList` page object component offers the follo
 | `sort(...)`       | Method                                                                                   | Calls `sort` helper on current list. See below for arguments.     |
 | `move(...)`       | Method                                                                                   | Calls `move` helper on current list. See below for arguments.     |
 
-
 **The `dragSortItem` page object component offers the following properties and methods**:
 
 | Property           | Type                  | Description                                                                                                    |
-|:-------------------|:----------------------|:---------------------------------------------------------------------------------------------------------------|
+| :----------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------- |
 | `content`          | Page Object Component | Represents the content of every `dragSortItem`. Available only via the factory imported from `{dragSortList}`. |
 | `draggable`        | Boolean               | Whether the item is draggable                                                                                  |
 | `isDragged`        | Boolean               | Checks for `-isDragged` class on the component (see above).                                                    |
 | `isDraggingOver`   | Boolean               | Checks for `-isDraggingOver` class on the component (see above).                                               |
-| `placeholderAbove` | Boolean               | Checks for `-placeholderBefore` class on the component (see above).                                             |
+| `placeholderAbove` | Boolean               | Checks for `-placeholderBefore` class on the component (see above).                                            |
 | `placeholderBelow` | Boolean               | Checks for `-placeholderAfter` class on the component (see above).                                             |
 | `dragStart()`      | Method                | Calls `trigger` helper on current item with `'dragstart'`.                                                     |
 | `dragOver(above)`  | Method                | Calls `trigger` helper on current item with `'dragover'` and `above`.                                          |
@@ -585,7 +537,7 @@ When used in a test, **the `dragSortList` page object component offers the follo
 Additionally, **both page object components offer the following properties and methods**:
 
 | Property                      | Type              | Description                                                                                                                               |
-|:------------------------------|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+| :---------------------------- | :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
 | `$`                           | jQuery Collection | Current element wrapped in jQuery.                                                                                                        |
 | `empty`                       | Boolean           | Whether current element is empty, ignoring whitespace.                                                                                    |
 | `exists`                      | Boolean           | Whether current element exists. When element does not exist, returns `false` without raising an exception.                                |
@@ -597,9 +549,6 @@ Additionally, **both page object components offer the following properties and m
 | `hasClass(string)`            | Method            | Returns whether current element has given class.                                                                                          |
 | `text()`                      | Method            | Returns text of current element ([PageObject.text](http://ember-cli-page-object.js.org/docs/v1.8.x/api/text)).                            |
 
-
-
-
 #### Including page object components into your page objects
 
 Here's how you include `dragSortList` into your page object:
@@ -607,35 +556,31 @@ Here's how you include `dragSortList` into your page object:
 ```js
 // tests/pages/index.js
 
-import {create, visitable} from 'ember-cli-page-object'
-import dragSortList from '<your-app-name>/tests/pages/components/drag-sort-list'
+import { create, visitable } from "ember-cli-page-object";
+import dragSortList from "<your-app-name>/tests/pages/components/drag-sort-list";
 
 export default create({
-  visit:        visitable('/'),
-  sortableList: dragSortList
-})
+  visit: visitable("/"),
+  sortableList: dragSortList,
+});
 ```
-
-
 
 #### Extending the dragSortList page object component
 
 If you want to provide custom descriptors for the `dragSortList` page object component, use the spread operator:
 
 ```js
-import {create, hasClass, visitable} from 'ember-cli-page-object'
-import dragSortList from '<your-app-name>/tests/pages/components/drag-sort-list'
+import { create, hasClass, visitable } from "ember-cli-page-object";
+import dragSortList from "<your-app-name>/tests/pages/components/drag-sort-list";
 
 export default create({
-  visit:        visitable('/'),
+  visit: visitable("/"),
   sortableList: {
     ...dragSortList,
-    isActive: hasClass('active')
-  }
-})
+    isActive: hasClass("active"),
+  },
+});
 ```
-
-
 
 #### Extending the dragSortItem page object component
 
@@ -643,11 +588,11 @@ You can not provide a custom descriptor for `dragSortItem`, but you can describe
 
 ```handlebars
 <DragSortList
-  @items         = {{this.items}}
-  @dragEndAction = {{this.dragEndAction}}
+  @items={{this.items}}
+  @dragEndAction={{this.dragEndAction}}
   as |item|
 >
-  <div class = 'drag-sort-item-content'>
+  <div class="drag-sort-item-content">
     {{item.name}}
   </div>
 </DragSortList>
@@ -656,39 +601,37 @@ You can not provide a custom descriptor for `dragSortItem`, but you can describe
 ...by importing the page object component factory from `{dragSortList}` and passing your item description into it like this:
 
 ```js
-import {create, visitable} from 'ember-cli-page-object'
-import {dragSortList} from '<your-app-name>/tests/pages/components/drag-sort-list'
+import { create, visitable } from "ember-cli-page-object";
+import { dragSortList } from "<your-app-name>/tests/pages/components/drag-sort-list";
 
 export default create({
-  visit:        visitable('/'),
+  visit: visitable("/"),
   sortableList: dragSortList({
-    title: text()
-  })
-})
+    title: text(),
+  }),
+});
 ```
 
-In a test, list items are available as `sortableList.items()`. Item content is available as `sortableList.items(index).content`.
+In a test, list items are available as `sortableList.items`. Item content is available as `sortableList.items.objectAt(index)`.
 
 For example, to assert the title of the first item in a list, using the page object from the last example, you can do this:
 
 ```js
-assert.strictEqual(sortableList.items(0).content.title, "Foo")
+assert.strictEqual(sortableList.items.objectAt(0).item.content.title, "Foo");
 ```
-
-
 
 #### Providing the drag handle selector
 
 If you're using drag handles, you must pass a drag handle selector to the factory as the second argument:
 
 ```js
-import {create, visitable} from 'ember-cli-page-object'
-import {dragSortList} from '<your-app-name>/tests/pages/components/drag-sort-list'
+import { create, visitable } from "ember-cli-page-object";
+import { dragSortList } from "<your-app-name>/tests/pages/components/drag-sort-list";
 
 export default create({
-  visit:        visitable('/'),
-  sortableList: dragSortList({}, '[draggable]')
-})
+  visit: visitable("/"),
+  sortableList: dragSortList({}, "[draggable]"),
+});
 ```
 
 If you don't want to provide custom list item content, pass an empty object.
@@ -699,8 +642,6 @@ The selector must be discoverable within list item content. In other words, the 
 
 If you're describing a nested list, use the `>` combinator in your drag handle selector, so that drag handles of child items aren't selected.
 
-
-
 #### Sorting the dragSortList page object component
 
 Inside your acceptance test, you can use the `sort` method on the `dragSortList` page object component.
@@ -708,7 +649,7 @@ Inside your acceptance test, you can use the `sort` method on the `dragSortList`
 To **rearrange items within a single list**, call `dragSortList.sort()` with three arguments:
 
 | Argument      | Type    | Required | Description                                                                                                                     |
-|:--------------|:--------|:---------|:--------------------------------------------------------------------------------------------------------------------------------|
+| :------------ | :------ | :------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | `sourceIndex` | Integer | yes      | Zero-based index of the item to pick up.                                                                                        |
 | `targetIndex` | Integer | yes      | Zero-based index of the item to drop picked item on top of, calculated while the picked item is still on its original position. |
 | `above`       | Boolean | yes      | Whether to drop picked item above (`true`) or below (`false`) target item.                                                      |
@@ -727,21 +668,19 @@ test('sorting a list', async function (assert) {
 
   const expectedTitles = ['Bar', 'Foo', 'Baz', 'Quux']
 
-  assert.strictEqual(list.items().count, 4)
+  assert.strictEqual(list.items.length, 4)
 
   expectedTitles.forEach((expectedTitle, k) => {
     m = `List #0 item #${k} content title`
-    expect(list.items(k).content.title, m).equal(expectedTitle)
+    expect(list.items.objectAt(k).item.title, m).equal(expectedTitle)
   })
 }))
 ```
 
-
-
 To **move an item from one list to another**, call `dragSortList.move()` with four arguments:
 
 | Argument      | Type                  | Required                        | Description                                                                                                                                                                                                                                |
-|:--------------|:----------------------|:--------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :------------ | :-------------------- | :------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sourceIndex` | Integer               | yes                             | Zero-based index of the item to pick up.                                                                                                                                                                                                   |
 | `targetList`  | Page object component | yes                             | The page object of the other sortable list component.                                                                                                                                                                                      |
 | `targetIndex` | Integer               | no                              | Zero-based index of the item to drop picked item on top of, calculated while the picked item is still on its original position. When omitted, adds item to the end of the target list. **Must** be omitted when moving into an empty list. |
@@ -752,17 +691,15 @@ After executing `sort`, perform a wait using `await` or `andThen()`.
 Example:
 
 ```js
-const list1 = page.sortableList1
-const list2 = page.sortableList2
+const list1 = page.sortableList1;
+const list2 = page.sortableList2;
 
-await list1.sort(0, list2, 1, false)
+await list1.sort(0, list2, 1, false);
 ```
 
 This will pick the first item from `list1` and drop it below the second item of `list2`.
 
 See this addon's acceptance test for example.
-
-
 
 ## Development
 
@@ -770,30 +707,22 @@ See this addon's acceptance test for example.
 
 Use [Volta](https://volta.sh) to automatically pick correct Node and Yarn versions.
 
-
-
 ### Do not use npm, use yarn
 
 This project uses [Yarn](https://yarnpkg.com/) to lock dependencies. You can install yarn with `npm i -g yarn`.
 
-
-
 ### Installation for development
 
-* `git clone <repository-url>` this repository
-* `cd ember-drag-sort`
-* `yarn install` :warning:
+- `git clone <repository-url>` this repository
+- `cd ember-drag-sort`
+- `yarn install` :warning:
 
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
-
-
 ### Running
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-
+- `ember serve`
+- Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Branch names
 
@@ -802,27 +731,22 @@ Main branches are named as `gen-1`, `gen-2`, etc. Default branch on GitHub is wh
 This naming scheme is due to the fact that this project uses SemVer. As a result, major version number will rise very quickly, without any correlation with actual major changes in the app.
 
 The number in the branch name, "generation", is supposed to be incremented in these cases:
-* A huge improvement or change happens in the addon.
-* There's a change in the addon's API or architecture which introduces a necessity to maintain more than one branch at a time.
-* The codebase is started from scratch.
+
+- A huge improvement or change happens in the addon.
+- There's a change in the addon's API or architecture which introduces a necessity to maintain more than one branch at a time.
+- The codebase is started from scratch.
 
 Pull requests are welcome from feature branches. Make sure to discus proposed changes with addon maintainers to avoid wasted effort.
-
-
 
 ### Updating the table of contents
 
 Maintaining the TOC by hand is extremely tedious. Use [this tiny webapp](https://lolmaus.github.io/tocdown/) to generate the TOC automatically. Enable the first two checkboxes there.
-
-
 
 ### Demo deployment
 
 This command will deploy the app to https://kaliber5/ember-drag-sort.github.io/ember-drag-sort/ :
 
     ember deploy prod
-
-
 
 ## Credits
 
@@ -837,8 +761,6 @@ Reimplemented in [Deveo](https://github.com/Deveo)/[Perforce](https://www.perfor
 Currently developed and maintained by [kaliber5](https://kaliber5.de).
 
 <img src="https://www.kaliber5.de/assets/images/kaliber5@2x.png" alt="kaliber5" width="134" height="40">
-
-
 
 ## License
 

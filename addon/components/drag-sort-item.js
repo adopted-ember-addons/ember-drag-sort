@@ -1,13 +1,10 @@
-// ----- Ember modules -----
+/* eslint-disable ember/no-runloop */
 import Component from '@ember/component';
 import { assert } from '@ember/debug';
 import { inject as service } from '@ember/service';
 import { not, reads } from '@ember/object/computed';
 import { computed, observer } from '@ember/object';
 import { next } from '@ember/runloop';
-
-// ----- Own modules -----
-import layout from '../templates/components/drag-sort-item';
 
 function getComputedStyleInt(element, cssProp) {
   const computedStyle = window.getComputedStyle(element, null);
@@ -37,7 +34,6 @@ export default Component.extend({
   dragSort: service(),
 
   // ----- Overridden properties -----
-  layout,
   classNameBindings: [
     ':dragSortItem',
     'isDragged2:-isDragged',

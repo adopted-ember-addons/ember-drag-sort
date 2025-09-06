@@ -7,6 +7,8 @@ import { next } from '@ember/runloop';
 import { A } from '@ember/array';
 
 export default Component.extend({
+  dragSort: service(),
+
   // ----- Arguments -----
   additionalArgs: undefined,
   items: undefined,
@@ -23,9 +25,6 @@ export default Component.extend({
   dragEndAction: undefined,
   dragStartAction: undefined,
   determineForeignPositionAction: undefined,
-
-  // ----- Services -----
-  dragSort: service(),
 
   // ----- Overridden properties -----
   classNameBindings: [
@@ -51,9 +50,9 @@ export default Component.extend({
 
   // ----- Computed properties -----
   isDragging: computed('dragSort.{isDragging,group}', 'group', function () {
-    const isDragging = this.get('dragSort.isDragging');
+    const isDragging = this.dragSort.isDragging;
     const group = this.group;
-    const groupFromService = this.get('dragSort.group');
+    const groupFromService = this.dragSort.group;
 
     return isDragging && group === groupFromService;
   }),
@@ -82,7 +81,7 @@ export default Component.extend({
   isExpanded2: reads('isExpanded'),
 
   isEmpty: computed('items.[]', function () {
-    const count = this.get('items.length');
+    const count = this.items?.length;
 
     return !count;
   }),
@@ -93,7 +92,7 @@ export default Component.extend({
     'sourceList',
     'sourceIndex',
     function () {
-      const count = this.get('items.length');
+      const count = this.items?.length;
       const items = this.items;
       const sourceList = this.sourceList;
       const sourceIndex = this.sourceIndex;
@@ -105,11 +104,11 @@ export default Component.extend({
   // ----- Overridden methods -----
   dragEnter(event) {
     // Ignore irrelevant drags
-    if (!this.get('dragSort.isDragging')) return;
+    if (!this.dragSort.isDragging) return;
 
     // Ignore irrelevant groups
     const group = this.group;
-    const activeGroup = this.get('dragSort.group');
+    const activeGroup = this.dragSort.group;
     if (group !== activeGroup) return;
 
     event.stopPropagation();
@@ -133,11 +132,11 @@ export default Component.extend({
     }
 
     // Ignore irrelevant drags
-    if (!this.get('dragSort.isDragging') || this.determineForeignPositionAction)
+    if (!this.dragSort.isDragging || this.determineForeignPositionAction)
       return;
 
     const group = this.group;
-    const activeGroup = this.get('dragSort.group');
+    const activeGroup = this.dragSort.group;
 
     if (group !== activeGroup) return;
 
@@ -190,7 +189,7 @@ export default Component.extend({
 
     const group = this.group;
     const items = this.items;
-    const itemsLength = items.length;
+    const itemsLength = items?.length;
     const draggedItem = this.draggedItem;
     const sourceList = this.sourceList;
     const dragSort = this.dragSort;

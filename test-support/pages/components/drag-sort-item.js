@@ -12,7 +12,7 @@ export default component({
   placeholderAbove: hasClass('-placeholderBefore'),
   placeholderBelow: hasClass('-placeholderAfter'),
 
-  dragStart(index) {
+  dragStart() {
     trigger(this.$.get(0), 'dragstart');
   },
 

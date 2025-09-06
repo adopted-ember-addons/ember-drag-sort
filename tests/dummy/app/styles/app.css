@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: sans-serif;
 }
 
@@ -12,8 +13,7 @@ h2:first-child,
 h3:first-child,
 h4:first-child,
 h5:first-child,
-h6:first-child
-{
+h6:first-child {
   margin-top: 0;
 }
 
@@ -23,8 +23,7 @@ h2:last-child,
 h3:last-child,
 h4:last-child,
 h5:last-child,
-h6:last-child
-{
+h6:last-child {
   margin-bottom: 0;
 }
 
@@ -73,7 +72,7 @@ h6:last-child
   border: 1px solid black;
   margin: 4px;
   padding: 0.2em 0.5em;
-  background-color: #FFD0E9;
+  background-color: #ffd0e9;
 }
 
 .nestedItem {
@@ -109,23 +108,23 @@ h6:last-child
 }
 
 .nestedItem {
-  background-color : #FFD0E9;
+  background-color: #ffd0e9;
 }
 .nestedItem .nestedItem {
-  background-color: #FFAAD7;
+  background-color: #ffaad7;
 }
 
 .nestedItem .nestedItem .nestedItem {
-  background-color: #FF8CC9;
+  background-color: #ff8cc9;
 }
 .nestedItem .nestedItem .nestedItem .nestedItem {
-  background-color: #FF74BD;
+  background-color: #ff74bd;
 }
 .nestedItem .nestedItem .nestedItem .nestedItem .nestedItem {
-  background-color: #FF60B4;
+  background-color: #ff60b4;
 }
 .nestedItem .nestedItem .nestedItem .nestedItem .nestedItem .nestedItem {
-  background-color: #FF50AD;
+  background-color: #ff50ad;
 }
 
 .dragSortList:not(.-draggingEnabled) {

@@ -14,6 +14,8 @@ function getComputedStyleInt(element, cssProp) {
 }
 
 export default Component.extend({
+  dragSort: service(),
+
   // ----- Arguments -----
   item: undefined,
   index: undefined,
@@ -29,9 +31,6 @@ export default Component.extend({
   dragEndAction: undefined,
   dragStartAction: undefined,
   determineForeignPositionAction: undefined,
-
-  // ----- Services -----
-  dragSort: service(),
 
   // ----- Overridden properties -----
   classNameBindings: [
@@ -77,7 +76,7 @@ export default Component.extend({
     'index',
     'sourceIndex',
     function () {
-      const isDragging = this.get('dragSort.isDragging');
+      const isDragging = this.dragSort.isDragging;
       const items = this.items;
       const sourceList = this.sourceList;
       const index = this.index;
@@ -96,7 +95,7 @@ export default Component.extend({
     'isDragged',
     'sourceOnly',
     function () {
-      const isDragging = this.get('dragSort.isDragging');
+      const isDragging = this.dragSort.isDragging;
       const items = this.items;
       const targetList = this.targetList;
       const index = this.index;
@@ -116,7 +115,7 @@ export default Component.extend({
 
   isLast: computed('index', 'items.[]', function () {
     const index = this.index;
-    const count = this.get('items.length');
+    const count = this.items?.length;
 
     return index === count - 1;
   }),
@@ -195,7 +194,7 @@ export default Component.extend({
 
   dragEnd(event) {
     // Ignore irrelevant drags
-    if (!this.get('dragSort.isDragging')) return;
+    if (!this.dragSort.isDragging) return;
 
     event.stopPropagation();
     event.preventDefault();
@@ -211,14 +210,14 @@ export default Component.extend({
   dragOver(event) {
     // Ignore irrelevant drags
     if (
-      !this.get('dragSort.isDragging') ||
+      !this.dragSort.isDragging ||
       this.determineForeignPositionAction ||
       this.sourceOnly
     )
       return;
 
     const group = this.group;
-    const activeGroup = this.get('dragSort.group');
+    const activeGroup = this.dragSort.group;
 
     if (group !== activeGroup) return;
 
@@ -229,7 +228,7 @@ export default Component.extend({
   },
 
   dragEnter(event) {
-    if (!this.get('dragSort.isDragging')) return;
+    if (!this.dragSort.isDragging) return;
     // Without this, dragOver would not fire in IE11. http://mereskin.github.io/dnd/
     event.preventDefault();
   },
@@ -277,7 +276,7 @@ export default Component.extend({
     const index = this.index;
     const items = this.items;
     const element = this.element;
-    const isHorizontal = this.get('dragSort.isHorizontal');
+    const isHorizontal = this.dragSort.isHorizontal;
     const isRtl = this.isRtl && isHorizontal;
     const isPlaceholderBefore = this.shouldShowPlaceholderBefore2;
     const isPlaceholderAfter = this.shouldShowPlaceholderAfter2;

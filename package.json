@@ -17,17 +17,28 @@
     "sortable-list",
     "sortable list"
   ],
+  "repository": "https://github.com/adopted-ember-addons/ember-drag-sort",
   "license": "MIT",
   "author": "Andrey Mikhaylov @lolmaus <lolmaus@gmail.com> (http://lolma.us)",
   "contributors": [
     "kaliber5/ember-drag-sort (https://github.com/kaliber5/ember-drag-sort)",
     "kaliber5 (https://kaliber5.de)"
   ],
-  "homepage": "https://github.com/adopted-ember-addons/ember-drag-sort",
-  "bugs": {
-    "url": "https://github.com/adopted-ember-addons/ember-drag-sort/issues"
+    "typesVersions": {
+    "*": {
+      "test-support": [
+        "declarations/addon-test-support/index.d.ts"
+      ],
+      "test-support/*": [
+        "declarations/addon-test-support/*",
+        "declarations/addon-test-support/*/index.d.ts"
+      ],
+      "*": [
+        "declarations/addon/*",
+        "declarations/addon/*/index.d.ts"
+      ]
+    }
   },
-  "repository": "https://github.com/adopted-ember-addons/ember-drag-sort",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -43,6 +54,9 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "lint:types": "tsc --noEmit",
+    "prepack": "tsc --project tsconfig.declarations.json",
+    "postpack": "rimraf declarations",
     "start": "ember serve",
     "test": "concurrently \"pnpm:lint\" \"pnpm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test",
@@ -54,14 +68,39 @@
     "ember-cli-htmlbars": "^6.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.4",
-    "@babel/eslint-parser": "^7.28.4",
-    "@babel/plugin-proposal-decorators": "^7.28.0",
     "@ember/optional-features": "^2.2.0",
     "@ember/test-helpers": "^3.3.1",
     "@embroider/test-setup": "^4.0.0",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
+      "@glint/environment-ember-loose": "^1.4.0",
+    "@glint/template": "^1.4.0",
+    "@tsconfig/ember": "^3.0.8",
+    "@types/ember": "^4.0.11",
+    "@types/ember__application": "^4.0.11",
+    "@types/ember__array": "^4.0.10",
+    "@types/ember__component": "^4.0.22",
+    "@types/ember__controller": "^4.0.12",
+    "@types/ember__debug": "^4.0.8",
+    "@types/ember__destroyable": "^4.0.5",
+    "@types/ember__engine": "^4.0.11",
+    "@types/ember__error": "^4.0.6",
+    "@types/ember__helper": "^4.0.8",
+    "@types/ember__modifier": "^4.0.9",
+    "@types/ember__object": "^4.0.12",
+    "@types/ember__owner": "^4.0.9",
+    "@types/ember__polyfills": "^4.0.6",
+    "@types/ember__routing": "^4.0.22",
+    "@types/ember__runloop": "^4.0.10",
+    "@types/ember__service": "^4.0.9",
+    "@types/ember__string": "^3.16.3",
+    "@types/ember__template": "^4.0.7",
+    "@types/ember__test": "^4.0.6",
+    "@types/ember__utils": "^4.0.7",
+    "@types/qunit": "^2.19.10",
+    "@types/rsvp": "^4.0.9",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.2.2",
     "ember-auto-import": "^2.10.0",
@@ -95,11 +134,13 @@
     "prettier": "^3.6.2",
     "qunit": "^2.24.1",
     "qunit-dom": "^3.5.0",
+    "rimraf": "^5.0.1",
     "sinon": "^8.1.1",
     "sinon-chai": "^3.7.0",
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-prettier": "^4.1.0",
+    "typescript": "^5.6.2",
     "webpack": "^5.101.3"
   },
   "peerDependencies": {

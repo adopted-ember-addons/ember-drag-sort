@@ -2,26 +2,30 @@
 import Service from '@ember/service';
 import EventedMixin from '@ember/object/evented';
 import { next } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking';
+import { setProperties } from '@ember/object';
 
-export default Service.extend(EventedMixin, {
-  // ----- Static properties -----
-  isDragging: false,
-  isDraggingUp: null,
+export default class DragSort extends Service.extend(EventedMixin) {
+  @tracked isDragging = false;
+  @tracked isDraggingUp: boolean | null = null;
 
-  draggedItem: null,
-  group: null,
+  @tracked draggedItem = null;
+  @tracked group = null;
 
-  sourceList: null,
-  targetList: null,
-  sourceIndex: null,
-  targetIndex: null,
+  @tracked sourceArgs: unknown | null = null;
+  @tracked sourceIndex: number | null = null;
+  @tracked sourceList = null;
 
-  lastDragEnteredList: null,
-  isHorizontal: false,
+  @tracked targetArgs: unknown | null = null;
+  @tracked targetIndex: number | null = null;
+  @tracked targetList = null;
 
-  // ----- Custom methods -----
+  @tracked lastDragEnteredList: unknown | null = null;
+  @tracked isHorizontal?: boolean;
+
   startDragging({ additionalArgs, item, index, items, group, isHorizontal }) {
-    this.setProperties({
+    debugger;
+    setProperties(this, {
       isDragging: true,
       isDraggingUp: false,
 
@@ -30,19 +34,20 @@ export default Service.extend(EventedMixin, {
       isHorizontal,
 
       sourceArgs: additionalArgs,
-      sourceList: items,
-      targetArgs: additionalArgs,
-      targetList: items,
       sourceIndex: index,
+      sourceList: items,
+
+      targetArgs: additionalArgs,
       targetIndex: index,
+      targetList: items,
     });
 
     if (items.length > 1) {
       if (index === 0) {
-        this.set('targetIndex', index + 1);
-        this.set('isDraggingUp', true);
+        this.targetIndex = index + 1;
+        this.isDraggingUp = true;
       } else {
-        this.set('targetIndex', index - 1);
+        this.targetIndex = index - 1;
       }
     }
 
@@ -54,7 +59,7 @@ export default Service.extend(EventedMixin, {
         sourceIndex: index,
       });
     });
-  },
+  }
 
   draggingOver({ group, index, items, isDraggingUp }) {
     // Ignore hovers over irrelevant groups
@@ -80,11 +85,11 @@ export default Service.extend(EventedMixin, {
     }
 
     // Remember current index and direction
-    this.setProperties({
+    setProperties(this, {
       targetIndex: index,
       isDraggingUp,
     });
-  },
+  }
 
   dragEntering({ group, items, isHorizontal, targetArgs, targetIndex = 0 }) {
     // Ignore entering irrelevant groups
@@ -106,25 +111,25 @@ export default Service.extend(EventedMixin, {
         });
       });
 
-      this.set('targetArgs', targetArgs);
-      this.set('targetIndex', targetIndex);
+      this.targetArgs = targetArgs;
+      this.targetIndex = targetIndex;
     }
 
     // Remember entering a new list
-    this.setProperties({
+    setProperties(this, {
       targetList: items,
       lastDragEnteredList: items,
       isHorizontal: isHorizontal,
     });
-  },
+  }
 
   endDragging({ action }) {
     const sourceArgs = this.sourceArgs;
     const sourceList = this.sourceList;
-    const sourceIndex = this.sourceIndex;
+    const sourceIndex = this.sourceIndex as number;
     const targetArgs = this.targetArgs;
     const targetList = this.targetList;
-    let targetIndex = this.targetIndex;
+    let targetIndex = this.targetIndex as number;
     const isDraggingUp = this.isDraggingUp;
     const group = this.group;
     const draggedItem = this.draggedItem;
@@ -180,10 +185,10 @@ export default Service.extend(EventedMixin, {
         targetIndex,
       });
     });
-  },
+  }
 
   _reset() {
-    this.setProperties({
+    setProperties(this, {
       isDragging: false,
       isDraggingUp: null,
 
@@ -199,5 +204,5 @@ export default Service.extend(EventedMixin, {
 
       lastDragEnteredList: null,
     });
-  },
-});
+  }
+}

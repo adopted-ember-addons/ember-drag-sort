@@ -1,21 +1,40 @@
-{{#each this.items as |item index|}}
-  <DragSortItem
-    @additionalArgs={{this.additionalArgs}}
-    @item={{item}}
-    @index={{index}}
-    @items={{this.items}}
-    @group={{this.group}}
-    @handle={{this.handle}}
-    @tagName={{this.childTagName}}
-    @isHorizontal={{this.isHorizontal}}
-    @isRtl={{this.isRtl}}
-    @draggingEnabled={{this.draggingEnabled}}
-    @sourceOnly={{this.sourceOnly}}
-    @dragEndAction={{this.dragEndAction}}
-    @dragStartAction={{this.dragStartAction}}
-    @determineForeignPositionAction={{this.determineForeignPositionAction}}
-    class={{this.childClass}}
+{{#let (element (if @tagName @tagName "div")) as |Tag|}}
+  <Tag
+    class="dragSortList
+      {{if this.draggingEnabled '-draggingEnabled'}}
+      {{if this.isDragging '-isDragging'}}
+      {{if this.isDraggingOver '-isDraggingOver'}}
+      {{if this.isEmpty '-isEmpty'}}
+      {{if this.isExpanded '-isExpanded'}}
+      {{if @isHorizontal '-horizontal'}}
+      {{if @isRtl '-rtl'}}
+      {{if this.isVertical '-vertical'}}
+      {{if this.sourceOnly '-sourceOnlyList'}}"
+    {{did-insert this.elementInserted}}
+    {{on "dragenter" this.dragEnter}}
+    {{on "dragover" this.dragOver}}
+    ...attributes
   >
-    {{yield item index}}
-  </DragSortItem>
-{{/each}}
+    {{#each @items as |item index|}}
+      <DragSortItem
+        @additionalArgs={{@additionalArgs}}
+        @determineForeignPositionAction={{@determineForeignPositionAction}}
+        @draggingEnabled={{this.draggingEnabled}}
+        @dragEndAction={{@dragEndAction}}
+        @dragStartAction={{@dragStartAction}}
+        @group={{@group}}
+        @handle={{@handle}}
+        @index={{index}}
+        @isHorizontal={{@isHorizontal}}
+        @isRtl={{@isRtl}}
+        @item={{item}}
+        @items={{@items}}
+        @sourceOnly={{this.sourceOnly}}
+        @tagName={{@childTagName}}
+        class={{@childClass}}
+      >
+        {{yield item index}}
+      </DragSortItem>
+    {{/each}}
+  </Tag>
+{{/let}}

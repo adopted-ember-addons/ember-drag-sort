@@ -20,10 +20,6 @@
   "repository": "https://github.com/adopted-ember-addons/ember-drag-sort",
   "license": "MIT",
   "author": "Andrey Mikhaylov @lolmaus <lolmaus@gmail.com> (http://lolma.us)",
-  "contributors": [
-    "kaliber5/ember-drag-sort (https://github.com/kaliber5/ember-drag-sort)",
-    "kaliber5 (https://kaliber5.de)"
-  ],
   "typesVersions": {
     "*": {
       "test-support": [

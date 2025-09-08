@@ -1,11 +1,10 @@
 # ember-drag-sort
 
-[![Travis build status](https://img.shields.io/travis/kaliber5/ember-drag-sort.svg)](https://travis-ci.org/kaliber5/ember-drag-sort)
 [![Ember Observer Score](http://emberobserver.com/badges/ember-drag-sort.svg?cache_bust=1)](http://emberobserver.com/addons/ember-drag-sort)
 [![npm package version](https://img.shields.io/npm/v/ember-drag-sort.svg)](https://www.npmjs.com/package/ember-drag-sort)
-[![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/kaliber5/ember-drag-sort/blob/gen-1/LICENSE.md)
-![ember-versions 3.12+](https://img.shields.io/badge/ember--versions-3.12%2B-yellowgreen.svg)
-![node-versions 8+](https://img.shields.io/badge/node--versions-8%2B-yellowgreen.svg)
+[![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/adopted-ember-addons/ember-drag-sort/blob/main/LICENSE.md)
+![ember-versions 3.28+](https://img.shields.io/badge/ember--versions-3.28%2B-yellowgreen.svg)
+![node-versions 18+](https://img.shields.io/badge/node--versions-18%2B-yellowgreen.svg)
 ![ember-cli 3.15.1](https://img.shields.io/badge/uses%20ember--cli-3.15.1-blue.svg)
 
 - [ember-drag-sort](#ember-drag-sort)
@@ -69,13 +68,14 @@ A drag'n'drop sortable list addon.
 
 ### Demo
 
-https://kaliber5.github.io/ember-drag-sort/
+https://adopted-ember-addons.github.io/ember-drag-sort/
 
 ## Versions, branches and jQuery
 
 - Version 1.x, `gen-0` branch is based on jQuery. Supports Ember CLI 1.13+.
 - Version 2.x, `gen-1` branch (current development head) has got rid of jQuery. Except for page objects which [still import](https://github.com/san650/ember-cli-page-object/blob/v1.15.2/index.js#L23-L28) jQuery in test env. Supports Ember CLI 3.8+.
 - Version 3.x, `gen-2` branch supports Ember CLI 3.12+.
+- Version 4.x, `main` branch supports Ember and Ember CLI 3.28+.
 
 ### Browser support
 
@@ -733,21 +733,21 @@ Maintaining the TOC by hand is extremely tedious. Use [this tiny webapp](https:/
 
 ### Demo deployment
 
-This command will deploy the app to https://kaliber5/ember-drag-sort.github.io/ember-drag-sort/ :
+This command will deploy the app to https://adopted-ember-addons/ember-drag-sort.github.io/ember-drag-sort/ :
 
     ember deploy prod
 
 ## Credits
 
-Built by [@lolmaus](https://github.com/lolmaus) and [contributors](https://github.com/kaliber5/ember-drag-sort/graphs/contributors).
+Built by [@lolmaus](https://github.com/lolmaus) and [contributors](https://github.com/adopted-ember-addons/ember-drag-sort/graphs/contributors).
 
-Notable contributors: [@frysch](https://github.com/frysch), [@rwwagner90](https://github.com/rwwagner90).
+Notable contributors: [@frysch](https://github.com/frysch), [@RobbieTheWagner](https://github.com/RobbieTheWagner).
 
 Conceieved in [Firecracker](https://github.com/firecracker).
 
 Reimplemented in [Deveo](https://github.com/Deveo)/[Perforce](https://www.perforce.com/deveo-customer-info).
 
-Currently developed and maintained by [kaliber5](https://kaliber5.de).
+Originally developed and maintained by [kaliber5](https://kaliber5.de).
 
 <img src="https://www.kaliber5.de/assets/images/kaliber5@2x.png" alt="kaliber5" width="134" height="40">
 

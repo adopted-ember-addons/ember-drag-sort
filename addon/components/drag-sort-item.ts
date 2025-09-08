@@ -268,8 +268,6 @@ export default class DragSortItem extends Component<DragSortItemSignature> {
 
     const handleElement = this.el.querySelector(handle);
 
-    debugger;
-
     assert('Handle not found', !!handleElement);
 
     return handleElement === target || handleElement.contains(target);

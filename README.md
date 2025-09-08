@@ -77,23 +77,12 @@ https://kaliber5.github.io/ember-drag-sort/
 - Version 2.x, `gen-1` branch (current development head) has got rid of jQuery. Except for page objects which [still import](https://github.com/san650/ember-cli-page-object/blob/v1.15.2/index.js#L23-L28) jQuery in test env. Supports Ember CLI 3.8+.
 - Version 3.x, `gen-2` branch supports Ember CLI 3.12+.
 
-## Known issues
-
-- :warning: Nested lists do not work correctly in Ember <= v3.10.0-beta.1 without jQuery. This is an issue with Ember itself, see https://github.com/emberjs/ember.js/issues/17840 .
-
-  If your app has jQuery removed, make sure you're using Ember newer than v3.10.0-beta.1, non-inclusive.
-
-  The [demo app](https://kaliber5.github.io/ember-drag-sort/) is using Ember Canary.
-
 ### Browser support
 
 Tested manually.
 
 Works in desktop browsers:
 
-- IE 10
-- IE 11
-- Edge
 - Chrome
 - Firefox
 - Safari

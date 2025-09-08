@@ -24,7 +24,6 @@ export default class DragSort extends Service.extend(EventedMixin) {
   @tracked isHorizontal?: boolean;
 
   startDragging({ additionalArgs, item, index, items, group, isHorizontal }) {
-    debugger;
     setProperties(this, {
       isDragging: true,
       isDraggingUp: false,

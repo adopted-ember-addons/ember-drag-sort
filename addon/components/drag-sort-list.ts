@@ -145,7 +145,7 @@ export default class DragSortList extends Component<DragSortListSignature> {
     });
   };
 
-  getClosestHorizontalIndex = (event: Event) => {
+  getClosestHorizontalIndex = (event: DragEvent) => {
     // Calculate which item is closest and make that the target
     const itemsNodeList = this.el.querySelectorAll('.dragSortItem');
     const draggableItems = A(Array.prototype.slice.call(itemsNodeList));
@@ -186,7 +186,7 @@ export default class DragSortList extends Component<DragSortListSignature> {
     this.dragSort.draggingOver({ group, index, items, isDraggingUp });
   };
 
-  isDraggingOverHorizontal = (event: Event) => {
+  isDraggingOverHorizontal = (event: DragEvent) => {
     const dragSort = this.dragSort;
     const group = this.args.group;
     const items = this.args.items;

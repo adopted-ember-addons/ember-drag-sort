@@ -23,7 +23,22 @@ export default class DragSort extends Service.extend(EventedMixin) {
   @tracked lastDragEnteredList: unknown | null = null;
   @tracked isHorizontal?: boolean;
 
-  startDragging({ additionalArgs, item, index, items, group, isHorizontal }) {
+  startDragging({
+    additionalArgs,
+    item,
+    index,
+    items,
+    group,
+    isHorizontal,
+  }: {
+    additionalArgs: unknown;
+    item: unknown;
+    index: number;
+    items: Array<unknown>;
+    group: string;
+    isHorizontal: boolean;
+  }) {
+    // @ts-expect-error TODO: fix this type error
     setProperties(this, {
       isDragging: true,
       isDraggingUp: false,
@@ -51,7 +66,17 @@ export default class DragSort extends Service.extend(EventedMixin) {
     });
   }
 
-  draggingOver({ group, index, items, isDraggingUp }) {
+  draggingOver({
+    group,
+    index,
+    items,
+    isDraggingUp,
+  }: {
+    group: string;
+    index: number;
+    items: Array<unknown>;
+    isDraggingUp: boolean;
+  }) {
     // Ignore hovers over irrelevant groups
     if (group !== this.group) return;
 
@@ -81,7 +106,19 @@ export default class DragSort extends Service.extend(EventedMixin) {
     });
   }
 
-  dragEntering({ group, items, isHorizontal, targetArgs, targetIndex = 0 }) {
+  dragEntering({
+    group,
+    items,
+    isHorizontal,
+    targetArgs,
+    targetIndex = 0,
+  }: {
+    group: string;
+    items: Array<unknown>;
+    isHorizontal?: boolean;
+    targetArgs: unknown;
+    targetIndex?: number;
+  }) {
     // Ignore entering irrelevant groups
     if (group !== this.group) return;
 
@@ -106,6 +143,7 @@ export default class DragSort extends Service.extend(EventedMixin) {
     }
 
     // Remember entering a new list
+    // @ts-expect-error TODO: fix this type error
     setProperties(this, {
       targetList: items,
       lastDragEnteredList: items,
@@ -113,7 +151,7 @@ export default class DragSort extends Service.extend(EventedMixin) {
     });
   }
 
-  endDragging({ action }) {
+  endDragging({ action }: { action: unknown }) {
     const sourceArgs = this.sourceArgs;
     const sourceList = this.sourceList;
     const sourceIndex = this.sourceIndex as number;
@@ -133,11 +171,11 @@ export default class DragSort extends Service.extend(EventedMixin) {
         // Dragging down
         !isDraggingUp &&
         // Target index is not after the last item
-        targetIndex < targetList.get('length') &&
+        targetIndex < (targetList as any)?.get('length') &&
         // The only element in target list is not the one dragged
         !(
-          targetList.get('length') === 1 &&
-          targetList.get('firstObject') === draggedItem
+          (targetList as any)?.get('length') === 1 &&
+          (targetList as any)?.get('firstObject') === draggedItem
         )
       )
         targetIndex++;

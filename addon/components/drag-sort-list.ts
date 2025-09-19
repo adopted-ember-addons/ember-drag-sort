@@ -9,7 +9,7 @@ interface DragSortListSignature {
     additionalArgs: unknown;
     childClass?: string;
     childTagName?: string;
-    determineForeignPositionAction?: unknown;
+    determineForeignPositionAction?: (args: { draggedItem: unknown; items: Array<unknown> }) => number;
     draggingEnabled: boolean;
     dragEndAction?: unknown;
     dragStartAction?: unknown;
@@ -17,7 +17,7 @@ interface DragSortListSignature {
     items: Array<unknown>;
     isHorizontal?: boolean;
     isRtl?: boolean;
-    group: unknown;
+    group: string;
     sourceOnly: boolean;
   };
 }
@@ -175,8 +175,8 @@ export default class DragSortList extends Component<DragSortListSignature> {
 
     let index =
       items === sourceList
-        ? items.indexOf(draggedItem) + 1
-        : determineForeignPositionAction({ draggedItem, items });
+        ? (items as Array<unknown>).indexOf(draggedItem) + 1
+        : determineForeignPositionAction!({ draggedItem, items });
 
     if (index >= itemsLength) {
       index = itemsLength - 1;

@@ -19,11 +19,11 @@ interface DragSortItemSignature {
     determineForeignPositionAction: unknown;
     draggingEnabled: boolean;
     dragEndAction?: unknown;
-    dragStartAction?: unknown;
+    dragStartAction?: (args: { event: DragEvent; element: HTMLElement; draggedItem: unknown }) => void;
     group: string;
-    handle?: unknown;
-    index?: number;
-    isHorizontal?: boolean;
+    handle?: string;
+    index: number;
+    isHorizontal: boolean;
     isRtl?: boolean;
     item: unknown;
     items: Array<unknown>;

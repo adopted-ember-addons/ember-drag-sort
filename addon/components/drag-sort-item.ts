@@ -1,7 +1,7 @@
 /* eslint-disable ember/no-runloop */
 import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';

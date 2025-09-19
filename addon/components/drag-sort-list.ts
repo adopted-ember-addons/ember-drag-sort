@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { A } from '@ember/array';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 

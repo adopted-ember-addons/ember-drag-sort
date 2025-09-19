@@ -230,7 +230,7 @@ export default class DragSortItem extends Component<DragSortItemSignature> {
       ? getComputedStyleInt(this.el, beforeAttribute) * placeholderModifier
       : isPlaceholderAfter
         ? -getComputedStyleInt(this.el, afterAttribute) * placeholderModifier
-        : 0; // eslint-disable-line indent
+        : 0;
 
     const offset = isHorizontal
       ? this.el.getBoundingClientRect().left

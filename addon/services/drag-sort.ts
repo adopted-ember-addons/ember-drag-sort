@@ -88,7 +88,7 @@ export default class DragSort extends Service {
     items,
     isDraggingUp,
   }: {
-    group: string;
+    group?: string;
     index: number;
     items: Array<unknown>;
     isDraggingUp: boolean;
@@ -129,7 +129,7 @@ export default class DragSort extends Service {
     targetArgs,
     targetIndex = 0,
   }: {
-    group: string;
+    group?: string;
     items: Array<object>;
     isHorizontal?: boolean;
     targetArgs: object;

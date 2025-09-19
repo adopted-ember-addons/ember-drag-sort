@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-prettier/recommended'],
+  extends: ['stylelint-config-standard'],
   rules: {
     'declaration-block-no-redundant-longhand-properties': null,
     'no-descending-specificity': null,

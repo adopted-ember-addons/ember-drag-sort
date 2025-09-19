@@ -9,7 +9,10 @@ interface DragSortListSignature {
     additionalArgs: unknown;
     childClass?: string;
     childTagName?: string;
-    determineForeignPositionAction?: (args: { draggedItem: unknown; items: Array<unknown> }) => number;
+    determineForeignPositionAction?: (args: {
+      draggedItem: unknown;
+      items: Array<unknown>;
+    }) => number;
     draggingEnabled: boolean;
     dragEndAction?: unknown;
     dragStartAction?: unknown;

@@ -14,11 +14,11 @@ export default class DragSort extends Service.extend(EventedMixin) {
 
   @tracked sourceArgs: unknown | null = null;
   @tracked sourceIndex: number | null = null;
-  @tracked sourceList = null;
+  @tracked sourceList: Array<unknown> | null = null;
 
   @tracked targetArgs: unknown | null = null;
   @tracked targetIndex: number | null = null;
-  @tracked targetList = null;
+  @tracked targetList: Array<unknown> | null = null;
 
   @tracked lastDragEnteredList: unknown | null = null;
   @tracked isHorizontal?: boolean;
@@ -143,7 +143,6 @@ export default class DragSort extends Service.extend(EventedMixin) {
     }
 
     // Remember entering a new list
-    // @ts-expect-error TODO: fix this type error
     setProperties(this, {
       targetList: items,
       lastDragEnteredList: items,
@@ -171,12 +170,9 @@ export default class DragSort extends Service.extend(EventedMixin) {
         // Dragging down
         !isDraggingUp &&
         // Target index is not after the last item
-        targetIndex < (targetList as any)?.get('length') &&
+        targetIndex < (targetList?.length ?? 0) &&
         // The only element in target list is not the one dragged
-        !(
-          (targetList as any)?.get('length') === 1 &&
-          (targetList as any)?.get('firstObject') === draggedItem
-        )
+        !(targetList?.length === 1 && targetList[0] === draggedItem)
       )
         targetIndex++;
 

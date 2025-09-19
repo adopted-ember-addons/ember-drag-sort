@@ -2,6 +2,17 @@
 
 ## Release (2025-09-19)
 
+* ember-drag-sort 4.0.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-drag-sort`
+  * [#89](https://github.com/adopted-ember-addons/ember-drag-sort/pull/89) Try to fix declarations ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+## Release (2025-09-19)
+
 * ember-drag-sort 4.0.0 (major)
 
 #### :boom: Breaking Change

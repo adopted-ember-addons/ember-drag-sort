@@ -1,5 +1,17 @@
 # Changelog
 
+## Release (2025-09-19)
+
+* ember-drag-sort 4.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-drag-sort`
+  * [#87](https://github.com/adopted-ember-addons/ember-drag-sort/pull/87) Require ember 4.12+, node 20+ ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+  * [#86](https://github.com/adopted-ember-addons/ember-drag-sort/pull/86) Require Ember 3.28+, node 18+, modernize code ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)

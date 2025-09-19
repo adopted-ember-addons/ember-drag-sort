@@ -89,7 +89,7 @@
         <input
           type="checkbox"
           checked={{this.networkFailure}}
-          onclick={{action (mut this.networkFailure) value="target.checked"}}
+          {{on "change" this.updateNetworkFailure}}
         />
         Simulate network failure.
       </label>

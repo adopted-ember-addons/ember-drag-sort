@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 
 import { dropTask, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
+import { tracked } from '@glimmer/tracking';
 
 export default class IndexController extends Controller {
   simple1 = A([
@@ -134,7 +135,7 @@ export default class IndexController extends Controller {
 
   sourceOnly2 = A([{ name: 'Quux' }]);
 
-  networkFailure = false;
+  @tracked networkFailure = false;
 
   @action
   dragEnd({ sourceList, sourceIndex, targetList, targetIndex }) {
@@ -199,6 +200,10 @@ export default class IndexController extends Controller {
       event.clientY - y,
     );
   }
+
+  updateNetworkFailure = (event) => {
+    this.networkFailure = event.target.checked;
+  };
 
   dragEndTask = dropTask(
     async ({ sourceList, sourceIndex, targetList, targetIndex }) => {

@@ -161,7 +161,12 @@ export default class DragSort extends Service.extend(EventedMixin) {
     const group = this.group;
     const draggedItem = this.draggedItem;
 
-    if (sourceList !== targetList || sourceIndex !== targetIndex) {
+    // Only perform action if targetIndex was set (meaning dragover/dragenter occurred)
+    // and the position actually changed
+    if (
+      targetIndex !== null &&
+      (sourceList !== targetList || sourceIndex !== targetIndex)
+    ) {
       // Account for dragged item shifting indexes by one
       if (sourceList === targetList && targetIndex > sourceIndex) targetIndex--;
 

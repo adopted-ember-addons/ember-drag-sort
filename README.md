@@ -5,7 +5,6 @@
 [![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/adopted-ember-addons/ember-drag-sort/blob/main/LICENSE.md)
 ![ember-versions 3.28+](https://img.shields.io/badge/ember--versions-3.28%2B-yellowgreen.svg)
 ![node-versions 18+](https://img.shields.io/badge/node--versions-18%2B-yellowgreen.svg)
-![ember-cli 3.15.1](https://img.shields.io/badge/uses%20ember--cli-3.15.1-blue.svg)
 
 - [ember-drag-sort](#ember-drag-sort)
   - [Support](#support)

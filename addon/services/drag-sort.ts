@@ -1,26 +1,43 @@
 /* eslint-disable ember/no-runloop */
 import Service from '@ember/service';
-import EventedMixin from '@ember/object/evented';
 import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 import { setProperties } from '@ember/object';
 
-export default class DragSort extends Service.extend(EventedMixin) {
+export default class DragSort extends Service {
+  #eventTarget = new EventTarget();
+
+  on(eventName: string, callback: (event: CustomEvent) => void) {
+    this.#eventTarget.addEventListener(eventName, callback as EventListener);
+    return this;
+  }
+
+  off(eventName: string, callback: (event: CustomEvent) => void) {
+    this.#eventTarget.removeEventListener(eventName, callback as EventListener);
+    return this;
+  }
+
+  trigger(eventName: string, data?: unknown) {
+    const event = new CustomEvent(eventName, { detail: data });
+    this.#eventTarget.dispatchEvent(event);
+    return this;
+  }
+
   @tracked isDragging = false;
   @tracked isDraggingUp: boolean | null = null;
 
   @tracked draggedItem = null;
   @tracked group = null;
 
-  @tracked sourceArgs: unknown | null = null;
+  @tracked sourceArgs: object | null = null;
   @tracked sourceIndex: number | null = null;
-  @tracked sourceList: Array<unknown> | null = null;
+  @tracked sourceList: Array<object> | null = null;
 
-  @tracked targetArgs: unknown | null = null;
+  @tracked targetArgs: object | null = null;
   @tracked targetIndex: number | null = null;
-  @tracked targetList: Array<unknown> | null = null;
+  @tracked targetList: Array<object> | null = null;
 
-  @tracked lastDragEnteredList: unknown | null = null;
+  @tracked lastDragEnteredList: Array<object> | null = null;
   @tracked isHorizontal?: boolean;
 
   startDragging({
@@ -38,7 +55,6 @@ export default class DragSort extends Service.extend(EventedMixin) {
     group: string;
     isHorizontal: boolean;
   }) {
-    // @ts-expect-error TODO: fix this type error
     setProperties(this, {
       isDragging: true,
       isDraggingUp: false,
@@ -114,9 +130,9 @@ export default class DragSort extends Service.extend(EventedMixin) {
     targetIndex = 0,
   }: {
     group: string;
-    items: Array<unknown>;
+    items: Array<object>;
     isHorizontal?: boolean;
-    targetArgs: unknown;
+    targetArgs: object;
     targetIndex?: number;
   }) {
     // Ignore entering irrelevant groups
@@ -186,6 +202,7 @@ export default class DragSort extends Service.extend(EventedMixin) {
         typeof action === 'function'
       ) {
         next(() => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           action({
             group,
             draggedItem,

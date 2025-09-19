@@ -1,12 +1,12 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { A } from '@ember/array';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 
 interface DragSortListSignature {
   Element: HTMLDivElement;
   Args: {
-    additionalArgs: unknown;
+    additionalArgs: object;
     childClass?: string;
     childTagName?: string;
     determineForeignPositionAction?: (args: {
@@ -16,8 +16,8 @@ interface DragSortListSignature {
     draggingEnabled: boolean;
     dragEndAction?: unknown;
     dragStartAction?: unknown;
-    handle?: unknown;
-    items: Array<unknown>;
+    handle?: string;
+    items: Array<object>;
     isHorizontal?: boolean;
     isRtl?: boolean;
     group: string;
@@ -151,7 +151,9 @@ export default class DragSortList extends Component<DragSortListSignature> {
   getClosestHorizontalIndex = (event: DragEvent) => {
     // Calculate which item is closest and make that the target
     const itemsNodeList = this.el.querySelectorAll('.dragSortItem');
-    const draggableItems = A(Array.prototype.slice.call(itemsNodeList));
+    const draggableItems = A<HTMLElement>(
+      Array.prototype.slice.call(itemsNodeList),
+    );
     const positions = A(
       draggableItems.map((draggableItem) =>
         draggableItem.getBoundingClientRect(),
@@ -176,17 +178,19 @@ export default class DragSortList extends Component<DragSortListSignature> {
 
     let isDraggingUp = true;
 
-    let index =
-      items === sourceList
-        ? (items as Array<unknown>).indexOf(draggedItem) + 1
-        : determineForeignPositionAction!({ draggedItem, items });
+    if (draggedItem) {
+      let index =
+        items === sourceList
+          ? items.indexOf(draggedItem) + 1
+          : determineForeignPositionAction!({ draggedItem, items });
 
-    if (index >= itemsLength) {
-      index = itemsLength - 1;
-      isDraggingUp = false;
+      if (index >= itemsLength) {
+        index = itemsLength - 1;
+        isDraggingUp = false;
+      }
+
+      this.dragSort.draggingOver({ group, index, items, isDraggingUp });
     }
-
-    this.dragSort.draggingOver({ group, index, items, isDraggingUp });
   };
 
   isDraggingOverHorizontal = (event: DragEvent) => {

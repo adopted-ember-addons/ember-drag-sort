@@ -1,7 +1,7 @@
 /* eslint-disable ember/no-runloop */
 import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
@@ -230,7 +230,7 @@ export default class DragSortItem extends Component<DragSortItemSignature> {
       ? getComputedStyleInt(this.el, beforeAttribute) * placeholderModifier
       : isPlaceholderAfter
         ? -getComputedStyleInt(this.el, afterAttribute) * placeholderModifier
-        : 0; // eslint-disable-line indent
+        : 0;
 
     const offset = isHorizontal
       ? this.el.getBoundingClientRect().left

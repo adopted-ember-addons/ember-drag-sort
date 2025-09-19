@@ -1,8 +1,5 @@
-.github-fork-ribbon {
-  position: fixed !important;
-}
-
-html, body {
+html,
+body {
   font-family: sans-serif;
 }
 
@@ -16,8 +13,7 @@ h2:first-child,
 h3:first-child,
 h4:first-child,
 h5:first-child,
-h6:first-child
-{
+h6:first-child {
   margin-top: 0;
 }
 
@@ -27,8 +23,7 @@ h2:last-child,
 h3:last-child,
 h4:last-child,
 h5:last-child,
-h6:last-child
-{
+h6:last-child {
   margin-bottom: 0;
 }
 
@@ -36,7 +31,6 @@ h6:last-child
   display: flex;
   flex-wrap: wrap;
   margin-top: 30px;
-
   margin-right: -100px;
   margin-bottom: -100px;
 }
@@ -77,12 +71,13 @@ h6:last-child
   border: 1px solid black;
   margin: 4px;
   padding: 0.2em 0.5em;
-  background-color: #FFD0E9;
+  background-color: #ffd0e9;
 }
 
 .nestedItem {
   margin: 4px;
   padding: 1em;
+  background-color: #ffd0e9;
   border: 1px solid black;
   display: flex;
 }
@@ -108,28 +103,28 @@ h6:last-child
   background-color: deepskyblue;
 }
 
-.nestedItem .dragSortList.-isExpanded.-isDraggingOver:before {
+.nestedItem .dragSortList.-isExpanded.-isDraggingOver::before {
   top: 18px;
 }
 
-.nestedItem {
-  background-color : #FFD0E9;
-}
 .nestedItem .nestedItem {
-  background-color: #FFAAD7;
+  background-color: #ffaad7;
 }
 
 .nestedItem .nestedItem .nestedItem {
-  background-color: #FF8CC9;
+  background-color: #ff8cc9;
 }
+
 .nestedItem .nestedItem .nestedItem .nestedItem {
-  background-color: #FF74BD;
+  background-color: #ff74bd;
 }
+
 .nestedItem .nestedItem .nestedItem .nestedItem .nestedItem {
-  background-color: #FF60B4;
+  background-color: #ff60b4;
 }
+
 .nestedItem .nestedItem .nestedItem .nestedItem .nestedItem .nestedItem {
-  background-color: #FF50AD;
+  background-color: #ff50ad;
 }
 
 .dragSortList:not(.-draggingEnabled) {
@@ -150,12 +145,12 @@ table.dragSortList.-isExpanded.-isDraggingOver {
   background-color: #eee;
 }
 
-table.dragSortList.-isExpanded.-isDraggingOver:before {
+table.dragSortList.-isExpanded.-isDraggingOver::before {
   content: none;
 }
 
-tr.dragSortItem.-placeholderBefore:before,
-tr.dragSortItem.-placeholderAfter:before {
+tr.dragSortItem.-placeholderBefore::before,
+tr.dragSortItem.-placeholderAfter::before {
   content: none;
 }
 

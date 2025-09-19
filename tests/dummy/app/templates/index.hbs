@@ -1,7 +1,5 @@
 {{! template-lint-disable no-action}}
 
-{{fork-me "https://github.com/kaliber5/ember-drag-sort/"}}
-
 <h1>ember-drag-sort demo</h1>
 
 <p>
@@ -9,7 +7,9 @@
 
   See
 
-  <a href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/templates/index.hbs">
+  <a
+    href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/templates/index.hbs"
+  >
     {{~concat~}}
     demo template source
     {{~concat~}}
@@ -17,14 +17,14 @@
 
   and
 
-  <a href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/controllers/index.js">
+  <a
+    href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/controllers/index.js"
+  >
     {{~concat~}}
     demo controller source
     {{~concat~}}
   </a>.
 </p>
-
-
 
 <div class="list-groups">
 
@@ -32,7 +32,8 @@
     <h2>Simple usage</h2>
 
     <p>
-      Sort lists, drag between lists. Won't let you drag items from/to other groups.
+      Sort lists, drag between lists. Won't let you drag items from/to other
+      groups.
     </p>
 
     <section class="list-group">
@@ -40,10 +41,10 @@
         <h4>List without drag handles</h4>
 
         <DragSortList
-          id             = "simple-1"
-          @items         = {{this.simple1}}
-          @group         = "simple"
-          @dragEndAction = {{action "dragEnd"}}
+          id="simple-1"
+          @items={{this.simple1}}
+          @group="simple"
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -56,11 +57,11 @@
         <h4>List with drag handles</h4>
 
         <DragSortList
-          id             = "simple-2"
-          @items         = {{this.simple2}}
-          @group         = "simple"
-          @handle        = ".handle"
-          @dragEndAction = {{action "dragEnd"}}
+          id="simple-2"
+          @items={{this.simple2}}
+          @group="simple"
+          @handle=".handle"
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -72,24 +73,27 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
     <h2>Async action</h2>
 
     <p>
-      Uses async action, driven by <a href="http://ember-concurrency.com/">ember-concurrency</a>.
-
-      See <a href="https://github.com/kaliber5/ember-drag-sort/blob/gen-1/tests/dummy/app/controllers/index.js#L158-L177">task source</a>.
+      Uses async action, driven by
+      <a href="http://ember-concurrency.com/">ember-concurrency</a>. See
+      <a
+        href="https://github.com/kaliber5/ember-drag-sort/blob/gen-1/tests/dummy/app/controllers/index.js#L158-L177"
+      >task source</a>.
     </p>
 
     <p>
       <label>
-        <input type="checkbox" checked={{this.networkFailure}} onclick={{action (mut this.networkFailure) value="target.checked"}}>
+        <input
+          type="checkbox"
+          checked={{this.networkFailure}}
+          {{on "change" this.updateNetworkFailure}}
+        />
         Simulate network failure.
       </label>
     </p>
-
 
     <p>
       Status:
@@ -108,11 +112,11 @@
         <h4>List 1</h4>
 
         <DragSortList
-          id               = "async-1"
-          @items           = {{this.async1}}
-          @group           = "async"
-          @draggingEnabled = {{this.dragEndTask.isIdle}}
-          @dragEndAction   = {{action (perform this.dragEndTask)}}
+          id="async-1"
+          @items={{this.async1}}
+          @group="async"
+          @draggingEnabled={{this.dragEndTask.isIdle}}
+          @dragEndAction={{perform this.dragEndTask}}
           as |item|
         >
           <div class="the-item">
@@ -121,16 +125,15 @@
         </DragSortList>
       </article>
 
-
       <article class="list">
         <h4>List 2</h4>
 
         <DragSortList
-          id               = "async-2"
-          @items           = {{this.async2}}
-          @group           = "async"
-          @draggingEnabled = {{not this.dragEndTask.isRunning}}
-          @dragEndAction   = {{action (perform this.dragEndTask)}}
+          id="async-2"
+          @items={{this.async2}}
+          @group="async"
+          @draggingEnabled={{not this.dragEndTask.isRunning}}
+          @dragEndAction={{perform this.dragEndTask}}
           as |item|
         >
           <div class="the-item">
@@ -141,13 +144,12 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
     <h2>Unsortable list</h2>
 
     <p>
-      Use `determineForeignPositionAction` to prevent user from rearranging a list, while still letting them drag in and out of the list
+      Use `determineForeignPositionAction` to prevent user from rearranging a
+      list, while still letting them drag in and out of the list
     </p>
 
     <section class="list-group">
@@ -155,12 +157,11 @@
         <h4>List 1 (always sorted alphabetically)</h4>
 
         <DragSortList
-          id     = "foreign-1"
-          @items = {{this.foreign1}}
-          @group = "foreign"
-
-          @dragEndAction                  = {{action "dragEnd"}}
-          @determineForeignPositionAction = {{action "determineForeignPosition"}}
+          id="foreign-1"
+          @items={{this.foreign1}}
+          @group="foreign"
+          @dragEndAction={{this.dragEnd}}
+          @determineForeignPositionAction={{this.determineForeignPosition}}
           as |item|
         >
           <div class="the-item">
@@ -173,10 +174,10 @@
         <h4>List 2 (sorted by user)</h4>
 
         <DragSortList
-          id             = "foreign-2"
-          @items         = {{this.foreign2}}
-          @group         = "foreign"
-          @dragEndAction = {{action "dragEnd"}}
+          id="foreign-2"
+          @items={{this.foreign2}}
+          @group="foreign"
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -187,13 +188,12 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
     <h2>Create copies of items by dragging out, delete by dragging in</h2>
 
     <p>
-      Drag out of source list to create copies of items. Drag back into the source list to remove copies. The source list can't be modified.
+      Drag out of source list to create copies of items. Drag back into the
+      source list to remove copies. The source list can't be modified.
     </p>
 
     <section class="list-group">
@@ -201,12 +201,11 @@
         <h4>List 1 (source, always sorted alphabetically)</h4>
 
         <DragSortList
-          id     = "copies-1"
-          @items = {{this.copies1}}
-          @group = "copies"
-
-          @dragEndAction                  = {{action "dragEnd2"}}
-          @determineForeignPositionAction = {{action "determineForeignPosition2"}}
+          id="copies-1"
+          @items={{this.copies1}}
+          @group="copies"
+          @dragEndAction={{this.dragEnd2}}
+          @determineForeignPositionAction={{this.determineForeignPosition2}}
           as |item|
         >
           <div class="the-item">
@@ -219,10 +218,10 @@
         <h4>List 2 (target, sorted by user)</h4>
 
         <DragSortList
-          id             = "copies-2"
-          @items         = {{this.copies2}}
-          @group         = "copies"
-          @dragEndAction = {{action "dragEnd2"}}
+          id="copies-2"
+          @items={{this.copies2}}
+          @group="copies"
+          @dragEndAction={{this.dragEnd2}}
           as |item|
         >
           <div class="the-item">
@@ -235,10 +234,10 @@
         <h4>List 3 (target, sorted by user)</h4>
 
         <DragSortList
-          id             = "copies-3"
-          @items         = {{this.copies3}}
-          @group         = "copies"
-          @dragEndAction = {{action "dragEnd2"}}
+          id="copies-3"
+          @items={{this.copies3}}
+          @group="copies"
+          @dragEndAction={{this.dragEnd2}}
           as |item|
         >
           <div class="the-item">
@@ -249,18 +248,18 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
     <h2>Source only list</h2>
 
     <p>
-      Use `sourceOnly` to prevent the user from rearranging or dragging into the list.
-      Effectively, it is marked as immutable, and only used as a source bucket for other lists.
+      Use `sourceOnly` to prevent the user from rearranging or dragging into the
+      list. Effectively, it is marked as immutable, and only used as a source
+      bucket for other lists.
     </p>
 
     <p>
-      This example is similar to the previous one, except that the source list remains absolutely static.
+      This example is similar to the previous one, except that the source list
+      remains absolutely static.
     </p>
 
     <section class="list-group">
@@ -268,11 +267,11 @@
         <h4>Source list</h4>
 
         <DragSortList
-          id             = "source-only-1"
-          @items         = {{this.sourceOnly1}}
-          @group         = "source-only"
-          @dragEndAction = {{action "sourceOnlyDragEnd"}}
-          @sourceOnly    = {{true}}
+          id="source-only-1"
+          @items={{this.sourceOnly1}}
+          @group="source-only"
+          @dragEndAction={{this.sourceOnlyDragEnd}}
+          @sourceOnly={{true}}
           as |item|
         >
           <div class="the-item">
@@ -285,10 +284,10 @@
         <h4>Target list</h4>
 
         <DragSortList
-          id             = "source-only-2"
-          @items         = {{this.sourceOnly2}}
-          @group         = "source-only"
-          @dragEndAction = {{action "sourceOnlyDragEnd"}}
+          id="source-only-2"
+          @items={{this.sourceOnly2}}
+          @group="source-only"
+          @dragEndAction={{this.sourceOnlyDragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -299,25 +298,32 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
     <h2>Tables</h2>
 
     <p>
-      ember-drag-sort uses a simple CSS technique to render the placeholder: `:before` and `:after` pseudoelements.
+      ember-drag-sort uses a simple CSS technique to render the placeholder:
+      `:before` and `:after` pseudoelements.
     </p>
 
     <p>
-      Unfortunately, this doesn't work with HTML tables because table semantics are very restrictive. To work around this problem, top/bottom padding on table cells can be used instead of selectors.
+      Unfortunately, this doesn't work with HTML tables because table semantics
+      are very restrictive. To work around this problem, top/bottom padding on
+      table cells can be used instead of selectors.
     </p>
 
     <p>
-      This is not a great solution because padding appears <em>inside</em> table cells. If you want your cells to have borders, you'll have to apply them to inner elements instead.
+      This is not a great solution because padding appears
+      <em>inside</em>
+      table cells. If you want your cells to have borders, you'll have to apply
+      them to inner elements instead.
     </p>
 
     <p>
-      See <a href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/styles/app.css#L126-L159">style overrides of this demo.</a>
+      See
+      <a
+        href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/styles/app.css#L126-L159"
+      >style overrides of this demo.</a>
     </p>
 
     <section class="list-group">
@@ -325,12 +331,12 @@
         <h4>Table 1</h4>
 
         <DragSortList
-          id             = "table-1"
-          @items         = {{this.table1}}
-          @tagName       = "table"
-          @childTagName  = "tr"
-          @group         = "table"
-          @dragEndAction = {{action "dragEnd"}}
+          id="table-1"
+          @items={{this.table1}}
+          @tagName="table"
+          @childTagName="tr"
+          @group="table"
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <td>
@@ -345,12 +351,12 @@
         <h4>Table 2</h4>
 
         <DragSortList
-          id             = "table-2"
-          @items         = {{this.table2}}
-          @tagName       = "table"
-          @childTagName  = "tr"
-          @group         = "table"
-          @dragEndAction = {{action "dragEnd"}}
+          id="table-2"
+          @items={{this.table2}}
+          @tagName="table"
+          @childTagName="tr"
+          @group="table"
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <td>
@@ -363,13 +369,12 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
     <h2>Horizontal list</h2>
 
     <p>
-      Set `isHorizontal=true` for a horizontal drag n drop. You can also drag between a horizontal list and a vertical.
+      Set `isHorizontal=true` for a horizontal drag n drop. You can also drag
+      between a horizontal list and a vertical.
     </p>
 
     <section class="list-group">
@@ -377,11 +382,11 @@
         <h4>List 1</h4>
 
         <DragSortList
-          id             = "horizontal-1"
-          @items         = {{this.horizontal1}}
-          @group         = "horizontal"
-          @dragEndAction = {{action "dragEnd"}}
-          @isHorizontal  = {{true}}
+          id="horizontal-1"
+          @items={{this.horizontal1}}
+          @group="horizontal"
+          @dragEndAction={{this.dragEnd}}
+          @isHorizontal={{true}}
           as |item|
         >
           <div class="the-item">
@@ -394,10 +399,10 @@
         <h4>List 2</h4>
 
         <DragSortList
-          id             = "horizontal-2"
-          @items         = {{this.horizontal2}}
-          @group         = "horizontal"
-          @dragEndAction = {{action "dragEnd"}}
+          id="horizontal-2"
+          @items={{this.horizontal2}}
+          @group="horizontal"
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -408,24 +413,23 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
-    <h2>Horizontal list wwith RTL</h2>
+    <h2>Horizontal list with RTL</h2>
 
     <p>
-      Use `isRtl=true` if you're using a language which is read right to left. Has no effect on vertical lists.
+      Use `isRtl=true` if you're using a language which is read right to left.
+      Has no effect on vertical lists.
     </p>
 
     <section class="list-group list-groups">
       <article class="horizontal-list list">
         <DragSortList
-          id             = "rtl"
-          @items         = {{this.rtl}}
-          @group         = "rtl"
-          @isHorizontal  = {{true}}
-          @isRtl         = {{true}}
-          @dragEndAction = {{action "dragEnd"}}
+          id="rtl"
+          @items={{this.rtl}}
+          @group="rtl"
+          @isHorizontal={{true}}
+          @isRtl={{true}}
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -436,23 +440,22 @@
     </section>
   </div>
 
-
-
   <div class="list-group-wrapper">
     <h2>Custom drag image</h2>
 
     <p>
-      Note that the drag image does not contain the gray margins around the boxes
+      Note that the drag image does not contain the gray margins around the
+      boxes
     </p>
 
     <section class="list-group">
       <article class="list">
         <DragSortList
-          id               = "drag-image"
-          @items           = {{this.dragImage}}
-          @group           = "dragImage"
-          @dragStartAction = {{action "setDragImage"}}
-          @dragEndAction   = {{action "dragEnd"}}
+          id="drag-image"
+          @items={{this.dragImage}}
+          @group="dragImage"
+          @dragStartAction={{this.setDragImage}}
+          @dragEndAction={{this.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -464,8 +467,6 @@
   </div>
 </div>
 
-
-
 <div class="list-groups">
   <div class="list-group-wrapper">
     <h2>Nested list</h2>
@@ -473,7 +474,9 @@
     <p>
       {{! template-lint-disable no-implicit-this }}
       See
-      <a href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/templates/components/nested-item.hbs">
+      <a
+        href="https://github.com/adopted-ember-addons/ember-drag-sort/blob/gen-0/tests/dummy/app/templates/components/nested-item.hbs"
+      >
         {{~concat~}}
         component template source
         {{~concat~}}
@@ -481,10 +484,10 @@
     </p>
 
     <NestedItem
-      id             = "nested"
-      @item          = {{this.nestedItem}}
-      @group         = "nested"
-      @dragEndAction = {{action "dragEnd"}}
+      id="nested"
+      @item={{this.nestedItem}}
+      @group="nested"
+      @dragEndAction={{this.dragEnd}}
     />
 
     <p>Warning: Nested lists don't work well with horizontal lists.</p>

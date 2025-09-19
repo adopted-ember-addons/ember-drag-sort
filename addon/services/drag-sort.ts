@@ -37,18 +37,9 @@ export default class DragSort extends Service.extend(EventedMixin) {
       sourceList: items,
 
       targetArgs: additionalArgs,
-      targetIndex: index,
+      targetIndex: null,
       targetList: items,
     });
-
-    if (items.length > 1) {
-      if (index === 0) {
-        this.targetIndex = index + 1;
-        this.isDraggingUp = true;
-      } else {
-        this.targetIndex = index - 1;
-      }
-    }
 
     next(() => {
       this.trigger('start', {

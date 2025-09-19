@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-drag-sort": {
-      "impact": "major",
-      "oldVersion": "3.0.1",
-      "newVersion": "4.0.0",
+      "impact": "patch",
+      "oldVersion": "4.0.0",
+      "newVersion": "4.0.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-09-19)\n\n* ember-drag-sort 4.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-drag-sort`\n  * [#87](https://github.com/adopted-ember-addons/ember-drag-sort/pull/87) Require ember 4.12+, node 20+ ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n  * [#86](https://github.com/adopted-ember-addons/ember-drag-sort/pull/86) Require Ember 3.28+, node 18+, modernize code ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
+  "description": "## Release (2025-09-19)\n\n* ember-drag-sort 4.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-drag-sort`\n  * [#89](https://github.com/adopted-ember-addons/ember-drag-sort/pull/89) Try to fix declarations ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
 }

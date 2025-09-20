@@ -13,30 +13,32 @@ function getComputedStyleInt(element: HTMLElement, cssProp: string) {
   return parseInt(valueStr, 10);
 }
 
-interface DragSortItemSignature {
+interface DragSortItemSignature<Item extends Record<string, unknown>> {
   Args: {
-    additionalArgs: unknown;
+    additionalArgs: object;
     determineForeignPositionAction: unknown;
     draggingEnabled: boolean;
     dragEndAction?: unknown;
     dragStartAction?: (args: {
       event: DragEvent;
       element: HTMLElement;
-      draggedItem: unknown;
+      draggedItem: Item;
     }) => void;
     group: string;
     handle?: string;
     index: number;
     isHorizontal: boolean;
     isRtl?: boolean;
-    item: unknown;
-    items: Array<unknown>;
+    item: Item;
+    items: Array<Item>;
     sourceOnly: boolean;
   };
 }
 
-export default class DragSortItem extends Component<DragSortItemSignature> {
-  @service declare dragSort: DragSort;
+export default class DragSortItem<
+  Item extends Record<string, unknown>,
+> extends Component<DragSortItemSignature<Item>> {
+  @service declare dragSort: DragSort<Item>;
 
   declare el: HTMLElement;
 

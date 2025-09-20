@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 import { A } from '@ember/array';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 
-interface DragSortListSignature {
+interface DragSortListSignature<Item extends Record<string, unknown>> {
   Element: HTMLDivElement;
   Args: {
     additionalArgs: object;
@@ -11,13 +11,13 @@ interface DragSortListSignature {
     childTagName?: string;
     determineForeignPositionAction?: (args: {
       draggedItem: unknown;
-      items: Array<unknown>;
+      items: Array<Item>;
     }) => number;
     draggingEnabled: boolean;
     dragEndAction?: unknown;
     dragStartAction?: unknown;
     handle?: string;
-    items: Array<object>;
+    items: Array<Item>;
     isHorizontal?: boolean;
     isRtl?: boolean;
     group?: string;
@@ -28,8 +28,10 @@ interface DragSortListSignature {
   };
 }
 
-export default class DragSortList extends Component<DragSortListSignature> {
-  @service declare dragSort: DragSort;
+export default class DragSortList<
+  Item extends Record<string, unknown>,
+> extends Component<DragSortListSignature<Item>> {
+  @service declare dragSort: DragSort<Item>;
 
   declare el: HTMLElement;
 

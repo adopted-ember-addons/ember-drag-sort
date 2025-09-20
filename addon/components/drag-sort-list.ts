@@ -20,8 +20,11 @@ interface DragSortListSignature {
     items: Array<object>;
     isHorizontal?: boolean;
     isRtl?: boolean;
-    group: string;
+    group?: string;
     sourceOnly: boolean;
+  };
+  Blocks: {
+    default: [item: object, index: number];
   };
 }
 

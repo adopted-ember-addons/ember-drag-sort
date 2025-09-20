@@ -4,7 +4,9 @@ import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 import { setProperties } from '@ember/object';
 
-export default class DragSort extends Service {
+export default class DragSort<
+  Item extends Record<string, unknown>,
+> extends Service {
   #eventTarget = new EventTarget();
 
   on(eventName: string, callback: (event: CustomEvent) => void) {
@@ -31,13 +33,13 @@ export default class DragSort extends Service {
 
   @tracked sourceArgs: object | null = null;
   @tracked sourceIndex: number | null = null;
-  @tracked sourceList: Array<object> | null = null;
+  @tracked sourceList: Array<Item> | null = null;
 
   @tracked targetArgs: object | null = null;
   @tracked targetIndex: number | null = null;
-  @tracked targetList: Array<object> | null = null;
+  @tracked targetList: Array<Item> | null = null;
 
-  @tracked lastDragEnteredList: Array<object> | null = null;
+  @tracked lastDragEnteredList: Array<Item> | null = null;
   @tracked isHorizontal?: boolean;
 
   startDragging({
@@ -48,10 +50,10 @@ export default class DragSort extends Service {
     group,
     isHorizontal,
   }: {
-    additionalArgs: unknown;
-    item: unknown;
+    additionalArgs: object;
+    item: Item;
     index: number;
-    items: Array<unknown>;
+    items: Array<Item>;
     group: string;
     isHorizontal: boolean;
   }) {
@@ -90,7 +92,7 @@ export default class DragSort extends Service {
   }: {
     group?: string;
     index: number;
-    items: Array<unknown>;
+    items: Array<Item>;
     isDraggingUp: boolean;
   }) {
     // Ignore hovers over irrelevant groups
@@ -130,7 +132,7 @@ export default class DragSort extends Service {
     targetIndex = 0,
   }: {
     group?: string;
-    items: Array<object>;
+    items: Array<Item>;
     isHorizontal?: boolean;
     targetArgs: object;
     targetIndex?: number;

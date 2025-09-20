@@ -2,8 +2,8 @@
   "solution": {
     "ember-drag-sort": {
       "impact": "patch",
-      "oldVersion": "4.0.0",
-      "newVersion": "4.0.1",
+      "oldVersion": "4.0.1",
+      "newVersion": "4.0.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -14,5 +14,5 @@
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-09-19)\n\n* ember-drag-sort 4.0.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-drag-sort`\n  * [#89](https://github.com/adopted-ember-addons/ember-drag-sort/pull/89) Try to fix declarations ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
+  "description": "## Release (2025-09-20)\n\n* ember-drag-sort 4.0.2 (patch)\n\n#### :bug: Bug Fix\n* `ember-drag-sort`\n  * [#91](https://github.com/adopted-ember-addons/ember-drag-sort/pull/91) Make group optional, add yielded types ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
 }

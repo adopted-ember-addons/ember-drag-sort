@@ -2,6 +2,17 @@
 
 ## Release (2025-09-20)
 
+* ember-drag-sort 4.0.3 (patch)
+
+#### :bug: Bug Fix
+* `ember-drag-sort`
+  * [#93](https://github.com/adopted-ember-addons/ember-drag-sort/pull/93) Make item types generic ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+## Release (2025-09-20)
+
 * ember-drag-sort 4.0.2 (patch)
 
 #### :bug: Bug Fix

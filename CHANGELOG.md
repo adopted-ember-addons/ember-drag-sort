@@ -2,6 +2,17 @@
 
 ## Release (2025-09-20)
 
+* ember-drag-sort 4.0.5 (patch)
+
+#### :bug: Bug Fix
+* `ember-drag-sort`
+  * [#97](https://github.com/adopted-ember-addons/ember-drag-sort/pull/97) Yield item type ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+## Release (2025-09-20)
+
 * ember-drag-sort 4.0.4 (patch)
 
 #### :bug: Bug Fix

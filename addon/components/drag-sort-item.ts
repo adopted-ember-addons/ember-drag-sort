@@ -1,6 +1,7 @@
 /* eslint-disable ember/no-runloop */
 import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 import { next } from '@ember/runloop';
@@ -17,7 +18,7 @@ interface DragSortItemSignature<Item extends object> {
   Args: {
     additionalArgs: object;
     determineForeignPositionAction: unknown;
-    draggingEnabled: boolean;
+    draggingEnabled?: boolean;
     dragEndAction?: unknown;
     dragStartAction?: (args: {
       event: DragEvent;
@@ -106,15 +107,13 @@ export default class DragSortItem<Item extends object> extends Component<
     return !sourceOnly && isDraggingOver && !isDraggingUp;
   }
 
-  elementInserted = (element: HTMLElement) => {
-    this.el = element;
-  };
-
-  dragStart = (event: DragEvent) => {
+  @action
+  dragStart(event: DragEvent) {
+    const element = event.currentTarget as HTMLElement;
     // Ignore irrelevant drags
     if (!this.args.draggingEnabled) return;
 
-    if (!this.isHandleUsed(event.target as HTMLElement)) {
+    if (!this.isHandleUsed(event)) {
       event.preventDefault();
       return;
     }
@@ -125,7 +124,7 @@ export default class DragSortItem<Item extends object> extends Component<
     if (event.dataTransfer) {
       if (event.dataTransfer.setData) event.dataTransfer.setData('text', '');
       if (event.dataTransfer.setDragImage)
-        event.dataTransfer.setDragImage(this.el, 0, 0);
+        event.dataTransfer.setDragImage(element, 0, 0);
     }
 
     const dragStartAction = this.args.dragStartAction;
@@ -135,15 +134,16 @@ export default class DragSortItem<Item extends object> extends Component<
 
       dragStartAction({
         event,
-        element: this.el,
+        element,
         draggedItem: item,
       });
     }
 
     this.startDragging();
-  };
+  }
 
-  dragEnd = (event: DragEvent) => {
+  @action
+  dragEnd(event: DragEvent) {
     // Ignore irrelevant drags
     if (!this.dragSort.isDragging) return;
 
@@ -151,14 +151,16 @@ export default class DragSortItem<Item extends object> extends Component<
     event.preventDefault();
 
     this.endDragging();
-  };
+  }
 
   // Required for Firefox. http://stackoverflow.com/a/32592759/901944
-  drop = (event: DragEvent) => {
+  @action
+  drop(event: DragEvent) {
     event.preventDefault();
-  };
+  }
 
-  dragOver = (event: DragEvent) => {
+  @action
+  dragOver(event: DragEvent) {
     // Ignore irrelevant drags
     if (
       !this.dragSort.isDragging ||
@@ -176,9 +178,10 @@ export default class DragSortItem<Item extends object> extends Component<
     event.preventDefault();
 
     this.draggingOver(event);
-  };
+  }
 
-  startDragging = () => {
+  @action
+  startDragging() {
     this.collapse();
 
     const additionalArgs = this.args.additionalArgs;
@@ -197,15 +200,18 @@ export default class DragSortItem<Item extends object> extends Component<
       group,
       isHorizontal,
     });
-  };
+  }
 
-  endDragging = () => {
+  @action
+  endDragging() {
     this.restore();
 
     this.dragSort.endDragging({ action: this.args.dragEndAction });
-  };
+  }
 
-  draggingOver = (event: DragEvent) => {
+  @action
+  draggingOver(event: DragEvent) {
+    const element = event.currentTarget as HTMLElement;
     const sourceOnly = this.args.sourceOnly;
 
     if (sourceOnly) {
@@ -229,16 +235,16 @@ export default class DragSortItem<Item extends object> extends Component<
     }
 
     const placeholderCorrection = isPlaceholderBefore
-      ? getComputedStyleInt(this.el, beforeAttribute) * placeholderModifier
+      ? getComputedStyleInt(element, beforeAttribute) * placeholderModifier
       : isPlaceholderAfter
-        ? -getComputedStyleInt(this.el, afterAttribute) * placeholderModifier
+        ? -getComputedStyleInt(element, afterAttribute) * placeholderModifier
         : 0;
 
     const offset = isHorizontal
-      ? this.el.getBoundingClientRect().left
-      : this.el.getBoundingClientRect().top;
+      ? element.getBoundingClientRect().left
+      : element.getBoundingClientRect().top;
 
-    const itemSize = isHorizontal ? this.el.offsetWidth : this.el.offsetHeight;
+    const itemSize = isHorizontal ? element.offsetWidth : element.offsetHeight;
 
     const mousePosition = isHorizontal ? event.clientX : event.clientY;
 
@@ -247,35 +253,41 @@ export default class DragSortItem<Item extends object> extends Component<
       : mousePosition - offset < (itemSize + placeholderCorrection) / 2;
 
     dragSort.draggingOver({ group, index, items, isDraggingUp });
-  };
+  }
 
-  collapse = () => {
+  @action
+  collapse() {
     // The delay is necessary for HTML classes to update with a delay.
     // Otherwise, dragging is finished immediately.
     next(() => {
       if (this.isDestroying || this.isDestroyed) return;
       this._isDragged = true;
     });
-  };
+  }
 
-  restore = () => {
+  @action
+  restore() {
     // The delay is necessary for HTML class to update with a delay.
     // Otherwise, dragging is finished immediately.
     next(() => {
       if (this.isDestroying || this.isDestroyed) return;
       this._isDragged = false;
     });
-  };
+  }
 
-  isHandleUsed = (target: HTMLElement) => {
+  @action
+  isHandleUsed(event: DragEvent) {
     const handle = this.args.handle;
+    const target = event.target as HTMLElement;
 
     if (!handle) return true;
 
-    const handleElement = this.el.querySelector(handle);
+    const handleElement = (event.currentTarget as HTMLElement).querySelector(
+      handle,
+    );
 
     assert('Handle not found', !!handleElement);
 
     return handleElement === target || handleElement.contains(target);
-  };
+  }
 }

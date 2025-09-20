@@ -24,7 +24,7 @@ interface DragSortListSignature<Item extends object> {
     sourceOnly: boolean;
   };
   Blocks: {
-    default: [item: object, index: number];
+    default: [item: Item, index: number];
   };
 }
 

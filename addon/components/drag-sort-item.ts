@@ -13,7 +13,7 @@ function getComputedStyleInt(element: HTMLElement, cssProp: string) {
   return parseInt(valueStr, 10);
 }
 
-interface DragSortItemSignature<Item extends Record<string, unknown>> {
+interface DragSortItemSignature<Item extends object> {
   Args: {
     additionalArgs: object;
     determineForeignPositionAction: unknown;
@@ -35,9 +35,9 @@ interface DragSortItemSignature<Item extends Record<string, unknown>> {
   };
 }
 
-export default class DragSortItem<
-  Item extends Record<string, unknown>,
-> extends Component<DragSortItemSignature<Item>> {
+export default class DragSortItem<Item extends object> extends Component<
+  DragSortItemSignature<Item>
+> {
   @service declare dragSort: DragSort<Item>;
 
   declare el: HTMLElement;

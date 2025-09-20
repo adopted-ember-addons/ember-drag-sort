@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-drag-sort": {
-      "impact": "patch",
-      "oldVersion": "4.0.4",
-      "newVersion": "4.0.5",
+      "impact": "minor",
+      "oldVersion": "4.0.5",
+      "newVersion": "4.1.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-09-20)\n\n* ember-drag-sort 4.0.5 (patch)\n\n#### :bug: Bug Fix\n* `ember-drag-sort`\n  * [#97](https://github.com/adopted-ember-addons/ember-drag-sort/pull/97) Yield item type ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
+  "description": "## Release (2025-09-20)\n\n* ember-drag-sort 4.1.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-drag-sort`\n  * [#99](https://github.com/adopted-ember-addons/ember-drag-sort/pull/99) Remove @ember/render-modifiers ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
 }

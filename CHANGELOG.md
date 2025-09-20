@@ -2,6 +2,17 @@
 
 ## Release (2025-09-20)
 
+* ember-drag-sort 4.0.4 (patch)
+
+#### :bug: Bug Fix
+* `ember-drag-sort`
+  * [#96](https://github.com/adopted-ember-addons/ember-drag-sort/pull/96) Extend object instead for item types ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+## Release (2025-09-20)
+
 * ember-drag-sort 4.0.3 (patch)
 
 #### :bug: Bug Fix

@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { A } from '@ember/array';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
@@ -13,7 +14,7 @@ interface DragSortListSignature<Item extends object> {
       draggedItem: unknown;
       items: Array<Item>;
     }) => number;
-    draggingEnabled: boolean;
+    draggingEnabled?: boolean;
     dragEndAction?: unknown;
     dragStartAction?: unknown;
     handle?: string;
@@ -21,7 +22,7 @@ interface DragSortListSignature<Item extends object> {
     isHorizontal?: boolean;
     isRtl?: boolean;
     group?: string;
-    sourceOnly: boolean;
+    sourceOnly?: boolean;
   };
   Blocks: {
     default: [item: Item, index: number];
@@ -84,11 +85,8 @@ export default class DragSortList<Item extends object> extends Component<
     return this.args.sourceOnly ?? false;
   }
 
-  elementInserted = (element: HTMLElement) => {
-    this.el = element;
-  };
-
-  dragEnter = (event: DragEvent) => {
+  @action
+  dragEnter(event: DragEvent) {
     // Ignore irrelevant drags
     if (!this.dragSort.isDragging) return;
 
@@ -109,9 +107,10 @@ export default class DragSortList<Item extends object> extends Component<
     if (this.args.determineForeignPositionAction) {
       this.forceDraggingOver();
     }
-  };
+  }
 
-  dragOver = (event: DragEvent) => {
+  @action
+  dragOver(event: DragEvent) {
     // This event is only used for placing the dragged element into the end of a horizontal list
     if (this.isVertical) {
       return;
@@ -129,9 +128,10 @@ export default class DragSortList<Item extends object> extends Component<
     event.stopPropagation();
 
     this.isDraggingOverHorizontal(event);
-  };
+  }
 
-  dragEntering = (event: DragEvent) => {
+  @action
+  dragEntering(event: DragEvent) {
     const group = this.args.group;
     const items = this.args.items;
     const dragSort = this.dragSort;
@@ -151,11 +151,14 @@ export default class DragSortList<Item extends object> extends Component<
       targetArgs,
       targetIndex,
     });
-  };
+  }
 
-  getClosestHorizontalIndex = (event: DragEvent) => {
+  @action
+  getClosestHorizontalIndex(event: DragEvent) {
     // Calculate which item is closest and make that the target
-    const itemsNodeList = this.el.querySelectorAll('.dragSortItem');
+    const itemsNodeList = (event.currentTarget as HTMLElement).querySelectorAll(
+      '.dragSortItem',
+    );
     const draggableItems = A<HTMLElement>(
       Array.prototype.slice.call(itemsNodeList),
     );
@@ -169,9 +172,10 @@ export default class DragSortList<Item extends object> extends Component<
     const closestItem = positions.filterBy('top', currentRowPosition).pop();
 
     return closestItem ? positions.indexOf(closestItem) : 0;
-  };
+  }
 
-  forceDraggingOver = () => {
+  @action
+  forceDraggingOver() {
     const determineForeignPositionAction =
       this.args.determineForeignPositionAction;
 
@@ -196,9 +200,10 @@ export default class DragSortList<Item extends object> extends Component<
 
       this.dragSort.draggingOver({ group, index, items, isDraggingUp });
     }
-  };
+  }
 
-  isDraggingOverHorizontal = (event: DragEvent) => {
+  @action
+  isDraggingOverHorizontal(event: DragEvent) {
     const dragSort = this.dragSort;
     const group = this.args.group;
     const items = this.args.items;
@@ -206,5 +211,5 @@ export default class DragSortList<Item extends object> extends Component<
     const isDraggingUp = false;
 
     dragSort.draggingOver({ group, index, items, isDraggingUp });
-  };
+  }
 }

@@ -8,7 +8,6 @@
       {{if this.shouldShowPlaceholderBefore '-placeholderBefore'}}
       {{if this.shouldShowPlaceholderAfter '-placeholderAfter'}}"
     draggable={{this.draggable}}
-    {{did-insert this.elementInserted}}
     {{on "dragstart" this.dragStart}}
     {{on "dragend" this.dragEnd}}
     {{on "dragover" this.dragOver}}

@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 import { A } from '@ember/array';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 
-interface DragSortListSignature<Item extends Record<string, unknown>> {
+interface DragSortListSignature<Item extends object> {
   Element: HTMLDivElement;
   Args: {
     additionalArgs: object;
@@ -28,9 +28,9 @@ interface DragSortListSignature<Item extends Record<string, unknown>> {
   };
 }
 
-export default class DragSortList<
-  Item extends Record<string, unknown>,
-> extends Component<DragSortListSignature<Item>> {
+export default class DragSortList<Item extends object> extends Component<
+  DragSortListSignature<Item>
+> {
   @service declare dragSort: DragSort<Item>;
 
   declare el: HTMLElement;

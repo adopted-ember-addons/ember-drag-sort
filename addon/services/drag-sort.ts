@@ -4,9 +4,7 @@ import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
 import { setProperties } from '@ember/object';
 
-export default class DragSort<
-  Item extends Record<string, unknown>,
-> extends Service {
+export default class DragSort<Item extends object> extends Service {
   #eventTarget = new EventTarget();
 
   on(eventName: string, callback: (event: CustomEvent) => void) {

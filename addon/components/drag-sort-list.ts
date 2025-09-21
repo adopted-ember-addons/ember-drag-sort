@@ -7,7 +7,7 @@ import type DragSort from 'ember-drag-sort/services/drag-sort';
 interface DragSortListSignature<Item extends object> {
   Element: HTMLDivElement;
   Args: {
-    additionalArgs: object;
+    additionalArgs?: object;
     childClass?: string;
     childTagName?: string;
     determineForeignPositionAction?: (args: {
@@ -136,7 +136,7 @@ export default class DragSortList<Item extends object> extends Component<
     const items = this.args.items;
     const dragSort = this.dragSort;
     const isHorizontal = this.args.isHorizontal;
-    const targetArgs = this.args.additionalArgs;
+    const targetArgs = this.args.additionalArgs ?? null;
     let targetIndex = 0;
 
     if (isHorizontal) {

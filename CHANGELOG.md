@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-09-22)
+
+* ember-drag-sort 4.1.1 (patch)
+
+#### :bug: Bug Fix
+* `ember-drag-sort`
+  * [#101](https://github.com/adopted-ember-addons/ember-drag-sort/pull/101) Make additionalArgs optional ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 ## Release (2025-09-20)
 
 * ember-drag-sort 4.1.0 (minor)

@@ -48,7 +48,7 @@ export default class DragSort<Item extends object> extends Service {
     group,
     isHorizontal,
   }: {
-    additionalArgs: object;
+    additionalArgs?: object;
     item: Item;
     index: number;
     items: Array<Item>;
@@ -132,7 +132,7 @@ export default class DragSort<Item extends object> extends Service {
     group?: string;
     items: Array<Item>;
     isHorizontal?: boolean;
-    targetArgs: object;
+    targetArgs: object | null;
     targetIndex?: number;
   }) {
     // Ignore entering irrelevant groups

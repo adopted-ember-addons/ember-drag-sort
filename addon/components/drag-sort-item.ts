@@ -16,8 +16,8 @@ function getComputedStyleInt(element: HTMLElement, cssProp: string) {
 
 interface DragSortItemSignature<Item extends object> {
   Args: {
-    additionalArgs: object;
-    determineForeignPositionAction: unknown;
+    additionalArgs?: object;
+    determineForeignPositionAction?: unknown;
     draggingEnabled?: boolean;
     dragEndAction?: unknown;
     dragStartAction?: (args: {

@@ -1,18 +1,18 @@
 {
   "solution": {
     "ember-drag-sort": {
-      "impact": "patch",
-      "oldVersion": "4.1.0",
-      "newVersion": "4.1.1",
+      "impact": "minor",
+      "oldVersion": "4.1.1",
+      "newVersion": "4.2.0",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2025-09-22)\n\n* ember-drag-sort 4.1.1 (patch)\n\n#### :bug: Bug Fix\n* `ember-drag-sort`\n  * [#101](https://github.com/adopted-ember-addons/ember-drag-sort/pull/101) Make additionalArgs optional ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
+  "description": "## Release (2025-10-23)\n\n* ember-drag-sort 4.2.0 (minor)\n\n#### :rocket: Enhancement\n* `ember-drag-sort`\n  * [#103](https://github.com/adopted-ember-addons/ember-drag-sort/pull/103) Remove prototype extensions and Ember.A usage ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n\n#### Committers: 1\n- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))\n"
 }

@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-10-23)
+
+* ember-drag-sort 4.2.0 (minor)
+
+#### :rocket: Enhancement
+* `ember-drag-sort`
+  * [#103](https://github.com/adopted-ember-addons/ember-drag-sort/pull/103) Remove prototype extensions and Ember.A usage ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
+#### Committers: 1
+- Robbie Wagner ([@RobbieTheWagner](https://github.com/RobbieTheWagner))
+
 ## Release (2025-09-22)
 
 * ember-drag-sort 4.1.1 (patch)

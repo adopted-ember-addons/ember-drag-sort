@@ -10,13 +10,12 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 import trigger from 'ember-drag-sort/utils/trigger';
 import sinon from 'sinon';
-import { A } from '@ember/array';
 
 module('Integration | Component | drag-sort-list', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it works', async function (assert) {
-    const items = A([{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }]);
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
 
     const dragEndCallback = sinon.spy();
 
@@ -46,7 +45,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     assert.ok(
       dragEndCallback.calledWithExactly({
         group: undefined,
-        draggedItem: items.objectAt(0),
+        draggedItem: items[0],
         sourceArgs: { parent: 'test' },
         sourceList: items,
         targetArgs: { parent: 'test' },
@@ -58,7 +57,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
   });
 
   test('sorting with neither dragover nor dragenter', async function (assert) {
-    const items = A([{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }]);
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
 
     const dragEndCallback = sinon.spy();
 
@@ -83,7 +82,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
   });
 
   test('drag handle', async function (assert) {
-    const items = A([{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }]);
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
 
     const dragEndCallback = sinon.spy();
 
@@ -120,7 +119,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     assert.ok(
       dragEndCallback.calledWithExactly({
         group: undefined,
-        draggedItem: items.objectAt(0),
+        draggedItem: items[0],
         sourceArgs: undefined,
         sourceList: items,
         targetArgs: undefined,
@@ -132,7 +131,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
   });
 
   test('nested drag handle', async function (assert) {
-    const items = A([{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }]);
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
 
     const dragEndCallback = sinon.spy();
 
@@ -171,7 +170,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     assert.ok(
       dragEndCallback.calledWithExactly({
         group: undefined,
-        draggedItem: items.objectAt(0),
+        draggedItem: items[0],
         sourceArgs: undefined,
         sourceList: items,
         targetArgs: undefined,
@@ -183,7 +182,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
   });
 
   test('drag start action', async function (assert) {
-    const items = A([{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }]);
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
 
     const dragStartCallback = sinon.stub();
 
@@ -217,7 +216,7 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     assert.ok(
       dragStartCallback.calledWithMatch({
-        draggedItem: items.objectAt(0),
+        draggedItem: items[0],
         element: item0,
       }),
     );

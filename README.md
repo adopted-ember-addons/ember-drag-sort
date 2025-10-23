@@ -143,10 +143,10 @@ Here's the reference implementation of the `dragEndAction` action:
   dragEndAction ({sourceList, sourceIndex, targetList, targetIndex/* , sourceArgs, targetArgs */}) {
     if (sourceList === targetList && sourceIndex === targetIndex) return
 
-    const item = sourceList.objectAt(sourceIndex)
+    const item = sourceList[sourceIndex]
 
-    sourceList.removeAt(sourceIndex)
-    targetList.insertAt(targetIndex, item)
+    sourceList.splice(sourceIndex, 1)
+    targetList.splice(targetIndex, 0, item)
   }
 ```
 
@@ -236,10 +236,10 @@ Or do it by hand:
 ```js
 @action
 determineForeignPosition ({draggedItem, items}) {
-    return Ember.A(items.slice()) // make sure not to mutate the list; `Ember.A()` is typically redundant
-      .addObject(draggedItem)
-      .sortBy('name')
-      .indexOf(draggedItem)
+    const itemsCopy = items.slice(); // make sure not to mutate the list
+    itemsCopy.push(draggedItem);
+    itemsCopy.sort((a, b) => a.name.localeCompare(b.name));
+    return itemsCopy.indexOf(draggedItem);
 }
 ```
 
@@ -294,9 +294,9 @@ Now you can access the parent of both source and target lists in the `dragEndAct
 dragEndAction({ sourceList, sourceIndex, sourceArgs, targetList, targetIndex, targetArgs }) {
   if (sourceModel === targetModel && sourceIndex === targetIndex) return;
 
-  const item = sourceList.objectAt(sourceIndex);
-  sourceList.removeAt(sourceIndex);
-  targetList.insertAt(targetIndex, item);
+  const item = sourceList[sourceIndex];
+  sourceList.splice(sourceIndex, 1);
+  targetList.splice(targetIndex, 0, item);
 
   // Access the parent via `sourceArgs` and `targetArgs`
   sourceArgs.parent.save();
@@ -600,12 +600,12 @@ export default create({
 });
 ```
 
-In a test, list items are available as `sortableList.items`. Item content is available as `sortableList.items.objectAt(index)`.
+In a test, list items are available as `sortableList.items`. Item content is available as `sortableList.items[index]`.
 
 For example, to assert the title of the first item in a list, using the page object from the last example, you can do this:
 
 ```js
-assert.strictEqual(sortableList.items.objectAt(0).item.content.title, "Foo");
+assert.strictEqual(sortableList.items[0].item.content.title, "Foo");
 ```
 
 #### Providing the drag handle selector
@@ -660,7 +660,7 @@ test('sorting a list', async function (assert) {
 
   expectedTitles.forEach((expectedTitle, k) => {
     m = `List #0 item #${k} content title`
-    expect(list.items.objectAt(k).item.title, m).equal(expectedTitle)
+    expect(list.items[k].item.title, m).equal(expectedTitle)
   })
 }))
 ```

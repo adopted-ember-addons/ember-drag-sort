@@ -2,7 +2,6 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { findAll, render, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { A } from '@ember/array';
 
 module(
   'Integration | Component | drag-sort targetIndex regression test',
@@ -13,11 +12,11 @@ module(
       // This test prevents regression of the bug where targetIndex was being set
       // immediately on dragstart, which interfered with dragover events in modern Ember
 
-      const items = A([
+      const items = [
         { name: 'Item 1' },
         { name: 'Item 2' },
         { name: 'Item 3' },
-      ]);
+      ];
 
       this.setProperties({ items });
 

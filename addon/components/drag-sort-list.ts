@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { A } from '@ember/array';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 
 interface DragSortListSignature<Item extends object> {
@@ -159,17 +158,19 @@ export default class DragSortList<Item extends object> extends Component<
     const itemsNodeList = (event.currentTarget as HTMLElement).querySelectorAll(
       '.dragSortItem',
     );
-    const draggableItems = A<HTMLElement>(
-      Array.prototype.slice.call(itemsNodeList),
+    const draggableItems = Array.from(itemsNodeList) as HTMLElement[];
+    const positions = draggableItems.map((draggableItem: HTMLElement) =>
+      draggableItem.getBoundingClientRect(),
     );
-    const positions = A(
-      draggableItems.map((draggableItem) =>
-        draggableItem.getBoundingClientRect(),
-      ),
-    );
-    const rows = positions.uniqBy('top').mapBy('top').sort();
-    const currentRowPosition = rows.filter((row) => row < event.clientY).pop();
-    const closestItem = positions.filterBy('top', currentRowPosition).pop();
+    const tops = positions.map((pos: DOMRect) => pos.top);
+    const uniqueTops = [...new Set(tops)];
+    const rows = uniqueTops.sort();
+    const currentRowPosition = rows
+      .filter((row: number) => row < event.clientY)
+      .pop();
+    const closestItem = positions
+      .filter((pos: DOMRect) => pos.top === currentRowPosition)
+      .pop();
 
     return closestItem ? positions.indexOf(closestItem) : 0;
   }

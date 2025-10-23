@@ -10,11 +10,7 @@ function assertListItems(list, expectedTitles, assert, message) {
   // List with disabled sorting
   expectedTitles.forEach((expectedTitle, i) => {
     const m = `${message}: List #0 item #${i} content title`;
-    assert.strictEqual(
-      list.items.objectAt(i).item.content.title,
-      expectedTitle,
-      m,
-    );
+    assert.strictEqual(list.items[i].item.content.title, expectedTitle, m);
   });
 }
 
@@ -95,9 +91,9 @@ module('Acceptance | index', function (hooks) {
   test('sorting from an unsortable list to a sortable list, and then back into an unsortable list, should not change the position', async function (assert) {
     await page.visit();
 
-    const item0_0 = page.foreign1.items.objectAt(0).item;
-    const item0_3 = page.foreign1.items.objectAt(3).item;
-    const item1_0 = page.foreign2.items.objectAt(0).item;
+    const item0_0 = page.foreign1.items[0].item;
+    const item0_3 = page.foreign1.items[3].item;
+    const item1_0 = page.foreign2.items[0].item;
 
     await item0_3.dragStart();
     await page.foreign2.dragEnter();
@@ -120,8 +116,8 @@ module('Acceptance | index', function (hooks) {
   test('sorting from an sortable list to an unsortable list should position alphabetically', async function (assert) {
     await page.visit();
 
-    const item0_0 = page.foreign1.items.objectAt(0).item;
-    let item1_0 = page.foreign2.items.objectAt(0).item;
+    const item0_0 = page.foreign1.items[0].item;
+    let item1_0 = page.foreign2.items[0].item;
 
     await item1_0.dragStart();
     await page.foreign1.dragEnter();
@@ -138,7 +134,7 @@ module('Acceptance | index', function (hooks) {
     );
     assertListItems(page.foreign2, ['Lol'], assert, 'Foreign 2');
 
-    item1_0 = page.foreign2.items.objectAt(0).item;
+    item1_0 = page.foreign2.items[0].item;
 
     await item1_0.dragStart();
     await page.foreign1.dragEnter();

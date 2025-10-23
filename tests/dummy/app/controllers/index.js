@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import { A } from '@ember/array';
 import { action } from '@ember/object';
 
 import { dropTask, timeout } from 'ember-concurrency';
@@ -7,44 +6,44 @@ import RSVP from 'rsvp';
 import { tracked } from '@glimmer/tracking';
 
 export default class IndexController extends Controller {
-  simple1 = A([
+  @tracked simple1 = [
     { name: 'Foo' },
     { name: 'Bar' },
     { name: 'Baz' },
     { name: 'Quux' },
-  ]);
-  simple2 = A([{ name: 'Zomg' }, { name: 'Lol' }]);
+  ];
+  @tracked simple2 = [{ name: 'Zomg' }, { name: 'Lol' }];
 
-  async1 = A([
+  @tracked async1 = [
     { name: 'Foo' },
     { name: 'Bar' },
     { name: 'Baz' },
     { name: 'Quux' },
-  ]);
-  async2 = A([{ name: 'Zomg' }, { name: 'Lol' }]);
+  ];
+  @tracked async2 = [{ name: 'Zomg' }, { name: 'Lol' }];
 
-  foreign1 = A([
+  @tracked foreign1 = [
     { name: 'Bar' },
     { name: 'Baz' },
     { name: 'Foo' },
     { name: 'Quux' },
-  ]);
-  foreign2 = A([{ name: 'Zomg' }, { name: 'Lol' }]);
+  ];
+  @tracked foreign2 = [{ name: 'Zomg' }, { name: 'Lol' }];
 
-  copies1 = A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }]);
-  copies2 = A([{ name: 'Quux' }]);
-  copies3 = A();
+  @tracked copies1 = [{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }];
+  @tracked copies2 = [{ name: 'Quux' }];
+  @tracked copies3 = [];
 
-  table1 = A([
+  @tracked table1 = [
     { name: 'Foo' },
     { name: 'Bar' },
     { name: 'Baz' },
     { name: 'Quux' },
-  ]);
+  ];
 
-  table2 = A([{ name: 'Zomg' }, { name: 'Lol' }]);
+  @tracked table2 = [{ name: 'Zomg' }, { name: 'Lol' }];
 
-  horizontal1 = A([
+  @tracked horizontal1 = [
     { name: 'Foo' },
     { name: 'Bar' },
     { name: 'Baz' },
@@ -54,105 +53,146 @@ export default class IndexController extends Controller {
     { name: 'Quuz' },
     { name: 'Hello' },
     { name: 'World' },
-  ]);
+  ];
 
-  horizontal2 = A([
+  @tracked horizontal2 = [
     { name: 'Foo' },
     { name: 'Bar' },
     { name: 'Baz' },
     { name: 'Quux' },
-  ]);
+  ];
 
-  rtl = A([
+  @tracked rtl = [
     { name: 'حلقة واحدة للحكم عليهم جميعان' },
     { name: 'حلقة واحدة للعثور عليهم' },
     { name: 'حلقة واحدة لجلب لهم' },
     { name: 'وفي الظلام لربطهم' },
-  ]);
+  ];
 
-  dragImage = A([
+  @tracked dragImage = [
     { name: 'Foo' },
     { name: 'Bar' },
     { name: 'Baz' },
     { name: 'Quux' },
-  ]);
+  ];
 
-  nestedItem = {
+  @tracked nestedItem = {
     name: 'Foo',
-    children: A([
+    children: [
       {
         name: 'Bar',
-        children: A([
+        children: [
           {
             name: 'Baz',
-            children: A([]),
+            children: [],
           },
           {
             name: 'Quuz',
-            children: A([]),
+            children: [],
           },
-        ]),
+        ],
       },
       {
         name: 'Zomg',
-        children: A([]),
+        children: [],
       },
       {
         name: 'Lol',
-        children: A([]),
+        children: [],
       },
-    ]),
+    ],
   };
 
-  nestedItems2 = {
+  @tracked nestedItems2 = {
     name: 'Foo',
-    children: A([
+    children: [
       {
         name: 'Bar',
-        children: A([
+        children: [
           {
             name: 'Baz',
-            children: A([]),
+            children: [],
           },
           {
             name: 'Quuz',
-            children: A([]),
+            children: [],
           },
-        ]),
+        ],
       },
       {
         name: 'Zomg',
-        children: A([]),
+        children: [],
       },
       {
         name: 'Lol',
-        children: A([]),
+        children: [],
       },
-    ]),
+    ],
   };
 
-  sourceOnly1 = A([{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }]);
+  @tracked sourceOnly1 = [{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }];
 
-  sourceOnly2 = A([{ name: 'Quux' }]);
+  @tracked sourceOnly2 = [{ name: 'Quux' }];
 
   @tracked networkFailure = false;
+
+  _updateArrayProperty(oldArray, newArray) {
+    // Find which property matches the old array and update it
+    const propertyNames = [
+      'simple1',
+      'simple2',
+      'async1',
+      'async2',
+      'foreign1',
+      'foreign2',
+      'copies1',
+      'copies2',
+      'copies3',
+      'table1',
+      'table2',
+      'horizontal1',
+      'horizontal2',
+      'rtl',
+      'dragImage',
+      'sourceOnly1',
+      'sourceOnly2',
+    ];
+
+    for (const prop of propertyNames) {
+      if (this[prop] === oldArray) {
+        this[prop] = newArray;
+        break;
+      }
+    }
+  }
 
   @action
   dragEnd({ sourceList, sourceIndex, targetList, targetIndex }) {
     if (sourceList === targetList && sourceIndex === targetIndex) return;
 
-    const item = sourceList.objectAt(sourceIndex);
+    const item = sourceList[sourceIndex];
 
-    sourceList.removeAt(sourceIndex);
-    targetList.insertAt(targetIndex, item);
+    // Create new arrays to trigger reactivity
+    const newSourceList = [...sourceList];
+    newSourceList.splice(sourceIndex, 1);
+
+    const newTargetList =
+      sourceList === targetList ? newSourceList : [...targetList];
+    newTargetList.splice(targetIndex, 0, item);
+
+    // Update the tracked properties
+    this._updateArrayProperty(sourceList, newSourceList);
+    if (sourceList !== targetList) {
+      this._updateArrayProperty(targetList, newTargetList);
+    }
   }
 
   @action
   determineForeignPosition({ draggedItem, items }) {
-    return A(items.slice()) // create a copy of the list
-      .addObject(draggedItem)
-      .sortBy('name')
-      .indexOf(draggedItem);
+    const itemsCopy = items.slice(); // create a copy of the list
+    itemsCopy.push(draggedItem);
+    itemsCopy.sort((a, b) => a.name.localeCompare(b.name));
+    return itemsCopy.indexOf(draggedItem);
   }
 
   @action
@@ -161,13 +201,21 @@ export default class IndexController extends Controller {
 
     const unsortableList = this.copies1;
 
-    let item = sourceList.objectAt(sourceIndex);
+    let item = sourceList[sourceIndex];
 
-    if (sourceList === unsortableList)
+    if (sourceList === unsortableList) {
       item = { ...item }; // shallow clone
-    else sourceList.removeAt(sourceIndex);
+    } else {
+      const newSourceList = [...sourceList];
+      newSourceList.splice(sourceIndex, 1);
+      this._updateArrayProperty(sourceList, newSourceList);
+    }
 
-    if (targetList !== unsortableList) targetList.insertAt(targetIndex, item);
+    if (targetList !== unsortableList) {
+      const newTargetList = [...targetList];
+      newTargetList.splice(targetIndex, 0, item);
+      this._updateArrayProperty(targetList, newTargetList);
+    }
   }
 
   @action
@@ -181,11 +229,15 @@ export default class IndexController extends Controller {
 
     const sourceOnlyList = this.sourceOnly1;
 
-    let item = sourceList.objectAt(sourceIndex);
+    let item = sourceList[sourceIndex];
 
     if (sourceList === sourceOnlyList) item = { ...item }; // shallow clone
 
-    if (targetList !== sourceOnlyList) targetList.insertAt(targetIndex, item);
+    if (targetList !== sourceOnlyList) {
+      const newTargetList = [...targetList];
+      newTargetList.splice(targetIndex, 0, item);
+      this._updateArrayProperty(targetList, newTargetList);
+    }
   }
 
   @action
@@ -210,17 +262,35 @@ export default class IndexController extends Controller {
       if (sourceList === targetList && sourceIndex === targetIndex)
         return RSVP.resolve();
 
-      const item = sourceList.objectAt(sourceIndex);
+      const item = sourceList[sourceIndex];
 
-      sourceList.removeAt(sourceIndex);
-      targetList.insertAt(targetIndex, item);
+      // Create new arrays to trigger reactivity
+      const newSourceList = [...sourceList];
+      newSourceList.splice(sourceIndex, 1);
+
+      const newTargetList =
+        sourceList === targetList ? newSourceList : [...targetList];
+      newTargetList.splice(targetIndex, 0, item);
+
+      // Update the tracked properties
+      this._updateArrayProperty(sourceList, newSourceList);
+      if (sourceList !== targetList) {
+        this._updateArrayProperty(targetList, newTargetList);
+      }
 
       await timeout(2000);
 
       if (this.networkFailure) {
         // Rollback
-        targetList.removeAt(targetIndex);
-        sourceList.insertAt(sourceIndex, item);
+        const rollbackTargetList = [...newTargetList];
+        rollbackTargetList.splice(targetIndex, 1);
+        const rollbackSourceList = [...newSourceList];
+        rollbackSourceList.splice(sourceIndex, 0, item);
+
+        this._updateArrayProperty(newTargetList, rollbackTargetList);
+        if (sourceList !== targetList) {
+          this._updateArrayProperty(newSourceList, rollbackSourceList);
+        }
 
         return RSVP.reject({ message: 'Request timed out.' });
       }

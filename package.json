@@ -49,7 +49,8 @@
       "types": "./declarations/test-support/*.d.ts",
       "default": "./dist/test-support/*.js"
     },
-    "./styles/ember-drag-sort.css": "./dist/styles/ember-drag-sort.css"
+    "./styles/ember-drag-sort.css": "./dist/styles/ember-drag-sort.css",
+    "./dist/_app_/*": "./dist/_app_/*.js"
   },
   "files": [
     "addon-main.cjs",
@@ -101,14 +102,12 @@
     "babel-plugin-ember-template-compilation": "^4.0.0",
     "concurrently": "^9.0.1",
     "ember-cli-page-object": "^2.3.2",
-    "ember-composable-helpers": "^5.0.0",
     "ember-concurrency": "^5.2.0",
     "ember-page-title": "^9.0.3",
     "ember-qunit": "^9.0.2",
     "ember-source": "^6.7.0",
     "ember-strict-application-resolver": "^0.1.0",
     "ember-template-lint": "^7.9.0",
-    "ember-truth-helpers": "^4.0.3",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-ember": "^12.3.3",

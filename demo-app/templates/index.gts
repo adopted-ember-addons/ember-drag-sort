@@ -1,5 +1,4 @@
 import { on } from '@ember/modifier';
-import { not } from 'ember-truth-helpers';
 import perform from 'ember-concurrency/helpers/perform';
 import DragSortList from 'ember-drag-sort/components/drag-sort-list';
 import NestedItem from '../components/nested-item';
@@ -127,7 +126,7 @@ import NestedItem from '../components/nested-item';
             id="async-2"
             @items={{@controller.async2}}
             @group="async"
-            @draggingEnabled={{not @controller.dragEndTask.isRunning}}
+            @draggingEnabled={{@controller.draggingEnabled}}
             @dragEndAction={{perform @controller.dragEndTask}}
             as |item|
           >

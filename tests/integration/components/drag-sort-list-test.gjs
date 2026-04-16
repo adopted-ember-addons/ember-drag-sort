@@ -7,7 +7,7 @@ import {
   settled,
   triggerEvent,
 } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import DragSortList from 'ember-drag-sort/components/drag-sort-list';
 import trigger from 'ember-drag-sort/utils/trigger';
 import sinon from 'sinon';
 
@@ -21,15 +21,20 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     const additionalArgs = { parent: 'test' };
 
-    this.setProperties({ additionalArgs, items, dragEndCallback });
-
-    await render(hbs`
-      <DragSortList @additionalArgs={{this.additionalArgs}} @items={{this.items}} @dragEndAction={{this.dragEndCallback}} as |item|>
-        <div>
-          {{item.name}}
-        </div>
-      </DragSortList>
-    `);
+    await render(
+      <template>
+        <DragSortList
+          @additionalArgs={{additionalArgs}}
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          as |item|
+        >
+          <div>
+            {{item.name}}
+          </div>
+        </DragSortList>
+      </template>,
+    );
 
     const itemElements = findAll('.dragSortItem');
     const [item0, item1] = itemElements;
@@ -61,15 +66,19 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     const dragEndCallback = sinon.spy();
 
-    this.setProperties({ items, dragEndCallback });
-
-    await render(hbs`
-      <DragSortList @items={{this.items}} @dragEndAction={{this.dragEndCallback}} as |item|>
-        <div>
-          {{item.name}}
-        </div>
-      </DragSortList>
-    `);
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          as |item|
+        >
+          <div>
+            {{item.name}}
+          </div>
+        </DragSortList>
+      </template>,
+    );
 
     const item0 = find('.dragSortItem');
 
@@ -86,16 +95,21 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     const dragEndCallback = sinon.spy();
 
-    this.setProperties({ items, dragEndCallback });
-
-    await render(hbs`
-      <DragSortList @items={{this.items}} @dragEndAction={{this.dragEndCallback}} @handle=".handle" as |item|>
-        <div class="handle">handle</div>
-        <div>
-          {{item.name}}
-        </div>
-      </DragSortList>
-    `);
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          @handle=".handle"
+          as |item|
+        >
+          <div class="handle">handle</div>
+          <div>
+            {{item.name}}
+          </div>
+        </DragSortList>
+      </template>,
+    );
 
     const itemElements = findAll('.dragSortItem');
     const [item0, item1] = itemElements;
@@ -135,18 +149,23 @@ module('Integration | Component | drag-sort-list', function (hooks) {
 
     const dragEndCallback = sinon.spy();
 
-    this.setProperties({ items, dragEndCallback });
-
-    await render(hbs`
-      <DragSortList @items={{this.items}} @dragEndAction={{this.dragEndCallback}} @handle=".handle" as |item|>
-        <div class="handle">
-          <div class="handle2">handle</div>
-        </div>
-        <div>
-          {{item.name}}
-        </div>
-      </DragSortList>
-    `);
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          @handle=".handle"
+          as |item|
+        >
+          <div class="handle">
+            <div class="handle2">handle</div>
+          </div>
+          <div>
+            {{item.name}}
+          </div>
+        </DragSortList>
+      </template>,
+    );
 
     const itemElements = findAll('.dragSortItem');
     const [item0, item1] = itemElements;
@@ -425,15 +444,19 @@ module('Integration | Component | drag-sort-list', function (hooks) {
       );
     });
 
-    this.setProperties({ items, dragStartCallback });
-
-    await render(hbs`
-      <DragSortList @items={{this.items}} @dragStartAction={{this.dragStartCallback}} as |item|>
-        <div class="item-wrapper">
-          {{item.name}}
-        </div>
-      </DragSortList>
-    `);
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragStartAction={{dragStartCallback}}
+          as |item|
+        >
+          <div class="item-wrapper">
+            {{item.name}}
+          </div>
+        </DragSortList>
+      </template>,
+    );
 
     const itemElements = findAll('.dragSortItem');
     const [item0] = itemElements;

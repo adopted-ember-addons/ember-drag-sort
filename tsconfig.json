@@ -3,14 +3,24 @@
   "glint": {
     "environment": ["ember-loose", "ember-template-imports"]
   },
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "unpublished-development-types/**/*",
+    "demo-app/**/*"
+  ],
   "compilerOptions": {
+    "rootDir": ".",
     "baseUrl": ".",
     "paths": {
       "ember-drag-sort": ["./src"],
       "ember-drag-sort/*": ["./src/*"],
       "#src/*": ["./src/*"]
     },
-    "types": ["ember-source/types"]
-  },
-  "include": ["src/**/*", "tests/**/*", "demo-app/**/*"]
+    "types": [
+      "ember-source/types",
+      "vite/client",
+      "@embroider/core/virtual"
+    ]
+  }
 }

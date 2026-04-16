@@ -24,17 +24,31 @@
     "#src/*": "./src/*"
   },
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./addon-main.js": "./addon-main.cjs",
-    "./components/*.js": "./dist/components/*.js",
-    "./components/*": "./dist/components/*.js",
-    "./services/*.js": "./dist/services/*.js",
-    "./services/*": "./dist/services/*.js",
-    "./utils/*.js": "./dist/utils/*.js",
-    "./utils/*": "./dist/utils/*.js",
-    "./test-support": "./dist/test-support/index.js",
-    "./test-support/*.js": "./dist/test-support/*.js",
-    "./test-support/*": "./dist/test-support/*.js",
+    "./components/*": {
+      "types": "./declarations/components/*.d.ts",
+      "default": "./dist/components/*.js"
+    },
+    "./services/*": {
+      "types": "./declarations/services/*.d.ts",
+      "default": "./dist/services/*.js"
+    },
+    "./utils/*": {
+      "types": "./declarations/utils/*.d.ts",
+      "default": "./dist/utils/*.js"
+    },
+    "./test-support": {
+      "types": "./declarations/test-support/index.d.ts",
+      "default": "./dist/test-support/index.js"
+    },
+    "./test-support/*": {
+      "types": "./declarations/test-support/*.d.ts",
+      "default": "./dist/test-support/*.js"
+    },
     "./styles/ember-drag-sort.css": "./dist/styles/ember-drag-sort.css"
   },
   "files": [
@@ -81,6 +95,8 @@
     "@embroider/vite": "^1.1.5",
     "@eslint/js": "^9.17.0",
     "@glimmer/component": "^2.0.0",
+    "@glint/ember-tsc": "^1.5.0",
+    "@glint/template": "^1.7.7",
     "@rollup/plugin-babel": "^6.0.4",
     "babel-plugin-ember-template-compilation": "^4.0.0",
     "concurrently": "^9.0.1",

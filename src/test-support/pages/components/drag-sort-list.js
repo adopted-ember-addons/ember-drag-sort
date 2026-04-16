@@ -1,6 +1,6 @@
 /* eslint-disable ember/no-jquery */
-import component from './_component';
-import dragSortItem from './drag-sort-item';
+import component from './_component.js';
+import dragSortItem from './drag-sort-item.js';
 import trigger, { sort, move } from 'ember-drag-sort/utils/trigger';
 
 import { collection, hasClass } from 'ember-cli-page-object';

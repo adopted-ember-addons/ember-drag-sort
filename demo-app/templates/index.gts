@@ -325,6 +325,7 @@ import NestedItem from '../components/nested-item';
         <article class="list">
           <h4>Table 1</h4>
 
+          {{! template-lint-disable table-groups }}
           <DragSortList
             id="table-1"
             @items={{@controller.table1}}
@@ -345,6 +346,7 @@ import NestedItem from '../components/nested-item';
         <article class="list">
           <h4>Table 2</h4>
 
+          {{! template-lint-disable table-groups }}
           <DragSortList
             id="table-2"
             @items={{@controller.table2}}

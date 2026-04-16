@@ -27,6 +27,11 @@ const esmParserOptions = {
   ecmaVersion: 'latest',
 };
 
+const tsParserOptions = {
+  projectService: true,
+  tsconfigRootDir: import.meta.dirname,
+};
+
 export default defineConfig([
   globalIgnores(['dist/', 'dist-*/', 'declarations/', 'coverage/', '!**/.*']),
   js.configs.recommended,
@@ -58,17 +63,23 @@ export default defineConfig([
     },
   },
   {
-    files: ['**/*.ts', '**/*.gts'],
+    files: ['**/*.{ts,gts}'],
     languageOptions: {
-      parser: ts.parser,
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+      parser: ember.parser,
+      parserOptions: tsParserOptions,
+      globals: {
+        ...globals.browser,
       },
     },
-    plugins: {
-      '@typescript-eslint': ts.plugin,
-    },
+    extends: [
+      ...ts.configs.recommendedTypeChecked,
+      // https://github.com/ember-cli/ember-addon-blueprint/issues/119
+      {
+        ...ts.configs.eslintRecommended,
+        files: undefined,
+      },
+      ember.configs.gts,
+    ],
   },
   {
     files: ['src/**/*'],

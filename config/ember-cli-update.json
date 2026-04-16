@@ -1,15 +1,17 @@
 {
   "schemaVersion": "1.0.0",
+  "projectName": "ember-drag-sort",
   "packages": [
     {
       "name": "@ember/addon-blueprint",
       "version": "0.17.1",
       "blueprints": [
         {
-          "name": "addon",
+          "name": "@ember/addon-blueprint",
           "isBaseBlueprint": true,
           "options": [
-            "--pnpm"
+            "--pnpm",
+            "--typescript"
           ]
         }
       ]

@@ -181,6 +181,237 @@ module('Integration | Component | drag-sort-list', function (hooks) {
     );
   });
 
+  test('dragged item receives -isDragged class', async function (assert) {
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
+
+    const dragEndCallback = () => {};
+
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          as |item|
+        >
+          <div class="the-item">{{item.name}}</div>
+        </DragSortList>
+      </template>,
+    );
+
+    const itemElements = findAll('.dragSortItem');
+    const [item0] = itemElements;
+
+    assert.notOk(
+      item0.classList.contains('-isDragged'),
+      'item0 does not have -isDragged before drag starts',
+    );
+
+    trigger(item0, 'dragstart');
+    await settled();
+
+    assert.ok(
+      item0.classList.contains('-isDragged'),
+      'item0 has -isDragged after dragstart + settled',
+    );
+
+    trigger(item0, 'dragend');
+    await settled();
+
+    assert.notOk(
+      item0.classList.contains('-isDragged'),
+      'item0 loses -isDragged after dragend + settled',
+    );
+  });
+
+  test('target item receives -isDraggingOver and -placeholderAfter when dragging down', async function (assert) {
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
+
+    const dragEndCallback = () => {};
+
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          as |item|
+        >
+          <div class="the-item">{{item.name}}</div>
+        </DragSortList>
+      </template>,
+    );
+
+    const itemElements = findAll('.dragSortItem');
+    const [item0, item1] = itemElements;
+
+    trigger(item0, 'dragstart');
+    await settled();
+
+    trigger(item1, 'dragover', false);
+    await settled();
+
+    assert.ok(
+      item1.classList.contains('-isDraggingOver'),
+      'item1 has -isDraggingOver when dragged over',
+    );
+
+    assert.ok(
+      item1.classList.contains('-placeholderAfter'),
+      'item1 has -placeholderAfter when dragging down',
+    );
+
+    assert.notOk(
+      item1.classList.contains('-placeholderBefore'),
+      'item1 does not have -placeholderBefore when dragging down',
+    );
+
+    trigger(item0, 'dragend');
+    await settled();
+  });
+
+  test('target item receives -isDraggingOver and -placeholderBefore when dragging up', async function (assert) {
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
+
+    const dragEndCallback = () => {};
+
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          as |item|
+        >
+          <div class="the-item">{{item.name}}</div>
+        </DragSortList>
+      </template>,
+    );
+
+    const itemElements = findAll('.dragSortItem');
+    const [item0, , item2] = itemElements;
+
+    trigger(item2, 'dragstart');
+    await settled();
+
+    trigger(item0, 'dragover', true);
+    await settled();
+
+    assert.ok(
+      item0.classList.contains('-isDraggingOver'),
+      'item0 has -isDraggingOver when dragged over',
+    );
+
+    assert.ok(
+      item0.classList.contains('-placeholderBefore'),
+      'item0 has -placeholderBefore when dragging up',
+    );
+
+    assert.notOk(
+      item0.classList.contains('-placeholderAfter'),
+      'item0 does not have -placeholderAfter when dragging up',
+    );
+
+    trigger(item2, 'dragend');
+    await settled();
+  });
+
+  test('list receives -isDragging and -isDraggingOver classes during drag', async function (assert) {
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
+
+    const dragEndCallback = () => {};
+
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          @group="test"
+          as |item|
+        >
+          <div class="the-item">{{item.name}}</div>
+        </DragSortList>
+      </template>,
+    );
+
+    const list = document.querySelector('.dragSortList');
+    const itemElements = findAll('.dragSortItem');
+    const [item0, item1] = itemElements;
+
+    assert.notOk(
+      list.classList.contains('-isDragging'),
+      'list does not have -isDragging before drag starts',
+    );
+
+    trigger(item0, 'dragstart');
+    await settled();
+
+    assert.ok(
+      list.classList.contains('-isDragging'),
+      'list has -isDragging during drag',
+    );
+
+    trigger(item1, 'dragover', false);
+    await settled();
+
+    assert.ok(
+      list.classList.contains('-isDraggingOver'),
+      'list has -isDraggingOver when items are dragged within it',
+    );
+
+    trigger(item0, 'dragend');
+    await settled();
+
+    assert.notOk(
+      list.classList.contains('-isDragging'),
+      'list loses -isDragging after dragend',
+    );
+  });
+
+  test('CSS classes are cleaned up after drag ends', async function (assert) {
+    const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
+
+    const dragEndCallback = () => {};
+
+    await render(
+      <template>
+        <DragSortList
+          @items={{items}}
+          @dragEndAction={{dragEndCallback}}
+          as |item|
+        >
+          <div class="the-item">{{item.name}}</div>
+        </DragSortList>
+      </template>,
+    );
+
+    const itemElements = findAll('.dragSortItem');
+    const [item0, item1] = itemElements;
+
+    trigger(item0, 'dragstart');
+    await settled();
+    trigger(item1, 'dragover', false);
+    await settled();
+    trigger(item0, 'dragend');
+    await settled();
+
+    for (const item of findAll('.dragSortItem')) {
+      assert.notOk(
+        item.classList.contains('-isDragged'),
+        `${item.textContent.trim()} does not have -isDragged after drag ends`,
+      );
+      assert.notOk(
+        item.classList.contains('-isDraggingOver'),
+        `${item.textContent.trim()} does not have -isDraggingOver after drag ends`,
+      );
+      assert.notOk(
+        item.classList.contains('-placeholderBefore'),
+        `${item.textContent.trim()} does not have -placeholderBefore after drag ends`,
+      );
+      assert.notOk(
+        item.classList.contains('-placeholderAfter'),
+        `${item.textContent.trim()} does not have -placeholderAfter after drag ends`,
+      );
+    }
+  });
+
   test('drag start action', async function (assert) {
     const items = [{ name: 'foo' }, { name: 'bar' }, { name: 'baz' }];
 

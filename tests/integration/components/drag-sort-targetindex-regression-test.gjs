@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { findAll, render, triggerEvent } from '@ember/test-helpers';
-import DragSortList from "ember-drag-sort/components/drag-sort-list";
+import DragSortList from 'ember-drag-sort/components/drag-sort-list';
 
 module(
   'Integration | Component | drag-sort targetIndex regression test',
@@ -20,11 +20,13 @@ module(
 
       this.setProperties({ items });
 
-      await render(<template>
-      <DragSortList @items={{this.items}} @group="test" as |item|>
-        <div class="the-item">{{item.name}}</div>
-      </DragSortList>
-    </template>);
+      await render(
+        <template>
+          <DragSortList @items={{this.items}} @group="test" as |item|>
+            <div class="the-item">{{item.name}}</div>
+          </DragSortList>
+        </template>,
+      );
 
       const dragSort = this.owner.lookup('service:drag-sort');
       const itemElements = findAll('.dragSortItem');

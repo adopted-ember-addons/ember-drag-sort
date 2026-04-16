@@ -4,7 +4,12 @@
  * For local dev experience, see the babel.config
  */
 module.exports = {
-  presets: [['@babel/preset-typescript', { allowDeclareFields: true, allExtensions: true }]],
+  presets: [
+    [
+      '@babel/preset-typescript',
+      { allowDeclareFields: true, allExtensions: true },
+    ],
+  ],
   plugins: [
     [
       'babel-plugin-ember-template-compilation',

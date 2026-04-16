@@ -16,7 +16,12 @@ const macros = buildMacros();
 const isCompat = Boolean(process.env.ENABLE_COMPAT_BUILD);
 
 module.exports = {
-  presets: [['@babel/preset-typescript', { allowDeclareFields: true, allExtensions: true }]],
+  presets: [
+    [
+      '@babel/preset-typescript',
+      { allowDeclareFields: true, allExtensions: true },
+    ],
+  ],
   plugins: [
     [
       'babel-plugin-ember-template-compilation',

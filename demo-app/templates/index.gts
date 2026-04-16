@@ -247,9 +247,9 @@ import NestedItem from '../components/nested-item';
       <h2>Source only list</h2>
 
       <p>
-        Use `sourceOnly` to prevent the user from rearranging or dragging into the
-        list. Effectively, it is marked as immutable, and only used as a source
-        bucket for other lists.
+        Use `sourceOnly` to prevent the user from rearranging or dragging into
+        the list. Effectively, it is marked as immutable, and only used as a
+        source bucket for other lists.
       </p>
 
       <p>
@@ -302,16 +302,16 @@ import NestedItem from '../components/nested-item';
       </p>
 
       <p>
-        Unfortunately, this doesn't work with HTML tables because table semantics
-        are very restrictive. To work around this problem, top/bottom padding on
-        table cells can be used instead of selectors.
+        Unfortunately, this doesn't work with HTML tables because table
+        semantics are very restrictive. To work around this problem, top/bottom
+        padding on table cells can be used instead of selectors.
       </p>
 
       <p>
         This is not a great solution because padding appears
         <em>inside</em>
-        table cells. If you want your cells to have borders, you'll have to apply
-        them to inner elements instead.
+        table cells. If you want your cells to have borders, you'll have to
+        apply them to inner elements instead.
       </p>
 
       <p>

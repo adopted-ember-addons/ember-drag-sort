@@ -19,7 +19,6 @@ export default defineConfig({
       input: {
         tests: 'tests/index.html',
       },
-
     },
   },
 });

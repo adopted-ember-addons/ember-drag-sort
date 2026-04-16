@@ -40,17 +40,28 @@ interface DragSortItemSignature<Item extends object> {
 
 export default class DragSortItem<Item extends object> extends Component<
   DragSortItemSignature<Item>
-> {<template>{{#let (element (if @tagName @tagName "div")) as |Tag|}}
-  <Tag class="dragSortItem
-      {{@index}}
-      {{this.dragSort.targetIndex}}
-      {{if this.isDraggingOver "-isDraggingOver"}}
-      {{if this._isDragged "-isDragged"}}
-      {{if this.shouldShowPlaceholderBefore "-placeholderBefore"}}
-      {{if this.shouldShowPlaceholderAfter "-placeholderAfter"}}" draggable={{this.draggable}} {{on "dragstart" this.dragStart}} {{on "dragend" this.dragEnd}} {{on "dragover" this.dragOver}} {{on "drop" this.drop}} ...attributes>
-    {{yield}}
-  </Tag>
-{{/let}}</template>
+> {
+  <template>
+    {{#let (element (if @tagName @tagName "div")) as |Tag|}}
+      <Tag
+        class="dragSortItem
+          {{@index}}
+          {{this.dragSort.targetIndex}}
+          {{if this.isDraggingOver '-isDraggingOver'}}
+          {{if this._isDragged '-isDragged'}}
+          {{if this.shouldShowPlaceholderBefore '-placeholderBefore'}}
+          {{if this.shouldShowPlaceholderAfter '-placeholderAfter'}}"
+        draggable={{this.draggable}}
+        {{on "dragstart" this.dragStart}}
+        {{on "dragend" this.dragEnd}}
+        {{on "dragover" this.dragOver}}
+        {{on "drop" this.drop}}
+        ...attributes
+      >
+        {{yield}}
+      </Tag>
+    {{/let}}
+  </template>
   @service declare dragSort: DragSort<Item>;
 
   declare el: HTMLElement;

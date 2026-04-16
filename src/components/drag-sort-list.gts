@@ -34,24 +34,48 @@ interface DragSortListSignature<Item extends object> {
 
 export default class DragSortList<Item extends object> extends Component<
   DragSortListSignature<Item>
-> {<template>{{#let (element (if @tagName @tagName "div")) as |Tag|}}
-  <Tag class="dragSortList
-      {{if this.draggingEnabled "-draggingEnabled"}}
-      {{if this.isDragging "-isDragging"}}
-      {{if this.isDraggingOver "-isDraggingOver"}}
-      {{if this.isEmpty "-isEmpty"}}
-      {{if this.isExpanded "-isExpanded"}}
-      {{if @isHorizontal "-horizontal"}}
-      {{if @isRtl "-rtl"}}
-      {{if this.isVertical "-vertical"}}
-      {{if this.sourceOnly "-sourceOnlyList"}}" {{on "dragenter" this.dragEnter}} {{on "dragover" this.dragOver}} ...attributes>
-    {{#each @items as |item index|}}
-      <DragSortItem @additionalArgs={{@additionalArgs}} @determineForeignPositionAction={{@determineForeignPositionAction}} @draggingEnabled={{this.draggingEnabled}} @dragEndAction={{@dragEndAction}} @dragStartAction={{@dragStartAction}} @group={{@group}} @handle={{@handle}} @index={{index}} @isHorizontal={{@isHorizontal}} @isRtl={{@isRtl}} @item={{item}} @items={{@items}} @sourceOnly={{this.sourceOnly}} @tagName={{@childTagName}} class={{@childClass}}>
-        {{yield item index}}
-      </DragSortItem>
-    {{/each}}
-  </Tag>
-{{/let}}</template>
+> {
+  <template>
+    {{#let (element (if @tagName @tagName "div")) as |Tag|}}
+      <Tag
+        class="dragSortList
+          {{if this.draggingEnabled '-draggingEnabled'}}
+          {{if this.isDragging '-isDragging'}}
+          {{if this.isDraggingOver '-isDraggingOver'}}
+          {{if this.isEmpty '-isEmpty'}}
+          {{if this.isExpanded '-isExpanded'}}
+          {{if @isHorizontal '-horizontal'}}
+          {{if @isRtl '-rtl'}}
+          {{if this.isVertical '-vertical'}}
+          {{if this.sourceOnly '-sourceOnlyList'}}"
+        {{on "dragenter" this.dragEnter}}
+        {{on "dragover" this.dragOver}}
+        ...attributes
+      >
+        {{#each @items as |item index|}}
+          <DragSortItem
+            @additionalArgs={{@additionalArgs}}
+            @determineForeignPositionAction={{@determineForeignPositionAction}}
+            @draggingEnabled={{this.draggingEnabled}}
+            @dragEndAction={{@dragEndAction}}
+            @dragStartAction={{@dragStartAction}}
+            @group={{@group}}
+            @handle={{@handle}}
+            @index={{index}}
+            @isHorizontal={{@isHorizontal}}
+            @isRtl={{@isRtl}}
+            @item={{item}}
+            @items={{@items}}
+            @sourceOnly={{this.sourceOnly}}
+            @tagName={{@childTagName}}
+            class={{@childClass}}
+          >
+            {{yield item index}}
+          </DragSortItem>
+        {{/each}}
+      </Tag>
+    {{/let}}
+  </template>
   @service declare dragSort: DragSort<Item>;
 
   declare el: HTMLElement;

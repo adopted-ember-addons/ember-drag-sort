@@ -17,10 +17,6 @@
       "ember-drag-sort/*": ["./src/*"],
       "#src/*": ["./src/*"]
     },
-    "types": [
-      "ember-source/types",
-      "vite/client",
-      "@embroider/core/virtual"
-    ]
+    "types": ["ember-source/types", "vite/client", "@embroider/core/virtual"]
   }
 }

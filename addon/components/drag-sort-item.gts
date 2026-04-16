@@ -6,6 +6,8 @@ import { service } from '@ember/service';
 import type DragSort from 'ember-drag-sort/services/drag-sort';
 import { next } from '@ember/runloop';
 import { tracked } from '@glimmer/tracking';
+import element_ from "ember-element-helper/helpers/element";
+import { on } from "@ember/modifier";
 
 function getComputedStyleInt(element: HTMLElement, cssProp: string) {
   const computedStyle = window.getComputedStyle(element, null);
@@ -38,7 +40,17 @@ interface DragSortItemSignature<Item extends object> {
 
 export default class DragSortItem<Item extends object> extends Component<
   DragSortItemSignature<Item>
-> {
+> {<template>{{#let (element_ (if @tagName @tagName "div")) as |Tag|}}
+  <Tag class="dragSortItem
+      {{@index}}
+      {{this.dragSort.targetIndex}}
+      {{if this.isDraggingOver "-isDraggingOver"}}
+      {{if this._isDragged "-isDragged"}}
+      {{if this.shouldShowPlaceholderBefore "-placeholderBefore"}}
+      {{if this.shouldShowPlaceholderAfter "-placeholderAfter"}}" draggable={{this.draggable}} {{on "dragstart" this.dragStart}} {{on "dragend" this.dragEnd}} {{on "dragover" this.dragOver}} {{on "drop" this.drop}} ...attributes>
+    {{yield}}
+  </Tag>
+{{/let}}</template>
   @service declare dragSort: DragSort<Item>;
 
   declare el: HTMLElement;
@@ -291,23 +303,3 @@ export default class DragSortItem<Item extends object> extends Component<
     return handleElement === target || handleElement.contains(target);
   }
 }
-
-{{#let (element (if @tagName @tagName "div")) as |Tag|}}
-  <Tag
-    class="dragSortItem
-      {{@index}}
-      {{this.dragSort.targetIndex}}
-      {{if this.isDraggingOver '-isDraggingOver'}}
-      {{if this._isDragged '-isDragged'}}
-      {{if this.shouldShowPlaceholderBefore '-placeholderBefore'}}
-      {{if this.shouldShowPlaceholderAfter '-placeholderAfter'}}"
-    draggable={{this.draggable}}
-    {{on "dragstart" this.dragStart}}
-    {{on "dragend" this.dragEnd}}
-    {{on "dragover" this.dragOver}}
-    {{on "drop" this.drop}}
-    ...attributes
-  >
-    {{yield}}
-  </Tag>
-{{/let}}

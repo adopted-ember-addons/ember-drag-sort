@@ -1,18 +1,22 @@
+import type { TemplateOnlyComponent } from '@ember/component/template-only';
+import { on } from "@ember/modifier";
+import { not } from "@ember/helper";
+import { perform } from "ember-concurrency";
+import DragSortList from "ember-drag-sort/components/drag-sort-list";
+import NestedItem from "tests/dummy/app/components/nested-item";
+
+export default <template>
 {{! template-lint-disable no-action}}
 
 <h1>ember-drag-sort demo</h1>
 
 <p>
-  {{! template-lint-disable no-implicit-this }}
-
   See
 
   <a
     href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/templates/index.hbs"
   >
-    {{~concat~}}
     demo template source
-    {{~concat~}}
   </a>
 
   and
@@ -20,9 +24,7 @@
   <a
     href="https://github.com/kaliber5/ember-drag-sort/blob/gen-0/tests/dummy/app/controllers/index.js"
   >
-    {{~concat~}}
     demo controller source
-    {{~concat~}}
   </a>.
 </p>
 
@@ -42,9 +44,9 @@
 
         <DragSortList
           id="simple-1"
-          @items={{this.simple1}}
+          @items={{@controller.simple1}}
           @group="simple"
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -58,10 +60,10 @@
 
         <DragSortList
           id="simple-2"
-          @items={{this.simple2}}
+          @items={{@controller.simple2}}
           @group="simple"
           @handle=".handle"
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -88,8 +90,8 @@
       <label>
         <input
           type="checkbox"
-          checked={{this.networkFailure}}
-          {{on "change" this.updateNetworkFailure}}
+          checked={{@controller.networkFailure}}
+          {{on "change" @controller.updateNetworkFailure}}
         />
         Simulate network failure.
       </label>
@@ -98,10 +100,10 @@
     <p>
       Status:
 
-      {{#if this.dragEndTask.isRunning}}
+      {{#if @controller.dragEndTask.isRunning}}
         Updating...
-      {{else if this.dragEndTask.last.error}}
-        {{this.dragEndTask.last.error.message}}
+      {{else if @controller.dragEndTask.last.error}}
+        {{@controller.dragEndTask.last.error.message}}
       {{else}}
         Idle.
       {{/if}}
@@ -113,10 +115,10 @@
 
         <DragSortList
           id="async-1"
-          @items={{this.async1}}
+          @items={{@controller.async1}}
           @group="async"
-          @draggingEnabled={{this.dragEndTask.isIdle}}
-          @dragEndAction={{perform this.dragEndTask}}
+          @draggingEnabled={{@controller.dragEndTask.isIdle}}
+          @dragEndAction={{perform @controller.dragEndTask}}
           as |item|
         >
           <div class="the-item">
@@ -130,10 +132,10 @@
 
         <DragSortList
           id="async-2"
-          @items={{this.async2}}
+          @items={{@controller.async2}}
           @group="async"
-          @draggingEnabled={{not this.dragEndTask.isRunning}}
-          @dragEndAction={{perform this.dragEndTask}}
+          @draggingEnabled={{not @controller.dragEndTask.isRunning}}
+          @dragEndAction={{perform @controller.dragEndTask}}
           as |item|
         >
           <div class="the-item">
@@ -158,10 +160,10 @@
 
         <DragSortList
           id="foreign-1"
-          @items={{this.foreign1}}
+          @items={{@controller.foreign1}}
           @group="foreign"
-          @dragEndAction={{this.dragEnd}}
-          @determineForeignPositionAction={{this.determineForeignPosition}}
+          @dragEndAction={{@controller.dragEnd}}
+          @determineForeignPositionAction={{@controller.determineForeignPosition}}
           as |item|
         >
           <div class="the-item">
@@ -175,9 +177,9 @@
 
         <DragSortList
           id="foreign-2"
-          @items={{this.foreign2}}
+          @items={{@controller.foreign2}}
           @group="foreign"
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -202,10 +204,10 @@
 
         <DragSortList
           id="copies-1"
-          @items={{this.copies1}}
+          @items={{@controller.copies1}}
           @group="copies"
-          @dragEndAction={{this.dragEnd2}}
-          @determineForeignPositionAction={{this.determineForeignPosition2}}
+          @dragEndAction={{@controller.dragEnd2}}
+          @determineForeignPositionAction={{@controller.determineForeignPosition2}}
           as |item|
         >
           <div class="the-item">
@@ -219,9 +221,9 @@
 
         <DragSortList
           id="copies-2"
-          @items={{this.copies2}}
+          @items={{@controller.copies2}}
           @group="copies"
-          @dragEndAction={{this.dragEnd2}}
+          @dragEndAction={{@controller.dragEnd2}}
           as |item|
         >
           <div class="the-item">
@@ -235,9 +237,9 @@
 
         <DragSortList
           id="copies-3"
-          @items={{this.copies3}}
+          @items={{@controller.copies3}}
           @group="copies"
-          @dragEndAction={{this.dragEnd2}}
+          @dragEndAction={{@controller.dragEnd2}}
           as |item|
         >
           <div class="the-item">
@@ -268,9 +270,9 @@
 
         <DragSortList
           id="source-only-1"
-          @items={{this.sourceOnly1}}
+          @items={{@controller.sourceOnly1}}
           @group="source-only"
-          @dragEndAction={{this.sourceOnlyDragEnd}}
+          @dragEndAction={{@controller.sourceOnlyDragEnd}}
           @sourceOnly={{true}}
           as |item|
         >
@@ -285,9 +287,9 @@
 
         <DragSortList
           id="source-only-2"
-          @items={{this.sourceOnly2}}
+          @items={{@controller.sourceOnly2}}
           @group="source-only"
-          @dragEndAction={{this.sourceOnlyDragEnd}}
+          @dragEndAction={{@controller.sourceOnlyDragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -332,11 +334,11 @@
 
         <DragSortList
           id="table-1"
-          @items={{this.table1}}
+          @items={{@controller.table1}}
           @tagName="table"
           @childTagName="tr"
           @group="table"
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <td>
@@ -352,11 +354,11 @@
 
         <DragSortList
           id="table-2"
-          @items={{this.table2}}
+          @items={{@controller.table2}}
           @tagName="table"
           @childTagName="tr"
           @group="table"
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <td>
@@ -383,9 +385,9 @@
 
         <DragSortList
           id="horizontal-1"
-          @items={{this.horizontal1}}
+          @items={{@controller.horizontal1}}
           @group="horizontal"
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           @isHorizontal={{true}}
           as |item|
         >
@@ -400,9 +402,9 @@
 
         <DragSortList
           id="horizontal-2"
-          @items={{this.horizontal2}}
+          @items={{@controller.horizontal2}}
           @group="horizontal"
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -425,11 +427,11 @@
       <article class="horizontal-list list">
         <DragSortList
           id="rtl"
-          @items={{this.rtl}}
+          @items={{@controller.rtl}}
           @group="rtl"
           @isHorizontal={{true}}
           @isRtl={{true}}
-          @dragEndAction={{this.dragEnd}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -452,10 +454,10 @@
       <article class="list">
         <DragSortList
           id="drag-image"
-          @items={{this.dragImage}}
+          @items={{@controller.dragImage}}
           @group="dragImage"
-          @dragStartAction={{this.setDragImage}}
-          @dragEndAction={{this.dragEnd}}
+          @dragStartAction={{@controller.setDragImage}}
+          @dragEndAction={{@controller.dragEnd}}
           as |item|
         >
           <div class="the-item">
@@ -472,24 +474,22 @@
     <h2>Nested list</h2>
 
     <p>
-      {{! template-lint-disable no-implicit-this }}
       See
       <a
         href="https://github.com/adopted-ember-addons/ember-drag-sort/blob/gen-0/tests/dummy/app/templates/components/nested-item.hbs"
       >
-        {{~concat~}}
         component template source
-        {{~concat~}}
       </a>.
     </p>
 
     <NestedItem
       id="nested"
-      @item={{this.nestedItem}}
+      @item={{@controller.nestedItem}}
       @group="nested"
-      @dragEndAction={{this.dragEnd}}
+      @dragEndAction={{@controller.dragEnd}}
     />
 
     <p>Warning: Nested lists don't work well with horizontal lists.</p>
   </div>
 </div>
+</template> satisfies TemplateOnlyComponent<{ Args: { model: unknown, controller: unknown } }>;

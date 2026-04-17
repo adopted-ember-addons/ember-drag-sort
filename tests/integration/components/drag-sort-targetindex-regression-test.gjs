@@ -18,11 +18,9 @@ module(
         { name: 'Item 3' },
       ];
 
-      this.setProperties({ items });
-
       await render(
         <template>
-          <DragSortList @items={{this.items}} @group="test" as |item|>
+          <DragSortList @items={{items}} @group="test" as |item|>
             <div class="the-item">{{item.name}}</div>
           </DragSortList>
         </template>,

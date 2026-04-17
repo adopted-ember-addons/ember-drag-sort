@@ -1,5 +1,3 @@
-import type { TemplateOnlyComponent } from '@ember/component/template-only';
+import RouteTemplate from 'ember-route-template';
 
-export default <template>{{outlet}}</template> satisfies TemplateOnlyComponent<{
-  Args: { model: unknown; controller: unknown };
-}>;
+export default RouteTemplate(<template>{{outlet}}</template>);

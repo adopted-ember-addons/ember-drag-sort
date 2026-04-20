@@ -1,6 +1,6 @@
 import { create, text, visitable } from 'ember-cli-page-object';
 
-import { dragSortList } from 'ember-drag-sort/test-support/pages/components/drag-sort-list';
+import { dragSortList } from './components/drag-sort-list';
 
 function list(scope) {
   return { ...dragSortList({ title: text() }), scope };

@@ -18,6 +18,7 @@
     "sortable list"
   ],
   "repository": "https://github.com/adopted-ember-addons/ember-drag-sort",
+  "packageManager": "pnpm@10.33.0",
   "license": "MIT",
   "author": "Andrey Mikhaylov @lolmaus <lolmaus@gmail.com> (http://lolma.us)",
   "imports": {
@@ -40,14 +41,6 @@
     "./utils/*": {
       "types": "./declarations/utils/*.d.ts",
       "default": "./dist/utils/*.js"
-    },
-    "./test-support": {
-      "types": "./declarations/test-support/index.d.ts",
-      "default": "./dist/test-support/index.js"
-    },
-    "./test-support/*": {
-      "types": "./declarations/test-support/*.d.ts",
-      "default": "./dist/test-support/*.js"
     },
     "./styles/ember-drag-sort.css": "./dist/styles/ember-drag-sort.css",
     "./dist/_app_/*": "./dist/_app_/*.js"

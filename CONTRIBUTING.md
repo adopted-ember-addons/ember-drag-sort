@@ -18,7 +18,7 @@
 ## Running the demo application
 
 - `pnpm start`
-- Visit the demo application at [http://localhost:5173](http://localhost:5173).
+- Visit the demo application at [http://localhost:4200](http://localhost:4200).
 
 ## Building
 

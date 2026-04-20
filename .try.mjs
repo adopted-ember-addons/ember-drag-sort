@@ -36,6 +36,7 @@ export default {
       },
       env: {
         ENABLE_COMPAT_BUILD: true,
+        SKIP_DECLARATIONS: true,
       },
       files: compatFiles,
     },
@@ -90,7 +91,7 @@ export default {
       name: 'ember-lts-6.12',
       npm: {
         devDependencies: {
-          'ember-source': 'npm:ember-source@~6.4.0',
+          'ember-source': 'npm:ember-source@~6.12.0',
         },
       },
     },

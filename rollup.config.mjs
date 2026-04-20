@@ -49,10 +49,11 @@ export default {
     }),
 
     // Emit .d.ts declaration files
-    addon.declarations(
-      'declarations',
-      `pnpm tsc --declaration --project ${tsConfig}`,
-    ),
+    !process.env.SKIP_DECLARATIONS &&
+      addon.declarations(
+        'declarations',
+        `pnpm tsc --declaration --project ${tsConfig}`,
+      ),
 
     // addons are allowed to contain imports of .css files, which we want rollup
     // to leave alone and keep in the published output.

@@ -7,7 +7,7 @@ import DragSortService from 'ember-drag-sort/services/drag-sort';
 
 export class Router extends EmberRouter {
   location = 'history';
-  rootURL = '/';
+  rootURL = import.meta.env.BASE_URL;
 }
 
 export class App extends EmberApp {

@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { currentURL, settled } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
-import page from 'dummy/tests/pages/index';
+import page from '../pages/index';
 
 function assertListItems(list, expectedTitles, assert, message) {
   const m = `${message}: items count`;

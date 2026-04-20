@@ -3,11 +3,7 @@
   "glint": {
     "environment": ["ember-loose", "ember-template-imports"]
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*",
-    "demo-app/**/*"
-  ],
+  "include": ["src/**/*", "tests/**/*", "demo-app/**/*"],
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": ".",

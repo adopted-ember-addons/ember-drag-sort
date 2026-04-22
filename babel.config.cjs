@@ -1,0 +1,49 @@
+/**
+ * This babel.config is not used for publishing.
+ * It's only for the local editing experience
+ * (and linting)
+ */
+const { buildMacros } = require('@embroider/macros/babel');
+
+const {
+  babelCompatSupport,
+  templateCompatSupport,
+} = require('@embroider/compat/babel');
+
+const macros = buildMacros();
+
+// For scenario testing
+const isCompat = Boolean(process.env.ENABLE_COMPAT_BUILD);
+
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-typescript',
+      { allowDeclareFields: true, allExtensions: true },
+    ],
+  ],
+  plugins: [
+    [
+      'babel-plugin-ember-template-compilation',
+      {
+        transforms: [
+          ...(isCompat ? templateCompatSupport() : macros.templateMacros),
+        ],
+      },
+    ],
+    [
+      'module:decorator-transforms',
+      {
+        runtime: {
+          import: require.resolve('decorator-transforms/runtime-esm'),
+        },
+      },
+    ],
+    ...(isCompat ? babelCompatSupport() : macros.babelMacros),
+    require.resolve('ember-concurrency/async-arrow-task-transform'),
+  ],
+
+  generatorOpts: {
+    compact: false,
+  },
+};

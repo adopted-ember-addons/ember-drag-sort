@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-04-22)
+
+* ember-drag-sort 5.0.0 (major)
+
+#### :boom: Breaking Change
+* `ember-drag-sort`
+  * [#107](https://github.com/adopted-ember-addons/ember-drag-sort/pull/107) Remove test-support page objects, Migrate to a V2 addon ([@BobrImperator](https://github.com/BobrImperator))
+
+#### :house: Internal
+* `ember-drag-sort`
+  * [#110](https://github.com/adopted-ember-addons/ember-drag-sort/pull/110) update release-plan ([@mansona](https://github.com/mansona))
+
+#### Committers: 2
+- Bartlomiej Dudzik ([@BobrImperator](https://github.com/BobrImperator))
+- Chris Manson ([@mansona](https://github.com/mansona))
+
 ## Release (2025-10-23)
 
 * ember-drag-sort 4.2.0 (minor)

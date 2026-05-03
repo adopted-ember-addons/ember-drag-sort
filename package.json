@@ -64,6 +64,7 @@
     "lint:js:fix": "eslint . --fix",
     "lint:publish": "pnpm build && publint run --level error",
     "prepack": "rollup --config",
+    "build:demo": "DEPLOY_TARGET=gh-pages vite build",
     "start": "vite dev",
     "test": "vite build --mode=development --out-dir dist-tests && testem --file testem.cjs ci --port 0"
   },

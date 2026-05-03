@@ -4,8 +4,10 @@ import { babel } from '@rollup/plugin-babel';
 
 // For scenario testing
 const isCompat = Boolean(process.env.ENABLE_COMPAT_BUILD);
+const isGHPages = process.env.DEPLOY_TARGET === 'gh-pages';
 
 export default defineConfig({
+  base: isGHPages ? '/ember-drag-sort/' : '/',
   plugins: [
     ...(isCompat ? [classicEmberSupport()] : []),
     ember(),
@@ -15,10 +17,11 @@ export default defineConfig({
     }),
   ],
   build: {
+    outDir: isGHPages ? 'dist-demo' : undefined,
     rollupOptions: {
-      input: {
-        tests: 'tests/index.html',
-      },
+      input: isGHPages
+        ? { main: 'index.html' }
+        : { tests: 'tests/index.html' },
     },
   },
 });

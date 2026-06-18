@@ -483,4 +483,62 @@ module('Integration | Component | drag-sort-list', function (hooks) {
       ),
     );
   });
+
+  test('list "-isExpanded" is deferred by one runloop after dragstart', async function (assert) {
+    const items = [{ name: 'foo' }];
+
+    await render(
+      <template>
+        <DragSortList @items={{items}} @group="test" as |item|>
+          <div class="the-item">{{item.name}}</div>
+        </DragSortList>
+      </template>,
+    );
+
+    const dragSort = this.owner.lookup('service:drag-sort');
+    const [item] = findAll('.dragSortItem');
+    const list = document.querySelector('.dragSortList');
+
+    assert.notOk(
+      list.classList.contains('-isExpanded'),
+      'list is not expanded before drag starts',
+    );
+
+    item.dispatchEvent(
+      new DragEvent('dragstart', {
+        dataTransfer: new DataTransfer(),
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+
+    assert.ok(dragSort.isDragging, 'isDragging flips immediately on dragstart');
+    assert.notOk(
+      dragSort.isDraggingDeferred,
+      'isDraggingDeferred stays off in the same runloop',
+    );
+
+    await settled();
+
+    assert.ok(
+      dragSort.isDraggingDeferred,
+      'isDraggingDeferred turns on one runloop later',
+    );
+    assert.ok(
+      list.classList.contains('-isExpanded'),
+      'list expands after the deferral resolves',
+    );
+
+    trigger(item, 'dragend');
+    await settled();
+
+    assert.notOk(
+      dragSort.isDraggingDeferred,
+      'isDraggingDeferred clears on dragend',
+    );
+    assert.notOk(
+      list.classList.contains('-isExpanded'),
+      'list collapses after dragend',
+    );
+  });
 });

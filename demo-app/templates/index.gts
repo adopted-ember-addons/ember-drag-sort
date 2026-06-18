@@ -2,6 +2,7 @@ import { on } from '@ember/modifier';
 import perform from 'ember-concurrency/helpers/perform';
 import DragSortList from 'ember-drag-sort/components/drag-sort-list';
 import NestedItem from '../components/nested-item';
+import ReproTree from '../components/repro-tree';
 import RouteTemplate from 'ember-route-template';
 
 export default RouteTemplate(
@@ -484,6 +485,22 @@ export default RouteTemplate(
         />
 
         <p>Warning: Nested lists don't work well with horizontal lists.</p>
+      </div>
+
+      <div class="list-group-wrapper">
+        <h2>Triple-nested</h2>
+
+        <p>
+          Last drag event:
+          <strong id="last-event">{{@controller.reproLastEvent}}</strong>
+        </p>
+
+        <div id="repro-root">
+          <ReproTree
+            @items={{@controller.reproTree}}
+            @dragEndAction={{@controller.reproDragEnd}}
+          />
+        </div>
       </div>
     </div>
   </template>,

@@ -24,6 +24,7 @@ export default class DragSort<Item extends object> extends Service {
   }
 
   @tracked isDragging = false;
+  @tracked isDraggingDeferred = false;
   @tracked isDraggingUp: boolean | null = null;
 
   @tracked draggedItem = null;
@@ -52,8 +53,8 @@ export default class DragSort<Item extends object> extends Service {
     item: Item;
     index: number;
     items: Array<Item>;
-    group: string;
-    isHorizontal: boolean;
+    group?: string;
+    isHorizontal?: boolean;
   }) {
     setProperties(this, {
       isDragging: true,
@@ -73,6 +74,8 @@ export default class DragSort<Item extends object> extends Service {
     });
 
     next(() => {
+      this.isDraggingDeferred = this.isDragging;
+
       this.trigger('start', {
         group,
         draggedItem: item,
@@ -236,6 +239,7 @@ export default class DragSort<Item extends object> extends Service {
   _reset() {
     setProperties(this, {
       isDragging: false,
+      isDraggingDeferred: false,
       isDraggingUp: null,
 
       draggedItem: null,

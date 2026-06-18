@@ -42,7 +42,7 @@
       "default": "./dist/utils/*.js"
     },
     "./styles/ember-drag-sort.css": "./dist/styles/ember-drag-sort.css",
-    "./dist/_app_/*": "./dist/_app_/*.js"
+    "./_app_/*": "./dist/_app_/*"
   },
   "files": [
     "addon-main.cjs",

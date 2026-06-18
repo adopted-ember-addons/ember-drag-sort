@@ -5,6 +5,31 @@ import { dropTask, timeout } from 'ember-concurrency';
 import RSVP from 'rsvp';
 import { tracked } from '@glimmer/tracking';
 
+function rebuildReproTree(node, sourceList, targetList, moved) {
+  const list = node;
+  let nextList = list;
+
+  if (list === sourceList && list === targetList) {
+    return moved.sameListResult;
+  }
+  if (list === sourceList) {
+    nextList = moved.newSourceList;
+  } else if (list === targetList) {
+    nextList = moved.newTargetList;
+  }
+
+  return nextList.map((item) => {
+    const newChildren = rebuildReproTree(
+      item.children,
+      sourceList,
+      targetList,
+      moved,
+    );
+    if (newChildren === item.children) return item;
+    return { ...item, children: newChildren };
+  });
+}
+
 export default class IndexController extends Controller {
   @tracked simple1 = [
     { name: 'Foo' },
@@ -130,6 +155,25 @@ export default class IndexController extends Controller {
     ],
   };
 
+  @tracked reproTree = [
+    {
+      name: 'L1-a',
+      level: 1,
+      children: [
+        {
+          name: 'L2-a',
+          level: 2,
+          children: [
+            { name: 'L3-a', level: 3, children: [] },
+            { name: 'L3-b', level: 3, children: [] },
+          ],
+        },
+      ],
+    },
+    { name: 'L1-b', level: 1, children: [] },
+  ];
+  @tracked reproLastEvent = '(none)';
+
   @tracked sourceOnly1 = [{ name: 'Foo' }, { name: 'Bar' }, { name: 'Baz' }];
 
   @tracked sourceOnly2 = [{ name: 'Quux' }];
@@ -250,6 +294,40 @@ export default class IndexController extends Controller {
       target,
       event.clientX - x,
       event.clientY - y,
+    );
+  }
+
+  @action
+  reproDragEnd({ sourceList, sourceIndex, targetList, targetIndex }) {
+    this.reproLastEvent = `dragEnd source[${sourceIndex}] -> target[${targetIndex}]`;
+
+    if (sourceList === targetList && sourceIndex === targetIndex) return;
+
+    const item = sourceList[sourceIndex];
+    let moved;
+
+    if (sourceList === targetList) {
+      const next = [...sourceList];
+      next.splice(sourceIndex, 1);
+      next.splice(targetIndex, 0, item);
+      moved = {
+        sameListResult: next,
+        newSourceList: next,
+        newTargetList: next,
+      };
+    } else {
+      const newSourceList = [...sourceList];
+      newSourceList.splice(sourceIndex, 1);
+      const newTargetList = [...targetList];
+      newTargetList.splice(targetIndex, 0, item);
+      moved = { newSourceList, newTargetList };
+    }
+
+    this.reproTree = rebuildReproTree(
+      this.reproTree,
+      sourceList,
+      targetList,
+      moved,
     );
   }
 

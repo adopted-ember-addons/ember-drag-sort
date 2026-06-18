@@ -1,22 +1,18 @@
 {
   "solution": {
     "ember-drag-sort": {
-      "impact": "major",
-      "oldVersion": "4.2.0",
-      "newVersion": "5.0.0",
+      "impact": "patch",
+      "oldVersion": "5.0.0",
+      "newVersion": "5.0.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "major",
-          "reason": "Appears in changelog section :boom: Breaking Change"
-        },
-        {
           "impact": "patch",
-          "reason": "Appears in changelog section :house: Internal"
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./package.json"
     }
   },
-  "description": "## Release (2026-04-22)\n\n* ember-drag-sort 5.0.0 (major)\n\n#### :boom: Breaking Change\n* `ember-drag-sort`\n  * [#107](https://github.com/adopted-ember-addons/ember-drag-sort/pull/107) Remove test-support page objects, Migrate to a V2 addon ([@BobrImperator](https://github.com/BobrImperator))\n\n#### :house: Internal\n* `ember-drag-sort`\n  * [#110](https://github.com/adopted-ember-addons/ember-drag-sort/pull/110) update release-plan ([@mansona](https://github.com/mansona))\n\n#### Committers: 2\n- Bartlomiej Dudzik ([@BobrImperator](https://github.com/BobrImperator))\n- Chris Manson ([@mansona](https://github.com/mansona))\n"
+  "description": "## Release (2026-06-18)\n\n* ember-drag-sort 5.0.1 (patch)\n\n#### :bug: Bug Fix\n* Other\n  * [#112](https://github.com/adopted-ember-addons/ember-drag-sort/pull/112) fix: resolve type exports ([@BobrImperator](https://github.com/BobrImperator))\n* `ember-drag-sort`\n  * [#111](https://github.com/adopted-ember-addons/ember-drag-sort/pull/111) Fix drag ending immediately upon start ([@BobrImperator](https://github.com/BobrImperator))\n\n#### Committers: 1\n- Bartlomiej Dudzik ([@BobrImperator](https://github.com/BobrImperator))\n"
 }

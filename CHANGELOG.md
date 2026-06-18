@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-06-18)
+
+* ember-drag-sort 5.0.1 (patch)
+
+#### :bug: Bug Fix
+* Other
+  * [#112](https://github.com/adopted-ember-addons/ember-drag-sort/pull/112) fix: resolve type exports ([@BobrImperator](https://github.com/BobrImperator))
+* `ember-drag-sort`
+  * [#111](https://github.com/adopted-ember-addons/ember-drag-sort/pull/111) Fix drag ending immediately upon start ([@BobrImperator](https://github.com/BobrImperator))
+
+#### Committers: 1
+- Bartlomiej Dudzik ([@BobrImperator](https://github.com/BobrImperator))
+
 ## Release (2026-04-22)
 
 * ember-drag-sort 5.0.0 (major)
